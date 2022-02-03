@@ -1,0 +1,13 @@
+{
+    "requestError": {
+        "serviceException": {
+            "messageId": "BAD_REQUEST",
+            "text": "Bad request",
+            "validationErrors": {
+                "content.contacts[0].birthday": [
+                    "must be in the YYYY-MM-DD format"
+                ]
+            }
+        }
+    }
+}

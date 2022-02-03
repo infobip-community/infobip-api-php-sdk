@@ -1,0 +1,8 @@
+{
+    "requestError": {
+        "serviceException": {
+            "messageId": "UNAUTHORIZED",
+            "text": "Invalid login details"
+        }
+    }
+}

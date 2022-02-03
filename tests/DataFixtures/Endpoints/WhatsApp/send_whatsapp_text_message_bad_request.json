@@ -1,0 +1,14 @@
+{
+    "requestError": {
+        "serviceException": {
+            "messageId": "BAD_REQUEST",
+            "text": "Bad request",
+            "validationErrors": {
+                "content.text": [
+                    "size must be between 1 and 4096",
+                    "must not be blank"
+                ]
+            }
+        }
+    }
+}

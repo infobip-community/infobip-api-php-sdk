@@ -1,0 +1,8 @@
+{
+    "requestError": {
+        "serviceException": {
+            "messageId": "TOO_MANY_REQUESTS",
+            "text": "Too many requests"
+        }
+    }
+}

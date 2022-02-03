@@ -1,0 +1,8 @@
+{
+    "requestError": {
+        "serviceException": {
+            "messageId": "SERVER_ERROR",
+            "text": "Internal server error"
+        }
+    }
+}

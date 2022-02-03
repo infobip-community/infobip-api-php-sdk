@@ -1,0 +1,15 @@
+{
+    "requestError": {
+        "serviceException": {
+            "messageId": "BAD_REQUEST",
+            "text": "Bad request",
+            "validationErrors": {
+                "content.header.mediaUrl": [
+                    "size must be between 1 and 2048",
+                    "is not a valid url",
+                    "must not be blank"
+                ]
+            }
+        }
+    }
+}

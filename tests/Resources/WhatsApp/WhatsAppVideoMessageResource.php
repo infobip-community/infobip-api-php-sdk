@@ -1,0 +1,109 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Resources\WhatsApp;
+
+use Infobip\Resources\WhatsApp\Models\VideoContent;
+use Infobip\Resources\WhatsApp\WhatsAppVideoMessageResource;
+use Tests\TestCase;
+
+final class WhatsAppVideoMessageResourceTest extends TestCase
+{
+    public function testCanCreateWhatsAppVideoMessageResourceWithAllData(): void
+    {
+        // arrange
+        $from = 'from';
+        $to = 'to';
+        $mediaUrl = 'mediaUrl';
+        $caption = 'caption';
+        $messageId = 'messageId';
+        $bulkId = 'bulkId';
+        $callbackData = 'callbackData';
+        $notifyUrl = 'notifyUrl';
+
+        $content = new VideoContent($mediaUrl);
+        $content->setCaption($caption);
+
+        $expectedArray = [
+            'from' => $from,
+            'to' => $to,
+            'messageId' => $messageId,
+            'bulkId' => $bulkId,
+            'content' => $content->toArray(),
+            'callbackData' => $callbackData,
+            'notifyUrl' => $notifyUrl,
+        ];
+
+        // act
+        $whatsAppVideoMessageResource = (new WhatsAppVideoMessageResource(
+            $from,
+            $to,
+            $content
+        ))
+            ->setBulkId($bulkId)
+            ->setMessageId($messageId)
+            ->setCallbackData($callbackData)
+            ->setNotifyUrl($notifyUrl);
+
+        // assert
+        $this->assertSame($expectedArray, $whatsAppVideoMessageResource->payload());
+    }
+
+    public function testCanCreateWhatsAppVideoMessageResourceWithPartialData(): void
+    {
+        // arrange
+        $from = 'from';
+        $to = 'to';
+        $mediaUrl = 'mediaUrl';
+        $messageId = 'messageId';
+        $bulkId = 'bulkId';
+
+        $content = new VideoContent($mediaUrl);
+
+        $expectedArray = [
+            'from' => $from,
+            'to' => $to,
+            'messageId' => $messageId,
+            'bulkId' => $bulkId,
+            'content' => $content->toArray(),
+        ];
+
+        // act
+        $whatsAppVideoMessageResource = (new WhatsAppVideoMessageResource(
+            $from,
+            $to,
+            $content
+        ))
+            ->setBulkId($bulkId)
+            ->setMessageId($messageId);
+
+        // assert
+        $this->assertSame($expectedArray, $whatsAppVideoMessageResource->payload());
+    }
+
+    public function testCanCreateWhatsAppVideoMessageResourceWithRequiredData(): void
+    {
+        // arrange
+        $from = 'from';
+        $to = 'to';
+        $mediaUrl = 'mediaUrl';
+        $content = new VideoContent($mediaUrl);
+
+        $expectedArray = [
+            'from' => $from,
+            'to' => $to,
+            'content' => $content->toArray(),
+        ];
+
+        // act
+        $whatsAppVideoMessageResource = new WhatsAppVideoMessageResource(
+            $from,
+            $to,
+            $content
+        );
+
+        // assert
+        $this->assertSame($expectedArray, $whatsAppVideoMessageResource->payload());
+    }
+}

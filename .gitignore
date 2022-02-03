@@ -1,0 +1,15 @@
+/vendor
+/.project
+/nbproject
+/tools
+/.idea
+composer.phar
+composer.lock
+phpstan.neon
+phplint.cache
+Thumbs.db
+.DS_Store
+.php-cs-fixer.cache
+.phpunit.result.cache
+*.stackdump
+*.log

@@ -1,0 +1,13 @@
+{
+    "requestError": {
+        "serviceException": {
+            "messageId": "BAD_REQUEST",
+            "text": "Bad request",
+            "validationErrors": {
+                "content.templateData.header.placeholder": [
+                    "cannot have new-line/tab characters or more than 4 consecutive spaces"
+                ]
+            }
+        }
+    }
+}

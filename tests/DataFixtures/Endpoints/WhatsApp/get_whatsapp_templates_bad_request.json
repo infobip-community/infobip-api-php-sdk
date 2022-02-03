@@ -1,0 +1,13 @@
+{
+    "requestError": {
+        "serviceException": {
+            "messageId": "06df139a-7eb5-4a6e-902e-40e892210455",
+            "text": "Bad request",
+            "validationErrors": {
+                "request.message.content.media.file.url": [
+                    "is not a valid url"
+                ]
+            }
+        }
+    }
+}

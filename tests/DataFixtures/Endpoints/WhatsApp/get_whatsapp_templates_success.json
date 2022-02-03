@@ -1,0 +1,20 @@
+{
+    "templates": [
+        {
+            "id": "111",
+            "businessAccountId": 222,
+            "name": "exampleName",
+            "language": "en",
+            "status": "APPROVED",
+            "category": "ACCOUNT_UPDATE",
+            "structure": {
+                "header": {
+                    "format": "IMAGE"
+                },
+                "body": "example {{1}} body",
+                "footer": "exampleFooter",
+                "type": "MEDIA"
+            }
+        }
+    ]
+}
