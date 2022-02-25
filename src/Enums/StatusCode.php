@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Infobip\Enums;
 
-final class StatusCode
+use MyCLabs\Enum\Enum;
+
+final class StatusCode extends Enum
 {
     public const SUCCESS = 200;
     public const NO_CONTENT = 204;

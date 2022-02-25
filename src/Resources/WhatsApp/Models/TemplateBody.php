@@ -7,6 +7,7 @@ namespace Infobip\Resources\WhatsApp\Models;
 use Infobip\Resources\ModelInterface;
 use Infobip\Resources\WhatsApp\Collections\PlaceholderCollection;
 use Infobip\Resources\WhatsApp\Collections\TemplateButtonCollection;
+use Infobip\Resources\WhatsApp\Contracts\TemplateButtonInterface;
 
 final class TemplateBody implements ModelInterface
 {
@@ -31,7 +32,7 @@ final class TemplateBody implements ModelInterface
         return $this;
     }
 
-    public function addTemplateButton(TemplateButton $templateButton): self
+    public function addTemplateButton(TemplateButtonInterface $templateButton): self
     {
         $this->templateButtons->add($templateButton);
         return $this;

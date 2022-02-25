@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Infobip\Resources;
 
-abstract class BaseCollection implements ModelInterface
+abstract class BaseCollection implements CollectionInterface
 {
     /** @var array|ModelInterface[] */
     protected $items = [];

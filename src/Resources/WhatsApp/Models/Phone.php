@@ -5,30 +5,23 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\WhatsApp\Enums\PhoneTypeEnum;
 
 final class Phone implements ModelInterface
 {
-    /** @var string|null */
-    private $phone = null;
+    /** @var string */
+    private $phone;
 
-    /** @var string|null */
-    private $type = null;
+    /** @var PhoneTypeEnum */
+    private $type;
 
-    /** @var string|null */
-    private $whatsAppId = null;
+    /** @var string */
+    private $whatsAppId;
 
-    public function setPhone(?string $phone): void
+    public function __construct(string $phone, PhoneTypeEnum $type, string $whatsAppId)
     {
         $this->phone = $phone;
-    }
-
-    public function setType(?string $type): void
-    {
         $this->type = $type;
-    }
-
-    public function setWhatsAppId(?string $whatsAppId): void
-    {
         $this->whatsAppId = $whatsAppId;
     }
 
@@ -36,7 +29,7 @@ final class Phone implements ModelInterface
     {
         return array_filter_recursive([
             'phone' => $this->phone,
-            'type' => $this->type,
+            'type' => $this->type->getValue(),
             'waId' => $this->whatsAppId,
         ]);
     }

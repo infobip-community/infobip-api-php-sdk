@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Resources\WhatsApp;
 
-use Infobip\Resources\WhatsApp\Collections\TemplateButtonCollection;
 use Infobip\Resources\WhatsApp\Models\TemplateBody;
-use Infobip\Resources\WhatsApp\Models\TemplateButton;
+use Infobip\Resources\WhatsApp\Models\TemplateQuickReplyButton;
 use Infobip\Resources\WhatsApp\Models\TemplateContent;
 use Infobip\Resources\WhatsApp\Models\TemplateData;
 use Infobip\Resources\WhatsApp\Models\TemplateHeader;
@@ -25,7 +24,7 @@ final class WhatsAppTemplateMessageResourceTest extends TestCase
         $templateName = new TemplateName('templatename');
         $language = new TemplateLanguage('language');
         $templateHeader = new TemplateHeader('type', 'placeholder');
-        $templateButton = new TemplateButton('type', 'parameter');
+        $templateButton = new TemplateQuickReplyButton('parameter');
 
         $body = new TemplateBody();
         $body->addTemplateButton($templateButton);
