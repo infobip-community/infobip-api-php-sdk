@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
-use Infobip\Resources\WhatsApp\Enums\AddressTypeEnum;
+use Infobip\Resources\WhatsApp\Enums\AddressType;
 
 final class Address implements ModelInterface
 {
@@ -24,7 +24,7 @@ final class Address implements ModelInterface
     /** @var string */
     private $countryCode;
 
-    /** @var AddressTypeEnum */
+    /** @var AddressType */
     private $type;
 
     public function __construct(
@@ -33,7 +33,7 @@ final class Address implements ModelInterface
         string $zip,
         string $country,
         string $countryCode,
-        AddressTypeEnum $type
+        AddressType $type
     ) {
         $this->street = $street;
         $this->city = $city;

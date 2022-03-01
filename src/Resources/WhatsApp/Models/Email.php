@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
-use Infobip\Resources\WhatsApp\Enums\EmailTypeEnum;
+use Infobip\Resources\WhatsApp\Enums\EmailType;
 
 final class Email implements ModelInterface
 {
     /** @var string */
     private $email;
 
-    /** @var EmailTypeEnum */
+    /** @var EmailType */
     private $type;
 
-    public function __construct(string $email, EmailTypeEnum $type)
+    public function __construct(string $email, EmailType $type)
     {
         $this->email = $email;
         $this->type = $type;

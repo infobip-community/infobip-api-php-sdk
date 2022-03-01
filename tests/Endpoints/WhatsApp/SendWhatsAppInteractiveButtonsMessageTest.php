@@ -12,7 +12,7 @@ use Infobip\Resources\WhatsApp\Models\InteractiveButtonsAction;
 use Infobip\Resources\WhatsApp\Models\InteractiveButtonsBody;
 use Infobip\Resources\WhatsApp\Models\InteractiveButtonsContent;
 use Infobip\Resources\WhatsApp\Models\InteractiveButtonsFooter;
-use Infobip\Resources\WhatsApp\Models\InteractiveButtonsHeader;
+use Infobip\Resources\WhatsApp\Models\InteractiveButtonsTextHeader;
 use Infobip\Resources\WhatsApp\WhatsAppInteractiveButtonsMessageResource;
 use Tests\Endpoints\TestCase;
 
@@ -113,7 +113,7 @@ final class SendWhatsAppInteractiveButtonsMessageTest extends TestCase
             new InteractiveButtonsContent(
                 new InteractiveButtonsBody('text'),
                 new InteractiveButtonsAction(),
-                new InteractiveButtonsHeader('type', 'text'),
+                new InteractiveButtonsTextHeader('type'),
                 new InteractiveButtonsFooter('text')
             )
         );

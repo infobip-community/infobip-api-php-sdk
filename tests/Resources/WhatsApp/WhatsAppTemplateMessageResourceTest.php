@@ -8,7 +8,7 @@ use Infobip\Resources\WhatsApp\Models\TemplateBody;
 use Infobip\Resources\WhatsApp\Models\TemplateQuickReplyButton;
 use Infobip\Resources\WhatsApp\Models\TemplateContent;
 use Infobip\Resources\WhatsApp\Models\TemplateData;
-use Infobip\Resources\WhatsApp\Models\TemplateHeader;
+use Infobip\Resources\WhatsApp\Models\TextTemplateHeader;
 use Infobip\Resources\WhatsApp\Models\TemplateLanguage;
 use Infobip\Resources\WhatsApp\Models\TemplateName;
 use Infobip\Resources\WhatsApp\WhatsAppTemplateMessageResource;
@@ -23,7 +23,7 @@ final class WhatsAppTemplateMessageResourceTest extends TestCase
         $to = 'to';
         $templateName = new TemplateName('templatename');
         $language = new TemplateLanguage('language');
-        $templateHeader = new TemplateHeader('type', 'placeholder');
+        $templateHeader = new TextTemplateHeader('type');
         $templateButton = new TemplateQuickReplyButton('parameter');
 
         $body = new TemplateBody();

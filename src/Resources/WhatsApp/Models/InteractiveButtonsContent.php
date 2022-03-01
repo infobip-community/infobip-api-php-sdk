@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\WhatsApp\Contracts\InteractiveButtonsHeaderInterface;
 
 final class InteractiveButtonsContent implements ModelInterface
 {
@@ -14,7 +15,7 @@ final class InteractiveButtonsContent implements ModelInterface
     /** @var InteractiveButtonsAction */
     private $action;
 
-    /** @var InteractiveButtonsHeader */
+    /** @var InteractiveButtonsHeaderInterface */
     private $header;
 
     /** @var InteractiveButtonsFooter */
@@ -23,7 +24,7 @@ final class InteractiveButtonsContent implements ModelInterface
     public function __construct(
         InteractiveButtonsBody $body,
         InteractiveButtonsAction $action,
-        InteractiveButtonsHeader $header,
+        InteractiveButtonsTextHeader $header,
         InteractiveButtonsFooter $footer
     ) {
         $this->body = $body;

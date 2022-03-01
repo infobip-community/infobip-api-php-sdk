@@ -6,8 +6,7 @@ namespace Infobip\Resources\WhatsApp\Enums;
 
 use MyCLabs\Enum\Enum;
 
-final class EmailTypeEnum extends Enum
+final class InteractiveMultiProductHeaderType extends Enum
 {
-    public const HOME = 'HOME';
-    public const WORK = 'WORK';
+    public const TEXT = 'TEXT';
 }

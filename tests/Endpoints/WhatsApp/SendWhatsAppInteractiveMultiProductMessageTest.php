@@ -11,7 +11,7 @@ use Infobip\Exceptions\InfobipUnauthorizedException;
 use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductAction;
 use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductBody;
 use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductContent;
-use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductHeader;
+use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductTextHeader;
 use Infobip\Resources\WhatsApp\WhatsAppInteractiveMultiProductMessageResource;
 use Tests\Endpoints\TestCase;
 
@@ -112,7 +112,7 @@ final class SendWhatsAppInteractiveMultiProductMessageTest extends TestCase
             new InteractiveMultiProductContent(
                 new InteractiveMultiProductBody('text'),
                 new InteractiveMultiProductAction('catalogId'),
-                new InteractiveMultiProductHeader('text', 'type')
+                new InteractiveMultiProductTextHeader('text')
             )
         );
     }

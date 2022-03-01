@@ -5,17 +5,17 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
-use Infobip\Resources\WhatsApp\Enums\UrlTypeEnum;
+use Infobip\Resources\WhatsApp\Enums\UrlType;
 
 final class Url implements ModelInterface
 {
     /** @var string */
     private $url;
 
-    /** @var UrlTypeEnum */
+    /** @var UrlType */
     private $type;
 
-    public function __construct(string $url, UrlTypeEnum $type)
+    public function __construct(string $url, UrlType $type)
     {
         $this->url = $url;
         $this->type = $type;

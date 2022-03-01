@@ -6,6 +6,7 @@ namespace Infobip\Endpoints;
 
 use Infobip\Resources\WhatsApp\WhatsAppAudioMessageResource;
 use Infobip\Resources\WhatsApp\WhatsAppContactMessageResource;
+use Infobip\Resources\WhatsApp\WhatsAppCreateTemplateResource;
 use Infobip\Resources\WhatsApp\WhatsAppDeleteMediaResource;
 use Infobip\Resources\WhatsApp\WhatsAppDocumentMessageResource;
 use Infobip\Resources\WhatsApp\WhatsAppDownloadInboundMediaResource;
@@ -182,6 +183,19 @@ final class WhatsApp extends BaseEndpoint
         );
 
         return $this->client->get($endpoint);
+    }
+
+    /**
+     * @link https://www.infobip.com/docs/api#channels/whatsapp/create-whatsapp-template
+     */
+    public function createWhatsAppTemplate(WhatsAppCreateTemplateResource $resource): array
+    {
+        $endpoint = sprintf(
+            'whatsapp/1/senders/%s/templates',
+            $resource->getSender()
+        );
+
+        return $this->client->post($endpoint, $resource->payload());
     }
 
     /**

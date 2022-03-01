@@ -5,13 +5,15 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\WhatsApp\Contracts\InteractiveButtonsInterface;
+use Infobip\Resources\WhatsApp\Enums\InteractiveButtonType;
 
-final class InteractiveButton implements ModelInterface
+final class ReplyInteractiveButtons implements InteractiveButtonsInterface
 {
     /** @var string */
     private $id;
 
-    /** @var string */
+    /** @var InteractiveButtonType */
     private $type;
 
     /** @var string */
@@ -19,18 +21,17 @@ final class InteractiveButton implements ModelInterface
 
     public function __construct(
         string $id,
-        string $type,
         string $title
     ) {
         $this->id = $id;
-        $this->type = $type;
         $this->title = $title;
+        $this->type = new InteractiveButtonType(InteractiveButtonType::REPLY);
     }
 
     public function toArray(): array
     {
         return array_filter_recursive([
-            'type' => $this->type,
+            'type' => $this->type->getValue(),
             'id' => $this->id,
             'title' => $this->title,
         ]);

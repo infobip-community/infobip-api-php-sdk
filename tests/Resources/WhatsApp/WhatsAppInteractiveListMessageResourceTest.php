@@ -8,7 +8,7 @@ use Infobip\Resources\WhatsApp\Models\InteractiveListAction;
 use Infobip\Resources\WhatsApp\Models\InteractiveListBody;
 use Infobip\Resources\WhatsApp\Models\InteractiveListContent;
 use Infobip\Resources\WhatsApp\Models\InteractiveListFooter;
-use Infobip\Resources\WhatsApp\Models\InteractiveListHeader;
+use Infobip\Resources\WhatsApp\Models\InteractiveListTextHeader;
 use Infobip\Resources\WhatsApp\Models\Section;
 use Infobip\Resources\WhatsApp\WhatsAppInteractiveListMessageResource;
 use Tests\TestCase;
@@ -22,7 +22,7 @@ final class WhatsAppInteractiveListMessageResourceTest extends TestCase
         $to = 'to';
         $messageId = 'messageId';
         $bulkId = 'bulkId';
-        $header = new InteractiveListHeader('type', 'text');
+        $header = new InteractiveListTextHeader('type');
         $footer = new InteractiveListFooter('text');
         $callbackData = 'callbackData';
         $notifyUrl = 'notifyUrl';

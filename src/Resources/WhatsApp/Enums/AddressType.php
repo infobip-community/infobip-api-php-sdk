@@ -6,11 +6,8 @@ namespace Infobip\Resources\WhatsApp\Enums;
 
 use MyCLabs\Enum\Enum;
 
-final class PhoneTypeEnum extends Enum
+final class AddressType extends Enum
 {
-    public const CELL = 'CELL';
-    public const MAIN = 'MAIN';
-    public const IPHONE = 'IPHONE';
     public const HOME = 'HOME';
     public const WORK = 'WORK';
 }

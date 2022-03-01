@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Tests\Resources\WhatsApp;
 
-use Infobip\Resources\WhatsApp\Models\InteractiveButton;
+use Infobip\Resources\WhatsApp\Models\ReplyInteractiveButtons;
 use Infobip\Resources\WhatsApp\Models\InteractiveButtonsAction;
 use Infobip\Resources\WhatsApp\Models\InteractiveButtonsBody;
 use Infobip\Resources\WhatsApp\Models\InteractiveButtonsContent;
 use Infobip\Resources\WhatsApp\Models\InteractiveButtonsFooter;
-use Infobip\Resources\WhatsApp\Models\InteractiveButtonsHeader;
+use Infobip\Resources\WhatsApp\Models\InteractiveButtonsTextHeader;
 use Infobip\Resources\WhatsApp\WhatsAppInteractiveButtonsMessageResource;
 use Tests\TestCase;
 
@@ -22,11 +22,11 @@ final class WhatsAppInteractiveButtonsMessageResourceTest extends TestCase
         $to = 'to';
         $messageId = 'messageId';
         $bulkId = 'bulkId';
-        $header = new InteractiveButtonsHeader('type', 'text');
+        $header = new InteractiveButtonsTextHeader('type');
         $footer = new InteractiveButtonsFooter('text');
         $body = new InteractiveButtonsBody('text');
         $action = new InteractiveButtonsAction();
-        $action->addInteractiveButton(new InteractiveButton('id', 'type', 'title'));
+        $action->addInteractiveButton(new ReplyInteractiveButtons('id', 'title'));
         $callbackData = 'callbackData';
         $notifyUrl = 'notifyUrl';
         $content = new InteractiveButtonsContent($body, $action, $header, $footer);
@@ -63,11 +63,11 @@ final class WhatsAppInteractiveButtonsMessageResourceTest extends TestCase
         $to = 'to';
         $messageId = 'messageId';
         $bulkId = 'bulkId';
-        $header = new InteractiveButtonsHeader('type', 'text');
+        $header = new InteractiveButtonsTextHeader('type');
         $footer = new InteractiveButtonsFooter('text');
         $body = new InteractiveButtonsBody('text');
         $action = new InteractiveButtonsAction();
-        $action->addInteractiveButton(new InteractiveButton('id', 'type', 'title'));
+        $action->addInteractiveButton(new ReplyInteractiveButtons('id', 'title'));
         $content = new InteractiveButtonsContent($body, $action, $header, $footer);
 
         $expectedArray = [
@@ -96,11 +96,11 @@ final class WhatsAppInteractiveButtonsMessageResourceTest extends TestCase
         // arrange
         $from = 'from';
         $to = 'to';
-        $header = new InteractiveButtonsHeader('type', 'text');
+        $header = new InteractiveButtonsTextHeader('text');
         $footer = new InteractiveButtonsFooter('text');
         $body = new InteractiveButtonsBody('text');
         $action = new InteractiveButtonsAction();
-        $action->addInteractiveButton(new InteractiveButton('id', 'type', 'title'));
+        $action->addInteractiveButton(new ReplyInteractiveButtons('id', 'title'));
         $content = new InteractiveButtonsContent($body, $action, $header, $footer);
 
         $expectedArray = [

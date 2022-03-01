@@ -9,7 +9,7 @@ use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductAction;
 use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductBody;
 use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductContent;
 use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductFooter;
-use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductHeader;
+use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductTextHeader;
 use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductSection;
 use Tests\TestCase;
 use Infobip\Resources\WhatsApp\Models\ProductRetailerId;
@@ -24,7 +24,7 @@ final class WhatsAppInteractiveMultiProductMessageResourceTest extends TestCase
         $to = 'to';
         $messageId = 'messageId';
         $bulkId = 'bulkId';
-        $header = new InteractiveMultiProductHeader('text', 'type');
+        $header = new InteractiveMultiProductTextHeader('text');
         $footer = new InteractiveMultiProductFooter('text');
         $callbackData = 'callbackData';
         $notifyUrl = 'notifyUrl';
@@ -76,7 +76,7 @@ final class WhatsAppInteractiveMultiProductMessageResourceTest extends TestCase
         $to = 'to';
         $messageId = 'messageId';
         $bulkId = 'bulkId';
-        $header = new InteractiveMultiProductHeader('text', 'type');
+        $header = new InteractiveMultiProductTextHeader('text');
 
         $productRetailerIds = new ProductRetailerIdCollection();
         $productRetailerIds->add(new ProductRetailerId('productRetailerId'));
@@ -116,7 +116,7 @@ final class WhatsAppInteractiveMultiProductMessageResourceTest extends TestCase
         // arrange
         $from = 'from';
         $to = 'to';
-        $header = new InteractiveMultiProductHeader('text', 'type');
+        $header = new InteractiveMultiProductTextHeader('text');
 
         $productRetailerIds = new ProductRetailerIdCollection();
         $productRetailerIds->add(new ProductRetailerId('productRetailerId'));

@@ -17,7 +17,7 @@ final class InteractiveButtonsAction implements ModelInterface
         $this->interactiveButtons = new InteractiveButtonCollection();
     }
 
-    public function addInteractiveButton(InteractiveButton $interactiveButton): self
+    public function addInteractiveButton(ReplyInteractiveButtons $interactiveButton): self
     {
         $this->interactiveButtons->add($interactiveButton);
         return $this;

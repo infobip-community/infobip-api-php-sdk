@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\WhatsApp\Contracts\InteractiveListHeaderInterface;
 
 final class InteractiveListContent implements ModelInterface
 {
@@ -14,7 +15,7 @@ final class InteractiveListContent implements ModelInterface
     /** @var InteractiveListAction */
     private $action;
 
-    /** @var InteractiveListHeader|null */
+    /** @var InteractiveListHeaderInterface|null */
     private $header;
 
     /** @var InteractiveListFooter|null  */
@@ -28,7 +29,7 @@ final class InteractiveListContent implements ModelInterface
         $this->action = $action;
     }
 
-    public function setHeader(?InteractiveListHeader $header): self
+    public function setHeader(?InteractiveListHeaderInterface $header): self
     {
         $this->header = $header;
         return $this;

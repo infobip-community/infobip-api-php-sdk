@@ -6,11 +6,11 @@ namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
 use Infobip\Resources\WhatsApp\Contracts\TemplateButtonInterface;
-use Infobip\Resources\WhatsApp\Enums\TemplateButtonTypeEnum;
+use Infobip\Resources\WhatsApp\Enums\TemplateButtonType;
 
-final class TemplateUrlButton implements ModelInterface, TemplateButtonInterface
+final class TemplateUrlButton implements TemplateButtonInterface
 {
-    /** @var TemplateButtonTypeEnum */
+    /** @var TemplateButtonType */
     private $type;
 
     /** @var string */
@@ -19,7 +19,7 @@ final class TemplateUrlButton implements ModelInterface, TemplateButtonInterface
     public function __construct(string $parameter)
     {
         $this->parameter = $parameter;
-        $this->type = new TemplateButtonTypeEnum(TemplateButtonTypeEnum::URL);
+        $this->type = new TemplateButtonType(TemplateButtonType::URL);
     }
 
     public function toArray(): array

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\WhatsApp\Contracts\InteractiveMultiProductHeaderInterface;
 
 final class InteractiveMultiProductContent implements ModelInterface
 {
@@ -14,7 +15,7 @@ final class InteractiveMultiProductContent implements ModelInterface
     /** @var InteractiveMultiProductAction */
     private $action;
 
-    /** @var InteractiveMultiProductHeader */
+    /** @var InteractiveMultiProductHeaderInterface */
     private $header;
 
     /** @var InteractiveMultiProductFooter|null */
@@ -23,7 +24,7 @@ final class InteractiveMultiProductContent implements ModelInterface
     public function __construct(
         InteractiveMultiProductBody $body,
         InteractiveMultiProductAction $action,
-        InteractiveMultiProductHeader $header
+        InteractiveMultiProductHeaderInterface $header
     ) {
         $this->body = $body;
         $this->action = $action;

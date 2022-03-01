@@ -8,13 +8,14 @@ use Infobip\Resources\ModelInterface;
 use Infobip\Resources\WhatsApp\Collections\PlaceholderCollection;
 use Infobip\Resources\WhatsApp\Collections\TemplateButtonCollection;
 use Infobip\Resources\WhatsApp\Contracts\TemplateButtonInterface;
+use Infobip\Resources\WhatsApp\Contracts\TemplateHeaderInterface;
 
 final class TemplateBody implements ModelInterface
 {
     /** @var PlaceholderCollection */
     private $placeholders;
 
-    /** @var TemplateHeader|null */
+    /** @var TemplateHeaderInterface|null */
     private $templateHeader = null;
 
     /** @var TemplateButtonCollection */
@@ -38,7 +39,7 @@ final class TemplateBody implements ModelInterface
         return $this;
     }
 
-    public function setTemplateHeader(?TemplateHeader $templateHeader): self
+    public function setTemplateHeader(?TemplateHeaderInterface $templateHeader): self
     {
         $this->templateHeader = $templateHeader;
         return $this;

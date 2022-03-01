@@ -6,6 +6,6 @@ namespace Infobip\Resources\WhatsApp\Contracts;
 
 use Infobip\Resources\ModelInterface;
 
-interface TemplateButtonInterface extends ModelInterface
+interface InteractiveMultiProductHeaderInterface extends ModelInterface
 {
 }
