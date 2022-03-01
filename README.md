@@ -1,9 +1,9 @@
 # Infobip API PHP SDK
 
-[![Latest Stable Version](https://poser.pugx.org/fsasvari/infobip-api-php-sdk/v/stable)](https://packagist.org/packages/fsasvari/infobip-api-php-sdk)
-[![Latest Unstable Version](https://poser.pugx.org/fsasvari/infobip-api-php-sdk/v/unstable)](https://packagist.org/packages/fsasvari/infobip-api-php-sdk)
-[![Total Downloads](https://poser.pugx.org/fsasvari/infobip-api-php-sdk/downloads)](https://packagist.org/packages/fsasvari/infobip-api-php-sdk)
-[![License](https://poser.pugx.org/fsasvari/infobip-api-php-sdk/license)](https://packagist.org/packages/fsasvari/infobip-api-php-sdk)
+[![Latest Stable Version](https://poser.pugx.org/infobip-community/infobip-api-php-sdk/v/stable)](https://packagist.org/packages/infobip-community/infobip-api-php-sdk)
+[![Latest Unstable Version](https://poser.pugx.org/infobip-community/infobip-api-php-sdk/v/unstable)](https://packagist.org/packages/infobip-community/infobip-api-php-sdk)
+[![Total Downloads](https://poser.pugx.org/infobip-community/infobip-api-php-sdk/downloads)](https://packagist.org/packages/infobip-community/infobip-api-php-sdk/stats)
+[![License](https://poser.pugx.org/infobip-community/infobip-api-php-sdk/license)](LICENSE)
 
 This is a PHP SDK for Infobip API and you can use it as a dependency to add [Infobip APIs](https://www.infobip.com/docs/api) to your application. To use this, you'll need an Infobip account. If you do not own one, you can create a [free account here](https://www.infobip.com/signup).
 
@@ -40,14 +40,14 @@ Published under [MIT License](LICENSE).
 To start using the `infobip-api-php-sdk` library add it as dependency to your `composer.json` project dependency:
 
 ```sh
-composer require fsasvari/infobip-api-php-sdk
+composer require infobip-community/infobip-api-php-sdk
 ```
 
 Or you can add it manually to `composer.json` file:
 
 ```json
 "require": {
-    "fsasvari/infobip-api-php-sdk": "1.*"
+    "infobip-community/infobip-api-php-sdk": "1.*"
 }
 ```
 And then simply run `composer install` to download dependencies.
@@ -71,7 +71,8 @@ A simple example of using the `InfobipClient` for calling the :
 // example 1
 $resource = new \Infobip\Resources\WhatsApp\WhatsAppTextMessageResource(
     '441134960000',
-    '441134960001'
+    '441134960001',
+    new \Infobip\Resources\WhatsApp\Models\TextContent('text message')
 );
 
 $response = $infobipClient
@@ -132,23 +133,24 @@ After that, you can start using the Infobip API PHP SDK package in your Laravel 
 ```php
 <?php
 
-namespace App\Services;
+namespace App\Http\Controllers;
 
 use Infobip\InfobipClient;
-use Infobip\Resources\WhatsApp\WhatsAppDownloadInboundMediaResource;
+use Infobip\Resources\WhatsApp\WhatsAppTextMessageResource;
 
-final class InfobipService
+final class InfobipController
 {
-    public function dashboard(InfobipClient $infobipClient)
+    public function sendTextMessage(Request $request, InfobipClient $infobipClient)
     {
-        $resource = new WhatsAppDownloadInboundMediaResource(
-            'sender',
-            'mediaId'
+        $resource = new WhatsAppTextMessageResource(
+            $request->input('from'),
+            $request->input('to'),
+            new \Infobip\Resources\WhatsApp\Models\TextContent($request->input('message'))
         );
         
         $response = $infobipClient
             ->whatsApp()
-            ->downloadWhatsAppInboundMedia($resource);
+            ->sendWhatsAppTextMessage($resource);
         
         return $response;
     }
