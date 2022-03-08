@@ -8,10 +8,9 @@ use GuzzleHttp\Client as GuzzleHttpClient;
 use GuzzleHttp\ClientInterface as GuzzleHttpClientInterface;
 use GuzzleHttp\Exception\RequestException as GuzzleHttpRequestException;
 use GuzzleHttp\RequestOptions;
+use Infobip\Endpoints\RCS;
 use Infobip\Endpoints\WhatsApp;
 use Infobip\Exceptions\InfobipExceptionFactory;
-use Infobip\Resources\ResourcePayloadInterface;
-use Infobip\Resources\ResourceQueryOptionsInterface;
 
 final class InfobipClient
 {
@@ -30,6 +29,9 @@ final class InfobipClient
     /** @var WhatsApp */
     private $whatsApp;
 
+    /** @var RCS */
+    private $RCS;
+
     public function __construct(string $apiKey, string $baseUrl, float $timeout)
     {
         $this->apiKey = $apiKey;
@@ -37,6 +39,7 @@ final class InfobipClient
         $this->timeout = $timeout;
 
         $this->whatsApp = new WhatsApp($this);
+        $this->RCS = new RCS($this);
     }
 
     public function setClient(GuzzleHttpClientInterface $client): void
@@ -98,6 +101,11 @@ final class InfobipClient
     public function whatsApp(): WhatsApp
     {
         return $this->whatsApp;
+    }
+
+    public function RCS(): RCS
+    {
+        return $this->RCS;
     }
 
     private function createDefaultClient(): void
