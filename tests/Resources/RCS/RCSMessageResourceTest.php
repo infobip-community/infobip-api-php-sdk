@@ -27,8 +27,6 @@ final class RCSMessageResourceTest extends TestCase
         $notifyUrl = 'notifyUrl';
         $callbackData = 'callbackData';
         $messageId = 'messageId';
-        $callbackData = 'callbackData';
-        $notifyUrl = 'notifyUrl';
         $content = new CarouselMessageContent(
             new CardWidth(CardWidth::SMALL),
             new CarouselContent()

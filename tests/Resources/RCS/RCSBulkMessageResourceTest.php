@@ -12,7 +12,7 @@ use Infobip\Resources\RCS\Models\SMSFailover;
 use Infobip\Resources\RCS\RCSBulkMessageResource;
 use Tests\TestCase;
 
-final class RCSMessageResourceTest extends TestCase
+final class RCSBulkMessageResourceTest extends TestCase
 {
     public function testCanCreateRCSBulkMessageResourceWithAllData(): void
     {
@@ -25,8 +25,6 @@ final class RCSMessageResourceTest extends TestCase
         $notifyUrl = 'notifyUrl';
         $callbackData = 'callbackData';
         $messageId = 'messageId';
-        $callbackData = 'callbackData';
-        $notifyUrl = 'notifyUrl';
         $content = new CarouselMessageContent(
             new CardWidth(CardWidth::SMALL),
             new CarouselContent()
