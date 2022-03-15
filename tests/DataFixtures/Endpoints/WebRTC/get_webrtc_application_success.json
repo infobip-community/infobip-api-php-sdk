@@ -1,0 +1,15 @@
+{
+    "id": "894c822b-d7ba-439c-a761-141f591cace7",
+    "name": "Application Name",
+    "description": "Application Description",
+    "ios": {
+      "apnsCertificateFileName": "IOS_APNS_certificate.p",
+      "apnsCertificatePassword": "IOS_APNS_certificate_password"
+    },
+    "android": {
+      "fcmServerKey": "AAAAtm7JlCY:APA91bEe02qZQbfcTtmnPOHlQ431tDPm2GoCjciVmoD3sz1juETiFRMglY-H)AWbDphXcRyBJd7UmcTZmziH6aMVqsGdDp1NRPyUHKwKRey-AESZ1DPdpbux24r3GaUWl_mLfjqzz1xuo"
+    },
+    "appToApp": true,
+    "appToConversations": true,
+    "appToPhone": true
+}
