@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Tests;
 
 use GuzzleHttp\Client as GuzzleHttpClient;
-use Infobip\InfobipClient;
+use Infobip\Endpoints\RCS;
+use Infobip\Endpoints\WebRTC;
 use Infobip\Endpoints\WhatsApp;
+use Infobip\InfobipClient;
 
 final class InfobipClientTest extends TestCase
 {
@@ -16,6 +18,8 @@ final class InfobipClientTest extends TestCase
         $client = $this->getInfobipClient();
 
         // assert
+        $this->assertInstanceOf(RCS::class, $client->RCS());
+        $this->assertInstanceOf(WebRTC::class, $client->webRTC());
         $this->assertInstanceOf(WhatsApp::class, $client->whatsApp());
     }
 
