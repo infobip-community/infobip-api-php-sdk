@@ -167,12 +167,17 @@ Infobip API Documentation can be found [here](https://www.infobip.com/docs/api).
 
 ## Development
 
-Feel free to participate in this open source project. These are some console commands that could help you with the development:
+Feel free to participate in this open source project. These are some console commands that could help you with the development like linter, static analysis and coding standards fixer:
 
 ```sh
 vendor/bin/phplint
 vendor/bin/phpstan analyse
 vendor/bin/php-cs-fixer fix src
 vendor/bin/php-cs-fixer fix tests
+```
+
+For running the PHPunit tests:
+
+```sh
 vendor/bin/phpunit
 ```
