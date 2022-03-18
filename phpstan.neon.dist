@@ -1,7 +1,12 @@
 parameters:
-  level: 5
+  level: 9
+  checkMissingIterableValueType: false
+  checkGenericClassInNonGenericObjectType: false
   paths:
     - src
     - tests
+  ignoreErrors:
+    - '#Cannot cast mixed to string.#'
+    - '#Cannot cast mixed to float.#'
 includes:
   - vendor/phpstan/phpstan-mockery/extension.neon

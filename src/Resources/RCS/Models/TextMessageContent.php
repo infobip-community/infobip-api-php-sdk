@@ -18,21 +18,18 @@ final class TextMessageContent implements ModelInterface, MessageContentInterfac
     /** @var string */
     private $text;
 
-    /** @var SuggestionCollection|null */
-    private $suggestions = null;
+    /** @var SuggestionCollection */
+    private $suggestions;
 
     public function __construct(string $text)
     {
         $this->text = $text;
         $this->type = new MessageContentType(MessageContentType::TEXT);
+        $this->suggestions = new SuggestionCollection();
     }
 
-    public function addSuggestion(?SuggestionInterface $suggestion): self
+    public function addSuggestion(SuggestionInterface $suggestion): self
     {
-        if (null === $this->suggestions) {
-            $this->suggestions = new SuggestionCollection();
-        }
-
         $this->suggestions->add($suggestion);
 
         return $this;
@@ -43,7 +40,7 @@ final class TextMessageContent implements ModelInterface, MessageContentInterfac
         return array_filter_recursive([
             'type' => $this->type,
             'text' => $this->text,
-            'suggestions' => $this->suggestions,
+            'suggestions' => $this->suggestions->toArray(),
         ]);
     }
 }

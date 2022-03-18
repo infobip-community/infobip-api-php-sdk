@@ -15,7 +15,7 @@ use Infobip\Exceptions\InfobipExceptionFactory;
 
 final class InfobipClient
 {
-    /** @var GuzzleHttpClientInterface|null */
+    /** @var GuzzleHttpClientInterface */
     private $client = null;
 
     /** @var string */
@@ -112,7 +112,7 @@ final class InfobipClient
     {
         return $this->RCS;
     }
-  
+
     public function webRTC(): WebRTC
     {
         return $this->webRTC;
@@ -142,7 +142,7 @@ final class InfobipClient
         try {
             $response = $this->getClient()->request($method, $endpoint, $options);
 
-            return json_decode($response->getBody()->getContents(), true);
+            return $this->getResponseBodyContents($response->getBody()->getContents());
         } catch (GuzzleHttpRequestException $exception) {
             throw InfobipExceptionFactory::make($exception);
         }
@@ -157,5 +157,16 @@ final class InfobipClient
                 'Authorization' => 'App '.$this->apiKey,
             ],
         ];
+    }
+
+    private function getResponseBodyContents(string $responseBodyContents): array
+    {
+        $jsonArray = json_decode($responseBodyContents, true);
+
+        if (is_array($jsonArray)) {
+            return $jsonArray;
+        }
+
+        return [];
     }
 }

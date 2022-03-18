@@ -19,8 +19,13 @@ final class CardContent implements ModelInterface
     /** @var Media|null */
     private $media = null;
 
-    /** @var SuggestionCollection|null */
-    private $suggestions = null;
+    /** @var SuggestionCollection */
+    private $suggestions;
+
+    public function __construct()
+    {
+        $this->suggestions = new SuggestionCollection();
+    }
 
     public function setTitle(?string $title): self
     {
@@ -43,12 +48,8 @@ final class CardContent implements ModelInterface
         return $this;
     }
 
-    public function addSuggestion(?SuggestionInterface $suggestion): self
+    public function addSuggestion(SuggestionInterface $suggestion): self
     {
-        if (null === $this->suggestions) {
-            $this->suggestions = new SuggestionCollection();
-        }
-
         $this->suggestions->add($suggestion);
 
         return $this;
@@ -60,7 +61,7 @@ final class CardContent implements ModelInterface
             'title' => $this->title,
             'description' => $this->description,
             'url' => $this->media ? $this->media->toArray() : null,
-            'suggestions' => $this->suggestions ? $this->suggestions->toArray() : null,
+            'suggestions' => $this->suggestions->toArray(),
         ]);
     }
 }
