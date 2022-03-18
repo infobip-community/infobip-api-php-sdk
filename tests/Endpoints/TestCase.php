@@ -36,7 +36,12 @@ abstract class TestCase extends BaseTestCase
 
     protected function setMockedGuzzleHttpClient(int $statusCode, array $responseBody = []): void
     {
-        $mockedResponse = new Response($statusCode, [], json_encode($responseBody));
+        $json = json_encode($responseBody);
+        if (false === $json) {
+            $json = '';
+        }
+
+        $mockedResponse = new Response($statusCode, [], $json);
         $mockHandler = new MockHandler([$mockedResponse]);
         $handlerStack = HandlerStack::create($mockHandler);
 
@@ -54,8 +59,18 @@ abstract class TestCase extends BaseTestCase
 
     protected function loadJsonDataFixture(string $path): array
     {
-        $jsonFile = file_get_contents(__DIR__ . '/../DataFixtures/' . ltrim($path, '/'));
+        $json = file_get_contents(__DIR__ . '/../DataFixtures/' . ltrim($path, '/'));
 
-        return json_decode($jsonFile, true);
+        if (false === $json) {
+            return [];
+        }
+
+        $jsonArray = json_decode($json, true);
+
+        if (is_array($jsonArray)) {
+            return $jsonArray;
+        }
+
+        return [];
     }
 }

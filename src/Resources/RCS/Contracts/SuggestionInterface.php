@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\RCS\Contracts;
 
-interface SuggestionInterface
+use Infobip\Resources\ModelInterface;
+
+interface SuggestionInterface extends ModelInterface
 {
 }

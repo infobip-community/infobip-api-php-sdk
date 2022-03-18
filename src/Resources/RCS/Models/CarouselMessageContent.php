@@ -8,10 +8,8 @@ use Infobip\Resources\ModelInterface;
 use Infobip\Resources\RCS\Collections\SuggestionCollection;
 use Infobip\Resources\RCS\Contracts\MessageContentInterface;
 use Infobip\Resources\RCS\Contracts\SuggestionInterface;
-use Infobip\Resources\RCS\Enums\Alignment;
 use Infobip\Resources\RCS\Enums\CardWidth;
 use Infobip\Resources\RCS\Enums\MessageContentType;
-use Infobip\Resources\RCS\Enums\Orientation;
 
 final class CarouselMessageContent implements ModelInterface, MessageContentInterface
 {
@@ -24,8 +22,8 @@ final class CarouselMessageContent implements ModelInterface, MessageContentInte
     /** @var CarouselContent */
     private $content;
 
-    /** @var SuggestionCollection|null */
-    private $suggestions = null;
+    /** @var SuggestionCollection */
+    private $suggestions;
 
     public function __construct(
         CardWidth $cardWidth,
@@ -34,14 +32,11 @@ final class CarouselMessageContent implements ModelInterface, MessageContentInte
         $this->cardWidth = $cardWidth;
         $this->content = $content;
         $this->type = new MessageContentType(MessageContentType::CAROUSEL);
+        $this->suggestions = new SuggestionCollection();
     }
 
-    public function addSuggestion(?SuggestionInterface $suggestion): self
+    public function addSuggestion(SuggestionInterface $suggestion): self
     {
-        if (null === $this->suggestions) {
-            $this->suggestions = new SuggestionCollection();
-        }
-
         $this->suggestions->add($suggestion);
 
         return $this;
@@ -53,7 +48,7 @@ final class CarouselMessageContent implements ModelInterface, MessageContentInte
             'type' => $this->type,
             'cardWidth' => $this->cardWidth,
             'content' => $this->content->toArray(),
-            'suggestions' => $this->suggestions ? $this->suggestions->toArray() : null,
+            'suggestions' => $this->suggestions->toArray(),
         ]);
     }
 }

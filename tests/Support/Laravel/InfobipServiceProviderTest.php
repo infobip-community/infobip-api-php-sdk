@@ -14,13 +14,13 @@ use Tests\TestCase;
 
 final class InfobipServiceProviderTest extends TestCase
 {
-    /** @var Application|LegacyMockInterface|MockInterface  */
+    /** @var LegacyMockInterface|MockInterface */
     private $application;
 
-    /** @var Config|LegacyMockInterface|MockInterface  */
+    /** @var LegacyMockInterface|MockInterface */
     private $config;
 
-    /** @var InfobipServiceProvider|LegacyMockInterface|MockInterface  */
+    /** @var InfobipServiceProvider */
     private $infobipServiceProvider;
 
     protected function setUp(): void

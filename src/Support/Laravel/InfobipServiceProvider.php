@@ -28,8 +28,8 @@ class InfobipServiceProvider extends ServiceProvider
             $config = $this->app->get('config');
 
             return new InfobipClient(
-                $config->get('infobip.api_key'),
-                $config->get('infobip.base_url'),
+                (string) $config->get('infobip.api_key'),
+                (string) $config->get('infobip.base_url'),
                 (float) $config->get('infobip.timeout')
             );
         });

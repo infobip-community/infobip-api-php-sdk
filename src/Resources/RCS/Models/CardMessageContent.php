@@ -26,8 +26,8 @@ final class CardMessageContent implements ModelInterface, MessageContentInterfac
     /** @var CardContent */
     private $content;
 
-    /** @var SuggestionCollection|null */
-    private $suggestions = null;
+    /** @var SuggestionCollection */
+    private $suggestions;
 
     public function __construct(
         Orientation $orientation,
@@ -38,14 +38,11 @@ final class CardMessageContent implements ModelInterface, MessageContentInterfac
         $this->alignment = $alignment;
         $this->content = $content;
         $this->type = new MessageContentType(MessageContentType::CARD);
+        $this->suggestions = new SuggestionCollection();
     }
 
-    public function addSuggestion(?SuggestionInterface $suggestion): self
+    public function addSuggestion(SuggestionInterface $suggestion): self
     {
-        if (null === $this->suggestions) {
-            $this->suggestions = new SuggestionCollection();
-        }
-
         $this->suggestions->add($suggestion);
 
         return $this;
@@ -58,7 +55,7 @@ final class CardMessageContent implements ModelInterface, MessageContentInterfac
             'orientation' => $this->orientation,
             'alignment' => $this->alignment,
             'content' => $this->content->toArray(),
-            'suggestions' => $this->suggestions ? $this->suggestions->toArray() : null,
+            'suggestions' => $this->suggestions->toArray(),
         ]);
     }
 }
