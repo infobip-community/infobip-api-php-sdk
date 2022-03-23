@@ -17,7 +17,7 @@ use Infobip\Resources\WhatsApp\WhatsAppInteractiveMultiProductMessageResource;
 
 final class WhatsAppInteractiveMultiProductMessageResourceTest extends TestCase
 {
-    public function testCanCreateWhatsAppInteractiveMultiProductMessageResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $from = 'from';
@@ -69,7 +69,7 @@ final class WhatsAppInteractiveMultiProductMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppInteractiveMultiProductMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppInteractiveMultiProductMessageResourceWithPartialData(): void
+    public function testCanCreateResourceWithPartialData(): void
     {
         // arrange
         $from = 'from';
@@ -111,7 +111,7 @@ final class WhatsAppInteractiveMultiProductMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppInteractiveMultiProductMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppInteractiveProductMessageResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $from = 'from';

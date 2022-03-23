@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 final class WhatsAppAudioMessageResourceTest extends TestCase
 {
-    public function testCanCreateWhatsAppAudioMessageResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $from = 'from';
@@ -43,7 +43,7 @@ final class WhatsAppAudioMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppAudioMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppAudioMessageResourceWithPartialData(): void
+    public function testCanCreateResourceWithPartialData(): void
     {
         // arrange
         $from = 'from';
@@ -70,7 +70,7 @@ final class WhatsAppAudioMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppAudioMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppAudioMessageResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $from = 'from';

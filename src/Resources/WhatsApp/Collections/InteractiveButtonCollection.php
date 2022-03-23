@@ -9,8 +9,10 @@ use Infobip\Resources\WhatsApp\Contracts\InteractiveButtonsInterface;
 
 final class InteractiveButtonCollection extends BaseCollection
 {
-    public function add(InteractiveButtonsInterface $interactiveButton): void
+    public function add(InteractiveButtonsInterface $interactiveButton): self
     {
         $this->items[] = $interactiveButton;
+
+        return $this;
     }
 }

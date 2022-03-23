@@ -15,7 +15,7 @@ use Tests\TestCase;
 
 final class WhatsAppInteractiveButtonsMessageResourceTest extends TestCase
 {
-    public function testCanCreateWhatsAppInteractiveButtonsMessageResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $from = 'from';
@@ -56,7 +56,7 @@ final class WhatsAppInteractiveButtonsMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppInteractiveButtonsMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppInteractiveButtonsMessageResourceWithPartialData(): void
+    public function testCanCreateResourceWithPartialData(): void
     {
         // arrange
         $from = 'from';
@@ -91,7 +91,7 @@ final class WhatsAppInteractiveButtonsMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppInteractiveButtonsMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppInteractiveButtonsMessageResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $from = 'from';

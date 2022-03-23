@@ -9,8 +9,10 @@ use Infobip\Resources\WhatsApp\Models\Url;
 
 final class UrlCollection extends BaseCollection
 {
-    public function add(Url $url): void
+    public function add(Url $url): self
     {
         $this->items[] = $url;
+
+        return $this;
     }
 }

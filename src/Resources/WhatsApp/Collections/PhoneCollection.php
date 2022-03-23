@@ -9,8 +9,10 @@ use Infobip\Resources\WhatsApp\Models\Phone;
 
 final class PhoneCollection extends BaseCollection
 {
-    public function add(Phone $phone): void
+    public function add(Phone $phone): self
     {
         $this->items[] = $phone;
+
+        return $this;
     }
 }

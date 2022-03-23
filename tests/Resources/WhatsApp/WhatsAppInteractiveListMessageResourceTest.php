@@ -15,7 +15,7 @@ use Tests\TestCase;
 
 final class WhatsAppInteractiveListMessageResourceTest extends TestCase
 {
-    public function testCanCreateWhatsAppInteractiveListMessageResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $from = 'from';
@@ -59,7 +59,7 @@ final class WhatsAppInteractiveListMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppInteractiveListMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppInteractiveListMessageResourceWithPartialData(): void
+    public function testCanCreateResourceWithPartialData(): void
     {
         // arrange
         $from = 'from';
@@ -92,7 +92,7 @@ final class WhatsAppInteractiveListMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppInteractiveListMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppInteractiveListMessageResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $from = 'from';

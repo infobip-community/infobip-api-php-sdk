@@ -9,8 +9,10 @@ use Infobip\Resources\WhatsApp\Models\ProductRetailerId;
 
 final class ProductRetailerIdCollection extends BaseCollection
 {
-    public function add(ProductRetailerId $productRetailerIds): void
+    public function add(ProductRetailerId $productRetailerIds): self
     {
         $this->items[] = $productRetailerIds;
+
+        return $this;
     }
 }

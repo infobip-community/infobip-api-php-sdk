@@ -9,8 +9,10 @@ use Infobip\Resources\WhatsApp\Models\Email;
 
 final class EmailCollection extends BaseCollection
 {
-    public function add(Email $email): void
+    public function add(Email $email): self
     {
         $this->items[] = $email;
+
+        return $this;
     }
 }

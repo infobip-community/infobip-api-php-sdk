@@ -9,8 +9,10 @@ use Infobip\Resources\WhatsApp\Models\Section;
 
 final class SectionCollection extends BaseCollection
 {
-    public function add(Section $section): void
+    public function add(Section $section): self
     {
         $this->items[] = $section;
+
+        return $this;
     }
 }
