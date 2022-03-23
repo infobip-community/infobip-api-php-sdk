@@ -1,0 +1,41 @@
+[
+  {
+    "applicationId": "0933F3BC087D2A617AC6DCB2EF5B8A61",
+    "name": "Test application BASIC 1",
+    "configuration": {
+      "pinAttempts": 10,
+      "allowMultiplePinVerifications": true,
+      "pinTimeToLive": "2h",
+      "verifyPinLimit": "1/3s",
+      "sendPinPerApplicationLimit": "10000/1d",
+      "sendPinPerPhoneNumberLimit": "3/1d"
+    },
+    "enabled": true
+  },
+  {
+    "applicationId": "5F04FACFAA4978F62FCAEBA97B37E90F",
+    "name": "Test application BASIC 2",
+    "configuration": {
+      "pinAttempts": 12,
+      "allowMultiplePinVerifications": true,
+      "pinTimeToLive": "10m",
+      "verifyPinLimit": "2/1s",
+      "sendPinPerApplicationLimit": "10000/1d",
+      "sendPinPerPhoneNumberLimit": "5/1h"
+    },
+    "enabled": true
+  },
+  {
+    "applicationId": "B450F966A8EF017180F148AF22C42642",
+    "name": "Test application BASIC 3",
+    "configuration": {
+      "pinAttempts": 15,
+      "allowMultiplePinVerifications": true,
+      "pinTimeToLive": "1h",
+      "verifyPinLimit": "30/10s",
+      "sendPinPerApplicationLimit": "10000/3d",
+      "sendPinPerPhoneNumberLimit": "10/20m"
+    },
+    "enabled": true
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "messageId": "9C815F8AF3328",
+    "applicationId": "HJ675435E3A6EA43432G5F37A635KJ8B",
+    "pinPlaceholder": "{{pin}}",
+    "messageText": "Your PIN is {{pin}}.",
+    "pinLength": 4,
+    "pinType": "NUMERIC",
+    "language": "en",
+    "repeatDTMF": "1#",
+    "speechRate": 1
+  },
+  {
+    "messageId": "8F0792F86035A",
+    "applicationId": "HJ675435E3A6EA43432G5F37A635KJ8B",
+    "pinPlaceholder": "{{pin}}",
+    "messageText": "Your PIN is {{pin}}.",
+    "pinLength": 6,
+    "pinType": "HEX",
+    "repeatDTMF": "1#",
+    "speechRate": 1.5
+  }
+]

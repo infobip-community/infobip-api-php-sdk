@@ -1,0 +1,16 @@
+{
+  "verifications": [
+    {
+      "msisdn": "41793026727",
+      "verified": true,
+      "verifiedAt": 1418364366,
+      "sentAt": 1418364246
+    },
+    {
+      "msisdn": "41793026746",
+      "verified": false,
+      "verifiedAt": 1418364226,
+      "sentAt": 1418333246
+    }
+  ]
+}

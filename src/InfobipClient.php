@@ -9,6 +9,7 @@ use GuzzleHttp\ClientInterface as GuzzleHttpClientInterface;
 use GuzzleHttp\Exception\RequestException as GuzzleHttpRequestException;
 use GuzzleHttp\RequestOptions;
 use Infobip\Endpoints\RCS;
+use Infobip\Endpoints\SMS;
 use Infobip\Endpoints\WebRTC;
 use Infobip\Endpoints\WhatsApp;
 use Infobip\Exceptions\InfobipExceptionFactory;
@@ -36,6 +37,9 @@ final class InfobipClient
     /** @var WebRTC */
     private $webRTC;
 
+    /** @var SMS */
+    private $SMS;
+
     public function __construct(string $apiKey, string $baseUrl, float $timeout)
     {
         $this->apiKey = $apiKey;
@@ -45,6 +49,7 @@ final class InfobipClient
         $this->whatsApp = new WhatsApp($this);
         $this->RCS = new RCS($this);
         $this->webRTC = new WebRTC($this);
+        $this->SMS = new SMS($this);
     }
 
     public function setClient(GuzzleHttpClientInterface $client): void
@@ -61,10 +66,11 @@ final class InfobipClient
         return $this->client;
     }
 
-    public function post(string $endpoint, array $payload = []): array
+    public function post(string $endpoint, array $payload = [], array $queryParams = []): array
     {
         $options = [
             RequestOptions::JSON => $payload,
+            RequestOptions::QUERY => $queryParams,
         ];
 
         return $this->call('POST', $endpoint, $options);
@@ -116,6 +122,11 @@ final class InfobipClient
     public function webRTC(): WebRTC
     {
         return $this->webRTC;
+    }
+
+    public function SMS(): SMS
+    {
+        return $this->SMS;
     }
 
     private function createDefaultClient(): void

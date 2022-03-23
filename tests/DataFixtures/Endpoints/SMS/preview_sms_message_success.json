@@ -1,0 +1,11 @@
+{
+  "originalText": "Let's see how many characters remain unused in this message.",
+  "previews": [
+    {
+      "textPreview": "Let's see how many characters remain unused in this message.",
+      "messageCount": 1,
+      "charactersRemaining": 96,
+      "configuration": {}
+    }
+  ]
+}

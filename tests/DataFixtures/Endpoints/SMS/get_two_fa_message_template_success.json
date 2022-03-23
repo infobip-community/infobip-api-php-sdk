@@ -1,0 +1,10 @@
+{
+  "pinPlaceholder": "{{pin}}",
+  "messageText": "Your pin is {{pin}}",
+  "pinLength": 4,
+  "pinType": "ALPHANUMERIC",
+  "language": "en",
+  "senderId": "Infobip 2FA",
+  "repeatDTMF": "1#",
+  "speechRate": 1
+}
