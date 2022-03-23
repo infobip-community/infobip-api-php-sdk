@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class GetWebRTCApplicationResourceTest extends TestCase
 {
-    public function testCanCreateGetWebRTCApplicationResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $id = 'id';

@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 final class UpdateWebRTCApplicationResourceTest extends TestCase
 {
-    public function testCanCreateUpdateWebRTCApplicationResourceResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $id = 'id';
@@ -50,7 +50,7 @@ final class UpdateWebRTCApplicationResourceTest extends TestCase
         $this->assertSame($id, $updateWebRTCApplicationResource->getId());
     }
 
-    public function testCanCreateUpdateWebRTCApplicationResourceWithPartialData(): void
+    public function testCanCreateResourceWithPartialData(): void
     {
         // arrange
         $id = 'id';
@@ -83,7 +83,7 @@ final class UpdateWebRTCApplicationResourceTest extends TestCase
         $this->assertSame($id, $updateWebRTCApplicationResource->getId());
     }
 
-    public function testCanCreateUpdateWebRTCApplicationResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $id = 'id';

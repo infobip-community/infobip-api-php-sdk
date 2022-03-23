@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 final class SaveWebRTCApplicationResourceTest extends TestCase
 {
-    public function testCanCreateSaveWebRTCApplicationResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $name = 'name';
@@ -45,7 +45,7 @@ final class SaveWebRTCApplicationResourceTest extends TestCase
         $this->assertSame($expectedArray, $saveWebRTCApplicationResource->payload());
     }
 
-    public function testCanCreateSaveWebRTCApplicationResourceWithPartialData(): void
+    public function testCanCreateResourceWithPartialData(): void
     {
         // arrange
         $name = 'name';
@@ -73,7 +73,7 @@ final class SaveWebRTCApplicationResourceTest extends TestCase
         $this->assertSame($expectedArray, $saveWebRTCApplicationResource->payload());
     }
 
-    public function testCanSaveWebRTCApplicationResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $name = 'name';
