@@ -1,0 +1,9 @@
+{
+  "externalBulkId": "string",
+  "bulks": [
+    {
+      "bulkId": "string",
+      "status": "PENDING"
+    }
+  ]
+}

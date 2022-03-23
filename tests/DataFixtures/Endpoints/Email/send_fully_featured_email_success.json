@@ -1,0 +1,16 @@
+{
+  "messages": [
+    {
+      "to": "joan.doe0@example.com",
+      "messageCount": 1,
+      "messageId": "somexternalMessageId0",
+      "status": {
+        "groupId": 1,
+        "groupName": "PENDING",
+        "id": 7,
+        "name": "PENDING_ENROUTE",
+        "description": "Message sent to next instance"
+      }
+    }
+  ]
+}
