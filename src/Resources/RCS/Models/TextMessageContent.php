@@ -38,7 +38,7 @@ final class TextMessageContent implements ModelInterface, MessageContentInterfac
     public function toArray(): array
     {
         return array_filter_recursive([
-            'type' => $this->type,
+            'type' => $this->type->getValue(),
             'text' => $this->text,
             'suggestions' => $this->suggestions->toArray(),
         ]);

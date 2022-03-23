@@ -33,7 +33,7 @@ final class RequestLocationSuggestion implements ModelInterface, SuggestionInter
         return array_filter_recursive([
             'text' => $this->text,
             'postbackData' => $this->postbackData,
-            'type' => $this->type,
+            'type' => $this->type->getValue(),
         ]);
     }
 }

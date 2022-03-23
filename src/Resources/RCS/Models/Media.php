@@ -37,8 +37,8 @@ final class Media implements ModelInterface
     {
         return array_filter_recursive([
             'file' => $this->file,
-            'height' => $this->height,
-            'thumbnail' => $this->thumbnail,
+            'height' => $this->height->getValue(),
+            'thumbnail' => $this->thumbnail ? $this->thumbnail->toArray() : null,
         ]);
     }
 }

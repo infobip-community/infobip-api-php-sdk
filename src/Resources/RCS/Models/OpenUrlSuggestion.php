@@ -39,7 +39,7 @@ final class OpenUrlSuggestion implements ModelInterface, SuggestionInterface
             'text' => $this->text,
             'postbackData' => $this->postbackData,
             'url' => $this->url,
-            'type' => $this->type,
+            'type' => $this->type->getValue(),
         ]);
     }
 }

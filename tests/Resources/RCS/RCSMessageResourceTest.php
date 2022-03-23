@@ -16,7 +16,7 @@ use Tests\TestCase;
 
 final class RCSMessageResourceTest extends TestCase
 {
-    public function testCanCreateRCSMessageResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $from = 'from';
@@ -36,9 +36,9 @@ final class RCSMessageResourceTest extends TestCase
             'from' => $from,
             'to' => $to,
             'validityPeriod' => $validityPeriod,
-            'validityPeriodTimeUnit' => $validityPeriodTimeUnit,
-            'content' => $content,
-            'smsFailover' => $smsFailover,
+            'validityPeriodTimeUnit' => $validityPeriodTimeUnit->getValue(),
+            'content' => $content->toArray(),
+            'smsFailover' => $smsFailover->toArray(),
             'notifyUrl' => $notifyUrl,
             'callbackData' => $callbackData,
             'messageId' => $messageId,
@@ -61,7 +61,7 @@ final class RCSMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $RCSMessageResource->payload());
     }
 
-    public function testCanCreateRCSMessageResourceWithPartialData(): void
+    public function testCanCreateResourceWithPartialData(): void
     {
         // arrange
         $from = 'from';
@@ -79,7 +79,7 @@ final class RCSMessageResourceTest extends TestCase
             'from' => $from,
             'to' => $to,
             'validityPeriod' => $validityPeriod,
-            'content' => $content,
+            'content' => $content->toArray(),
             'notifyUrl' => $notifyUrl,
             'callbackData' => $callbackData,
             'messageId' => $messageId,
@@ -100,7 +100,7 @@ final class RCSMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $RCSMessageResource->payload());
     }
 
-    public function testCanCreateRCSMessageResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $to = 'to';
@@ -111,7 +111,7 @@ final class RCSMessageResourceTest extends TestCase
 
         $expectedArray = [
             'to' => $to,
-            'content' => $content,
+            'content' => $content->toArray(),
         ];
 
         // act

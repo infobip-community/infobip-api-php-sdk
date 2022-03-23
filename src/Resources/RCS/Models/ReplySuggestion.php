@@ -33,7 +33,7 @@ final class ReplySuggestion implements ModelInterface, SuggestionInterface
         return array_filter_recursive([
             'text' => $this->text,
             'postbackData' => $this->postbackData,
-            'type' => $this->type,
+            'type' => $this->type->getValue(),
         ]);
     }
 }

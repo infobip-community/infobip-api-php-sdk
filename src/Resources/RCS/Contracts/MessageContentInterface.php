@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\RCS\Contracts;
 
-interface MessageContentInterface
+use Infobip\Resources\ModelInterface;
+
+interface MessageContentInterface extends ModelInterface
 {
 }
