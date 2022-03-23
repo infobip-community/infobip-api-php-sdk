@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class WhatsAppMarkAsReadResourceTest extends TestCase
 {
-    public function testCanCreateWhatsAppMarkAsReadResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $sender = 'sender';

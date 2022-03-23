@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class WhatsAppGetMediaMetaDataResourceTest extends TestCase
 {
-    public function testCanCreateWhatsAppGetMediaMetaDataResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $sender = 'sender';

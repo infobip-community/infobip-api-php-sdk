@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class WhatsAppDeleteMediaResourceTest extends TestCase
 {
-    public function testCanCreateWhatsAppDeleteMediaResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $sender = 'sender';

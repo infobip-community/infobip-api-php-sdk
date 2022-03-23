@@ -9,8 +9,10 @@ use Infobip\Resources\WhatsApp\Models\Address;
 
 final class AddressCollection extends BaseCollection
 {
-    public function add(Address $item): void
+    public function add(Address $item): self
     {
         $this->items[] = $item;
+
+        return $this;
     }
 }

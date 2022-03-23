@@ -9,8 +9,10 @@ use Infobip\Resources\WhatsApp\Models\Contact;
 
 final class ContactCollection extends BaseCollection
 {
-    public function add(Contact $contact): void
+    public function add(Contact $contact): self
     {
         $this->items[] = $contact;
+
+        return $this;
     }
 }

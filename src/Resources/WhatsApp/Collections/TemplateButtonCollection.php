@@ -9,8 +9,10 @@ use Infobip\Resources\WhatsApp\Contracts\TemplateButtonInterface;
 
 final class TemplateButtonCollection extends BaseCollection
 {
-    public function add(TemplateButtonInterface $templateButton): void
+    public function add(TemplateButtonInterface $templateButton): self
     {
         $this->items[] = $templateButton;
+
+        return $this;
     }
 }

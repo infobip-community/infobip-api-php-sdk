@@ -9,8 +9,10 @@ use Infobip\Resources\WhatsApp\Models\InteractiveMultiProductSection;
 
 final class InteractiveMultiProductSectionCollection extends BaseCollection
 {
-    public function add(InteractiveMultiProductSection $section): void
+    public function add(InteractiveMultiProductSection $section): self
     {
         $this->items[] = $section;
+
+        return $this;
     }
 }

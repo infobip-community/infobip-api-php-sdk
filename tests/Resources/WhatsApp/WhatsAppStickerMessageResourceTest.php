@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 final class WhatsAppStickerMessageResourceTest extends TestCase
 {
-    public function testCanCreateWhatsAppStickerMessageResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $from = 'from';
@@ -46,7 +46,7 @@ final class WhatsAppStickerMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppStickerMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppStickerMessageResourceWithPartialData(): void
+    public function testCanCreateResourceWithPartialData(): void
     {
         // arrange
         $from = 'from';
@@ -73,7 +73,7 @@ final class WhatsAppStickerMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppStickerMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppStickerMessageResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $from = 'from';

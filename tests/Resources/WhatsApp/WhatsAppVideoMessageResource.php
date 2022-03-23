@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 final class WhatsAppVideoMessageResourceTest extends TestCase
 {
-    public function testCanCreateWhatsAppVideoMessageResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $from = 'from';
@@ -50,7 +50,7 @@ final class WhatsAppVideoMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppVideoMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppVideoMessageResourceWithPartialData(): void
+    public function testCanCreateResourceWithPartialData(): void
     {
         // arrange
         $from = 'from';
@@ -82,7 +82,7 @@ final class WhatsAppVideoMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppVideoMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppVideoMessageResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $from = 'from';

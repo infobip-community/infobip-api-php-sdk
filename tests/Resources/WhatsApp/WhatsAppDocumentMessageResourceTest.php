@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 final class WhatsAppDocumentMessageResourceTest extends TestCase
 {
-    public function testCanCreateWhatsAppDocumentMessageResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $from = 'from';
@@ -46,7 +46,7 @@ final class WhatsAppDocumentMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppDocumentMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppDocumentMessageResourceWithPartialData(): void
+    public function testCanCreateResourceWithPartialData(): void
     {
         // arrange
         $from = 'from';
@@ -73,7 +73,7 @@ final class WhatsAppDocumentMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $whatsAppDocumentMessageResource->payload());
     }
 
-    public function testCanCreateWhatsAppDocumentMessageResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $from = 'from';
