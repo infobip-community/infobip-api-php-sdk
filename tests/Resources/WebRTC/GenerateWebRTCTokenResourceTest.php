@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 final class GenerateWebRTCTokenResourceTest extends TestCase
 {
-    public function testCanCreateGenerateWebRTCTokenResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $identity = 'identity';
@@ -42,7 +42,7 @@ final class GenerateWebRTCTokenResourceTest extends TestCase
         $this->assertSame($expectedArray, $generateWebRTCTokenResource->payload());
     }
 
-    public function testCanCreateGenerateWebRTCTokenResourceWithPartialData(): void
+    public function testCanCreateResourceWithPartialData(): void
     {
         // arrange
         $identity = 'identity';
@@ -61,7 +61,7 @@ final class GenerateWebRTCTokenResourceTest extends TestCase
         $this->assertSame($expectedArray, $generateWebRTCTokenResource->payload());
     }
 
-    public function testCanCreateGenerateWebRTCTokenResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $identity = 'identity';

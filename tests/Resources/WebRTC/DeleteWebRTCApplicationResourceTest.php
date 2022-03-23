@@ -9,7 +9,7 @@ use Tests\TestCase;
 
 final class DeleteWebRTCApplicationResourceTest extends TestCase
 {
-    public function testCanCreateDeleteWebRTCApplicationResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $id = 'id';
