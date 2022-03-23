@@ -7,6 +7,9 @@ namespace Infobip\Resources\WhatsApp;
 use Infobip\Resources\ResourcePayloadInterface;
 use Infobip\Resources\WhatsApp\Models\InteractiveListContent;
 
+/**
+ * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-interactive-list-message
+ */
 final class WhatsAppInteractiveListMessageResource implements ResourcePayloadInterface
 {
     /** @var string */
