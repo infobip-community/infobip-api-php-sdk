@@ -39,7 +39,7 @@ final class DialPhoneSuggestion implements ModelInterface, SuggestionInterface
             'text' => $this->text,
             'postbackData' => $this->postbackData,
             'phoneNumber' => $this->phoneNumber,
-            'type' => $this->type,
+            'type' => $this->type->getValue(),
         ]);
     }
 }

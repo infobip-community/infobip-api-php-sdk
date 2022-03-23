@@ -9,8 +9,10 @@ use Infobip\Resources\RCS\Contracts\SuggestionInterface;
 
 final class SuggestionCollection extends BaseCollection
 {
-    public function add(SuggestionInterface $item): void
+    public function add(SuggestionInterface $item): self
     {
         $this->items[] = $item;
+
+        return $this;
     }
 }

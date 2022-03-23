@@ -51,9 +51,9 @@ final class CardMessageContent implements ModelInterface, MessageContentInterfac
     public function toArray(): array
     {
         return array_filter_recursive([
-            'type' => $this->type,
-            'orientation' => $this->orientation,
-            'alignment' => $this->alignment,
+            'type' => $this->type->getValue(),
+            'orientation' => $this->orientation->getValue(),
+            'alignment' => $this->alignment->getValue(),
             'content' => $this->content->toArray(),
             'suggestions' => $this->suggestions->toArray(),
         ]);

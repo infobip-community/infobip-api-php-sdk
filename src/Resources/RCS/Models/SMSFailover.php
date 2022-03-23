@@ -49,7 +49,7 @@ final class SMSFailover implements ModelInterface
             'from' => $this->from,
             'text' => $this->text,
             'validityPeriod' => $this->validityPeriod,
-            'validityPeriodTimeUnit' => $this->validityPeriodTimeUnit,
+            'validityPeriodTimeUnit' => $this->validityPeriodTimeUnit ? $this->validityPeriodTimeUnit->getValue() : null,
         ]);
     }
 }

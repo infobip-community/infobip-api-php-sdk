@@ -14,7 +14,7 @@ use Tests\TestCase;
 
 final class RCSBulkMessageResourceTest extends TestCase
 {
-    public function testCanCreateRCSBulkMessageResourceWithAllData(): void
+    public function testCanCreateResourceWithAllData(): void
     {
         // arrange
         $from = 'from';
@@ -34,9 +34,9 @@ final class RCSBulkMessageResourceTest extends TestCase
             'from' => $from,
             'to' => $to,
             'validityPeriod' => $validityPeriod,
-            'validityPeriodTimeUnit' => $validityPeriodTimeUnit,
+            'validityPeriodTimeUnit' => $validityPeriodTimeUnit->getValue(),
             'content' => $content,
-            'smsFailover' => $smsFailover,
+            'smsFailover' => $smsFailover->toArray(),
             'notifyUrl' => $notifyUrl,
             'callbackData' => $callbackData,
             'messageId' => $messageId,
@@ -59,7 +59,7 @@ final class RCSBulkMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $RCSBulkMessageResource->payload());
     }
 
-    public function testCanCreateRCSBulkMessageResourceWithPartialData(): void
+    public function testCanCreateResourceWithPartialData(): void
     {
         // arrange
         $from = 'from';
@@ -98,7 +98,7 @@ final class RCSBulkMessageResourceTest extends TestCase
         $this->assertSame($expectedArray, $RCSBulkMessageResource->payload());
     }
 
-    public function testCanCreateRCSBulkMessageResourceWithRequiredData(): void
+    public function testCanCreateResourceWithRequiredData(): void
     {
         // arrange
         $to = 'to';

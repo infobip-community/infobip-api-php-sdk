@@ -8,7 +8,7 @@ use Infobip\Resources\ModelInterface;
 use Infobip\Resources\RCS\Contracts\SuggestionInterface;
 use Infobip\Resources\RCS\Enums\SuggestionType;
 
-final class OpenUrlSuggestion implements ModelInterface, SuggestionInterface
+final class ShowLocationSuggestion implements ModelInterface, SuggestionInterface
 {
     /** @var SuggestionType */
     private $type;
@@ -46,7 +46,7 @@ final class OpenUrlSuggestion implements ModelInterface, SuggestionInterface
         return array_filter_recursive([
             'text' => $this->text,
             'postbackData' => $this->postbackData,
-            'type' => $this->type,
+            'type' => $this->type->getValue(),
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
             'label' => $this->label,

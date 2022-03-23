@@ -25,7 +25,8 @@
         "phpoption/phpoption": "^1.8",
         "phpstan/phpstan": "^1.4",
         "phpstan/phpstan-mockery": "^1.0",
-        "vlucas/phpdotenv": "^4.2"
+        "vlucas/phpdotenv": "^4.2",
+        "ergebnis/phpstan-rules": "^1.0"
     },
     "autoload": {
         "psr-4": {

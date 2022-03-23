@@ -8,5 +8,7 @@ parameters:
   ignoreErrors:
     - '#Cannot cast mixed to string.#'
     - '#Cannot cast mixed to float.#'
+rules:
+  - Ergebnis\PHPStan\Rules\Files\DeclareStrictTypesRule
 includes:
   - vendor/phpstan/phpstan-mockery/extension.neon

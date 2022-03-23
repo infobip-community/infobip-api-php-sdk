@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 if (false === function_exists('array_filter_recursive')) {
     function array_filter_recursive(array $input): array
     {

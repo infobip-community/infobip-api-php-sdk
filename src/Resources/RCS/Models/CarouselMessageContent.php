@@ -45,8 +45,8 @@ final class CarouselMessageContent implements ModelInterface, MessageContentInte
     public function toArray(): array
     {
         return array_filter_recursive([
-            'type' => $this->type,
-            'cardWidth' => $this->cardWidth,
+            'type' => $this->type->getValue(),
+            'cardWidth' => $this->cardWidth->getValue(),
             'content' => $this->content->toArray(),
             'suggestions' => $this->suggestions->toArray(),
         ]);

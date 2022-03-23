@@ -33,7 +33,7 @@ final class FileMessageContent implements ModelInterface, MessageContentInterfac
     public function toArray(): array
     {
         return array_filter_recursive([
-            'type' => $this->type,
+            'type' => $this->type->getValue(),
             'file' => $this->file->toArray(),
             'thumbnail' => $this->thumbnail ? $this->thumbnail->toArray() : null,
         ]);
