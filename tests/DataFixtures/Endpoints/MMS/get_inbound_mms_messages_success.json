@@ -1,0 +1,17 @@
+{
+    "results": [
+        {
+            "messageId": "string",
+            "to": "string",
+            "from": "string",
+            "message": "string",
+            "receivedAt": "string",
+            "mmsCount": 0,
+            "callbackData": "string",
+            "price": {
+                "pricePerMessage": 0,
+                "currency": "string"
+            }
+        }
+    ]
+}

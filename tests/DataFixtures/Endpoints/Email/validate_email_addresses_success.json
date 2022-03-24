@@ -1,0 +1,8 @@
+{
+  "to": "abc@zxc.com",
+  "validMailbox": "true",
+  "validSyntax": true,
+  "catchAll": false,
+  "disposable": false,
+  "roleBased": false
+}

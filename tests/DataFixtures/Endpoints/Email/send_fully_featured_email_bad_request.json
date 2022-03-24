@@ -1,0 +1,8 @@
+{
+  "requestError": {
+    "serviceException": {
+      "messageId": "string",
+      "text": "string"
+    }
+  }
+}
