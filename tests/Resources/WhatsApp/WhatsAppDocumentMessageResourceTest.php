@@ -17,7 +17,6 @@ final class WhatsAppDocumentMessageResourceTest extends TestCase
         $to = 'to';
         $content = new DocumentContent('mediaUrl');
         $messageId = 'messageId';
-        $bulkId = 'bulkId';
         $callbackData = 'callbackData';
         $notifyUrl = 'notifyUrl';
 
@@ -25,7 +24,6 @@ final class WhatsAppDocumentMessageResourceTest extends TestCase
             'from' => $from,
             'to' => $to,
             'messageId' => $messageId,
-            'bulkId' => $bulkId,
             'content' => $content->toArray(),
             'callbackData' => $callbackData,
             'notifyUrl' => $notifyUrl,
@@ -37,7 +35,6 @@ final class WhatsAppDocumentMessageResourceTest extends TestCase
             $to,
             $content
         ))
-            ->setBulkId($bulkId)
             ->setMessageId($messageId)
             ->setCallbackData($callbackData)
             ->setNotifyUrl($notifyUrl);

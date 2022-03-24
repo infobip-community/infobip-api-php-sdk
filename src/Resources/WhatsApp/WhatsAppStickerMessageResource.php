@@ -10,73 +10,15 @@ use Infobip\Resources\WhatsApp\Models\StickerContent;
 /**
  * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-sticker-message
  */
-final class WhatsAppStickerMessageResource implements ResourcePayloadInterface
+final class WhatsAppStickerMessageResource extends BaseWhatsAppMessageResource
 {
-    /** @var string */
-    private $from;
-
-    /** @var string */
-    private $to;
-
     /** @var StickerContent */
-    private $content;
+    protected $content;
 
-    /** @var string|null */
-    private $messageId = null;
-
-    /** @var string|null */
-    private $bulkId = null;
-
-    /** @var string|null */
-    private $callbackData = null;
-
-    /** @var string|null */
-    private $notifyUrl = null;
-
-    public function __construct(
-        string $from,
-        string $to,
-        StickerContent $content
-    ) {
+    public function __construct(string $from, string $to, StickerContent $content)
+    {
         $this->from = $from;
         $this->to = $to;
         $this->content = $content;
-    }
-
-    public function setMessageId(?string $messageId): self
-    {
-        $this->messageId = $messageId;
-        return $this;
-    }
-
-    public function setBulkId(?string $bulkId): self
-    {
-        $this->bulkId = $bulkId;
-        return $this;
-    }
-
-    public function setCallbackData(?string $callbackData): self
-    {
-        $this->callbackData = $callbackData;
-        return $this;
-    }
-
-    public function setNotifyUrl(?string $notifyUrl): self
-    {
-        $this->notifyUrl = $notifyUrl;
-        return $this;
-    }
-
-    public function payload(): array
-    {
-        return array_filter_recursive([
-            'from' => $this->from,
-            'to' => $this->to,
-            'messageId' => $this->messageId,
-            'bulkId' => $this->bulkId,
-            'content' => $this->content->toArray(),
-            'callbackData' => $this->callbackData,
-            'notifyUrl' => $this->notifyUrl,
-        ]);
     }
 }

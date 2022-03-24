@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\WhatsApp\Models;
 
-use Infobip\Resources\ModelInterface;
 use Infobip\Resources\WhatsApp\Collections\ContactCollection;
+use Infobip\Resources\WhatsApp\Contracts\ContentInterface;
+use Infobip\Validations\RuleCollection;
 
-final class ContactContent implements ModelInterface
+final class ContactContent implements ContentInterface
 {
     /** @var ContactCollection */
     private $contacts;
@@ -28,5 +29,10 @@ final class ContactContent implements ModelInterface
         return array_filter_recursive([
             'contacts' => $this->contacts->toArray(),
         ]);
+    }
+
+    public function validationRules(): RuleCollection
+    {
+        return new RuleCollection();
     }
 }

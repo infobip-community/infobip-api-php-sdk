@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Infobip\Endpoints;
 
+use Infobip\Exceptions\InfobipValidationException;
 use Infobip\Resources\WhatsApp\WhatsAppAudioMessageResource;
 use Infobip\Resources\WhatsApp\WhatsAppContactMessageResource;
 use Infobip\Resources\WhatsApp\WhatsAppCreateTemplateResource;
@@ -23,6 +24,7 @@ use Infobip\Resources\WhatsApp\WhatsAppTemplateMessageResource;
 use Infobip\Resources\WhatsApp\WhatsAppTemplatesResource;
 use Infobip\Resources\WhatsApp\WhatsAppTextMessageResource;
 use Infobip\Resources\WhatsApp\WhatsAppVideoMessageResource;
+use Infobip\Validations\Validator;
 
 final class WhatsApp extends BaseEndpoint
 {
@@ -36,65 +38,89 @@ final class WhatsApp extends BaseEndpoint
 
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-text-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppTextMessage(WhatsAppTextMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/text', $resource->payload());
     }
 
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-document-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppDocumentMessage(WhatsAppDocumentMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/document', $resource->payload());
     }
 
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-image-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppImageMessage(WhatsAppImageMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/image', $resource->payload());
     }
 
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-audio-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppAudioMessage(WhatsAppAudioMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/audio', $resource->payload());
     }
 
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-video-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppVideoMessage(WhatsAppVideoMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/video', $resource->payload());
     }
 
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-sticker-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppStickerMessage(WhatsAppStickerMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/sticker', $resource->payload());
     }
 
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-location-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppLocationMessage(WhatsAppLocationMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/location', $resource->payload());
     }
 
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-contact-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppContactMessage(WhatsAppContactMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/contact', $resource->payload());
     }
 

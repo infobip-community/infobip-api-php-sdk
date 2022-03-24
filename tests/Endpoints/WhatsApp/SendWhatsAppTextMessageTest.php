@@ -8,6 +8,7 @@ use Infobip\Enums\StatusCode;
 use Infobip\Exceptions\InfobipBadRequestException;
 use Infobip\Exceptions\InfobipTooManyRequestException;
 use Infobip\Exceptions\InfobipUnauthorizedException;
+use Infobip\Exceptions\InfobipValidationException;
 use Infobip\Resources\WhatsApp\Models\TextContent;
 use Infobip\Resources\WhatsApp\WhatsAppTextMessageResource;
 use Tests\Endpoints\TestCase;
@@ -101,12 +102,46 @@ final class SendWhatsAppTextMessageTest extends TestCase
             ->sendWhatsAppTextMessage($resource);
     }
 
+    public function testApiCallExpectsValidationException(): void
+    {
+        // arrange
+        $resource = $this->getInvalidResource();
+
+        $this->setMockedGuzzleHttpClient(StatusCode::NO_CONTENT);
+
+        // act & assert
+        $this->expectException(InfobipValidationException::class);
+        $this->expectExceptionCode(StatusCode::UNPROCESSABLE_ENTITY);
+
+        try {
+            $this
+                ->getInfobipClient()
+                ->whatsApp()
+                ->sendWhatsAppTextMessage($resource);
+        } catch (InfobipValidationException $exception) {
+            $this->assertArrayHasKey('from', $exception->getValidationErrors());
+            $this->assertArrayHasKey('to', $exception->getValidationErrors());
+            $this->assertArrayHasKey('content.text', $exception->getValidationErrors());
+
+            throw $exception;
+        }
+    }
+
     private function getResource(): WhatsAppTextMessageResource
     {
         return new WhatsAppTextMessageResource(
             'from',
             'to',
             new TextContent('text')
+        );
+    }
+
+    private function getInvalidResource(): WhatsAppTextMessageResource
+    {
+        return new WhatsAppTextMessageResource(
+            '',
+            '',
+            new TextContent('')
         );
     }
 }

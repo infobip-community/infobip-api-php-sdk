@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\WhatsApp\Models;
 
-use Infobip\Resources\ModelInterface;
+use Infobip\Resources\WhatsApp\Contracts\ContentInterface;
+use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules\UrlRule;
 
-final class ImageContent implements ModelInterface
+final class ImageContent implements ContentInterface
 {
     /** @var string */
     private $mediaUrl;
@@ -14,9 +16,8 @@ final class ImageContent implements ModelInterface
     /** @var string|null */
     private $caption = null;
 
-    public function __construct(
-        string $mediaUrl
-    ) {
+    public function __construct(string $mediaUrl)
+    {
         $this->mediaUrl = $mediaUrl;
     }
 
@@ -32,5 +33,11 @@ final class ImageContent implements ModelInterface
             'mediaUrl' => $this->mediaUrl,
             'caption' => $this->caption,
         ]);
+    }
+
+    public function validationRules(): RuleCollection
+    {
+        return (new RuleCollection())
+            ->add(new UrlRule('content.mediaUrl', $this->mediaUrl));
     }
 }

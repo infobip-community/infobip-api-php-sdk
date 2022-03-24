@@ -9,6 +9,7 @@ use Infobip\Exceptions\InfobipBadRequestException;
 use Infobip\Exceptions\InfobipServerException;
 use Infobip\Exceptions\InfobipTooManyRequestException;
 use Infobip\Exceptions\InfobipUnauthorizedException;
+use Infobip\Exceptions\InfobipValidationException;
 use Infobip\Resources\WhatsApp\Models\AudioContent;
 use Infobip\Resources\WhatsApp\WhatsAppAudioMessageResource;
 use Tests\Endpoints\TestCase;
@@ -124,12 +125,46 @@ final class SendWhatsAppAudioMessageTest extends TestCase
             ->sendWhatsAppAudioMessage($resource);
     }
 
+    public function testApiCallExpectsValidationException(): void
+    {
+        // arrange
+        $resource = $this->getInvalidResource();
+
+        $this->setMockedGuzzleHttpClient(StatusCode::NO_CONTENT);
+
+        // act & assert
+        $this->expectException(InfobipValidationException::class);
+        $this->expectExceptionCode(StatusCode::UNPROCESSABLE_ENTITY);
+
+        try {
+            $this
+                ->getInfobipClient()
+                ->whatsApp()
+                ->sendWhatsAppAudioMessage($resource);
+        } catch (InfobipValidationException $exception) {
+            $this->assertArrayHasKey('from', $exception->getValidationErrors());
+            $this->assertArrayHasKey('to', $exception->getValidationErrors());
+            $this->assertArrayHasKey('content.mediaUrl', $exception->getValidationErrors());
+
+            throw $exception;
+        }
+    }
+
     private function getResource(): WhatsAppAudioMessageResource
     {
         return new WhatsAppAudioMessageResource(
             'from',
             'to',
-            new AudioContent('mediaUrl')
+            new AudioContent('https://infobip.com/api/docs')
+        );
+    }
+
+    private function getInvalidResource(): WhatsAppAudioMessageResource
+    {
+        return new WhatsAppAudioMessageResource(
+            '',
+            '',
+            new AudioContent('invalid url')
         );
     }
 }
