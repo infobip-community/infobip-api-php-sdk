@@ -7,6 +7,9 @@ namespace Infobip\Resources\WhatsApp;
 use Infobip\Resources\ResourcePayloadInterface;
 use Infobip\Resources\WhatsApp\Models\DocumentContent;
 
+/**
+ * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-document-message
+ */
 final class WhatsAppDocumentMessageResource implements ResourcePayloadInterface
 {
     /** @var string */

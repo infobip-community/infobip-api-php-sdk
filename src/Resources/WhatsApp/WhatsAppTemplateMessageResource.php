@@ -7,6 +7,9 @@ namespace Infobip\Resources\WhatsApp;
 use Infobip\Resources\ResourcePayloadInterface;
 use Infobip\Resources\WhatsApp\Models\TemplateContent;
 
+/**
+ * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-template-message
+ */
 final class WhatsAppTemplateMessageResource implements ResourcePayloadInterface
 {
     /** @var string */

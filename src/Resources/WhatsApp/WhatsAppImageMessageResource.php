@@ -7,6 +7,9 @@ namespace Infobip\Resources\WhatsApp;
 use Infobip\Resources\ResourcePayloadInterface;
 use Infobip\Resources\WhatsApp\Models\ImageContent;
 
+/**
+ * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-image-message
+ */
 final class WhatsAppImageMessageResource implements ResourcePayloadInterface
 {
     /** @var string */

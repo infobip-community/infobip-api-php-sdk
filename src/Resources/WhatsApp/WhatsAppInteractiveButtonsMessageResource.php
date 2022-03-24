@@ -7,6 +7,9 @@ namespace Infobip\Resources\WhatsApp;
 use Infobip\Resources\ResourcePayloadInterface;
 use Infobip\Resources\WhatsApp\Models\InteractiveButtonsContent;
 
+/**
+ * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-interactive-buttons-message
+ */
 final class WhatsAppInteractiveButtonsMessageResource implements ResourcePayloadInterface
 {
     /** @var string */
