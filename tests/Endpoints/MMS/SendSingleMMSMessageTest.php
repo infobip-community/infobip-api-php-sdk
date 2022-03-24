@@ -9,6 +9,8 @@ use Infobip\Exceptions\InfobipBadRequestException;
 use Infobip\Exceptions\InfobipServerException;
 use Infobip\Exceptions\InfobipTooManyRequestException;
 use Infobip\Exceptions\InfobipUnauthorizedException;
+use Infobip\Exceptions\InfobipValidationException;
+use Infobip\Resources\MMS\Models\ExternallyHostedMedia;
 use Infobip\Resources\MMS\SendSingleMMSMessageResource;
 use Tests\Endpoints\TestCase;
 
@@ -123,8 +125,41 @@ final class SendSingleMMSMessageTest extends TestCase
             ->sendSingleMMSMessage($resource);
     }
 
+    public function testApiCallExpectsValidationException(): void
+    {
+        // arrange
+        $resource = $this->getInvalidResource();
+
+        $this->setMockedGuzzleHttpClient(StatusCode::NO_CONTENT);
+
+        // act & assert
+        $this->expectException(InfobipValidationException::class);
+        $this->expectExceptionCode(StatusCode::UNPROCESSABLE_ENTITY);
+
+        try {
+            $this
+                ->getInfobipClient()
+                ->MMS()
+                ->sendSingleMMSMessage($resource);
+        } catch (InfobipValidationException $exception) {
+            $this->assertArrayHasKey('externallyHostedMedia.contentUrl', $exception->getValidationErrors());
+
+            throw $exception;
+        }
+    }
+
     private function getResource(): SendSingleMMSMessageResource
     {
         return new SendSingleMMSMessageResource();
+    }
+
+    private function getInvalidResource(): SendSingleMMSMessageResource
+    {
+        return (new SendSingleMMSMessageResource())
+            ->setExternallyHostedMedia(new ExternallyHostedMedia(
+                'contentType',
+                'contentId',
+                'invalid url'
+            ));
     }
 }

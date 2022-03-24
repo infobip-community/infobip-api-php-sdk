@@ -7,9 +7,13 @@ namespace Infobip\Resources\MMS\Models;
 use DateTimeImmutable;
 use DateTimeInterface;
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ResourceValidationInterface;
 use Infobip\Resources\Shared\Models\DeliveryTimeWindow;
+use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules\MaxLengthRule;
+use Infobip\Validations\Rules\UrlRule;
 
-final class Head implements ModelInterface
+final class Head implements ModelInterface, ResourceValidationInterface
 {
     /** @var string */
     private $from;
@@ -117,5 +121,13 @@ final class Head implements ModelInterface
             'intermediateReport' => $this->intermediateReport,
             'deliveryTimeWindow' => $this->deliveryTimeWindow ? $this->deliveryTimeWindow->toArray() : null,
         ]);
+    }
+
+    public function validationRules(): RuleCollection
+    {
+        return (new RuleCollection())
+            ->add(new MaxLengthRule('head.callbackData', $this->callbackData, 200))
+            ->add(new UrlRule('head.notifyUrl', $this->notifyUrl))
+            ->addCollection($this->deliveryTimeWindow ? $this->deliveryTimeWindow->validationRules() : null);
     }
 }

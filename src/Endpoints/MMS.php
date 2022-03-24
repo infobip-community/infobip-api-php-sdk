@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace Infobip\Endpoints;
 
+use Infobip\Exceptions\InfobipValidationException;
 use Infobip\Resources\MMS\GetInboundMMSMessagesResource;
 use Infobip\Resources\MMS\GetOutboundMMSMessageDeliveryReportsResource;
 use Infobip\Resources\MMS\SendSingleMMSMessageResource;
+use Infobip\Validations\Validator;
 
 final class MMS extends BaseEndpoint
 {
     /**
      * @link https://www.infobip.com/docs/api#channels/mms/send-mms-single-message
-     * @todo
+     * @throws InfobipValidationException
      */
     public function sendSingleMMSMessage(SendSingleMMSMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('/mms/1/single', $resource->payload());
     }
 

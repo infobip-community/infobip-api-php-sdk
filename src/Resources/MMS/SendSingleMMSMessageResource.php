@@ -7,11 +7,13 @@ namespace Infobip\Resources\MMS;
 use Infobip\Resources\ResourcePayloadInterface;
 use Infobip\Resources\MMS\Models\ExternallyHostedMedia;
 use Infobip\Resources\MMS\Models\Head;
+use Infobip\Resources\ResourceValidationInterface;
+use Infobip\Validations\RuleCollection;
 
 /**
  * @link https://www.infobip.com/docs/api#channels/mms/send-mms-single-message
  */
-final class SendSingleMMSMessageResource implements ResourcePayloadInterface
+final class SendSingleMMSMessageResource implements ResourcePayloadInterface, ResourceValidationInterface
 {
     /**
      * @var Head|null
@@ -74,5 +76,12 @@ final class SendSingleMMSMessageResource implements ResourcePayloadInterface
             'externallyHostedMedia' => $this->externallyHostedMedia ? $this->externallyHostedMedia->toArray() : null,
             'smil' => $this->smil,
         ]);
+    }
+
+    public function validationRules(): RuleCollection
+    {
+        return (new RuleCollection())
+            ->addCollection($this->head ? $this->head->validationRules() : null)
+            ->addCollection($this->externallyHostedMedia ? $this->externallyHostedMedia->validationRules() : null);
     }
 }
