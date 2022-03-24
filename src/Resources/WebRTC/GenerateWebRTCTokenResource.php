@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace Infobip\Resources\WebRTC;
 
 use Infobip\Resources\ResourcePayloadInterface;
+use Infobip\Resources\ResourceValidationInterface;
 use Infobip\Resources\WebRTC\Models\Capabilities;
+use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules\BetweenLengthRule;
+use Infobip\Validations\Rules\MaxNumberRule;
 
 /**
  * @link https://www.infobip.com/docs/api#channels/webrtc/generate-webrtc-token
  */
-final class GenerateWebRTCTokenResource implements ResourcePayloadInterface
+final class GenerateWebRTCTokenResource implements ResourcePayloadInterface, ResourceValidationInterface
 {
     /** @var string */
     private $identity;
@@ -65,5 +69,13 @@ final class GenerateWebRTCTokenResource implements ResourcePayloadInterface
             'capabilities' => $this->capabilities ? $this->capabilities->toArray() : null,
             'timeToLive' => $this->timeToLive,
         ]);
+    }
+
+    public function validationRules(): RuleCollection
+    {
+        return (new RuleCollection())
+            ->add(new BetweenLengthRule('identity', $this->identity, 3, 64))
+            ->add(new BetweenLengthRule('displayName', $this->displayName, 5, 50))
+            ->add(new MaxNumberRule('timeToLive', $this->timeToLive, 60 * 60 * 24));
     }
 }
