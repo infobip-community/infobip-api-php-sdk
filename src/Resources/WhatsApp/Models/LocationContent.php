@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\WhatsApp\Models;
 
-use Infobip\Resources\ModelInterface;
+use Infobip\Resources\WhatsApp\Contracts\ContentInterface;
+use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules\BetweenLengthRule;
+use Infobip\Validations\Rules\LatitudeRule;
+use Infobip\Validations\Rules\LongitudeRule;
 
-final class LocationContent implements ModelInterface
+final class LocationContent implements ContentInterface
 {
     /** @var float */
     private $latitude;
@@ -48,5 +52,14 @@ final class LocationContent implements ModelInterface
             'name' => $this->name,
             'address' => $this->address,
         ]);
+    }
+
+    public function validationRules(): RuleCollection
+    {
+        return (new RuleCollection())
+            ->add(new LatitudeRule('content.latitude', $this->latitude))
+            ->add(new LongitudeRule('content.longitude', $this->longitude))
+            ->add(new BetweenLengthRule('content.name', $this->name, 0, 1000))
+            ->add(new BetweenLengthRule('content.address', $this->address, 0, 1000));
     }
 }

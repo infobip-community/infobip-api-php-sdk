@@ -18,7 +18,6 @@ final class WhatsAppVideoMessageResourceTest extends TestCase
         $mediaUrl = 'mediaUrl';
         $caption = 'caption';
         $messageId = 'messageId';
-        $bulkId = 'bulkId';
         $callbackData = 'callbackData';
         $notifyUrl = 'notifyUrl';
 
@@ -29,7 +28,6 @@ final class WhatsAppVideoMessageResourceTest extends TestCase
             'from' => $from,
             'to' => $to,
             'messageId' => $messageId,
-            'bulkId' => $bulkId,
             'content' => $content->toArray(),
             'callbackData' => $callbackData,
             'notifyUrl' => $notifyUrl,
@@ -41,7 +39,6 @@ final class WhatsAppVideoMessageResourceTest extends TestCase
             $to,
             $content
         ))
-            ->setBulkId($bulkId)
             ->setMessageId($messageId)
             ->setCallbackData($callbackData)
             ->setNotifyUrl($notifyUrl);
@@ -57,7 +54,6 @@ final class WhatsAppVideoMessageResourceTest extends TestCase
         $to = 'to';
         $mediaUrl = 'mediaUrl';
         $messageId = 'messageId';
-        $bulkId = 'bulkId';
 
         $content = new VideoContent($mediaUrl);
 
@@ -65,7 +61,6 @@ final class WhatsAppVideoMessageResourceTest extends TestCase
             'from' => $from,
             'to' => $to,
             'messageId' => $messageId,
-            'bulkId' => $bulkId,
             'content' => $content->toArray(),
         ];
 
@@ -75,7 +70,6 @@ final class WhatsAppVideoMessageResourceTest extends TestCase
             $to,
             $content
         ))
-            ->setBulkId($bulkId)
             ->setMessageId($messageId);
 
         // assert

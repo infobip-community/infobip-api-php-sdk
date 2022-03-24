@@ -8,6 +8,7 @@ use Infobip\Enums\StatusCode;
 use Infobip\Exceptions\InfobipBadRequestException;
 use Infobip\Exceptions\InfobipTooManyRequestException;
 use Infobip\Exceptions\InfobipUnauthorizedException;
+use Infobip\Exceptions\InfobipValidationException;
 use Infobip\Resources\WhatsApp\Models\LocationContent;
 use Infobip\Resources\WhatsApp\WhatsAppLocationMessageResource;
 use Tests\Endpoints\TestCase;
@@ -101,12 +102,47 @@ final class SendWhatsAppLocationMessageTest extends TestCase
             ->sendWhatsAppLocationMessage($resource);
     }
 
+    public function testApiCallExpectsValidationException(): void
+    {
+        // arrange
+        $resource = $this->getInvalidResource();
+
+        $this->setMockedGuzzleHttpClient(StatusCode::NO_CONTENT);
+
+        // act & assert
+        $this->expectException(InfobipValidationException::class);
+        $this->expectExceptionCode(StatusCode::UNPROCESSABLE_ENTITY);
+
+        try {
+            $this
+                ->getInfobipClient()
+                ->whatsApp()
+                ->sendWhatsAppLocationMessage($resource);
+        } catch (InfobipValidationException $exception) {
+            $this->assertArrayHasKey('from', $exception->getValidationErrors());
+            $this->assertArrayHasKey('to', $exception->getValidationErrors());
+            $this->assertArrayHasKey('content.latitude', $exception->getValidationErrors());
+            $this->assertArrayHasKey('content.longitude', $exception->getValidationErrors());
+
+            throw $exception;
+        }
+    }
+
     private function getResource(): WhatsAppLocationMessageResource
     {
         return new WhatsAppLocationMessageResource(
             'from',
             'to',
-            new LocationContent(2.5, 2.5)
+            new LocationContent(45.81, 15.96)
+        );
+    }
+
+    private function getInvalidResource(): WhatsAppLocationMessageResource
+    {
+        return new WhatsAppLocationMessageResource(
+            '',
+            '',
+            new LocationContent(270, 550)
         );
     }
 }

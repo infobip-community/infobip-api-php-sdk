@@ -16,7 +16,6 @@ final class WhatsAppStickerMessageResourceTest extends TestCase
         $from = 'from';
         $to = 'to';
         $messageId = 'messageId';
-        $bulkId = 'bulkId';
         $callbackData = 'callbackData';
         $notifyUrl = 'notifyUrl';
         $content = new StickerContent('mediaUrl');
@@ -25,7 +24,6 @@ final class WhatsAppStickerMessageResourceTest extends TestCase
             'from' => $from,
             'to' => $to,
             'messageId' => $messageId,
-            'bulkId' => $bulkId,
             'content' => $content->toArray(),
             'callbackData' => $callbackData,
             'notifyUrl' => $notifyUrl,
@@ -37,7 +35,6 @@ final class WhatsAppStickerMessageResourceTest extends TestCase
             $to,
             $content
         ))
-            ->setBulkId($bulkId)
             ->setMessageId($messageId)
             ->setCallbackData($callbackData)
             ->setNotifyUrl($notifyUrl);

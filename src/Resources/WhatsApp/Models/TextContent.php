@@ -4,23 +4,24 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\WhatsApp\Models;
 
-use Infobip\Resources\ModelInterface;
+use Infobip\Resources\WhatsApp\Contracts\ContentInterface;
+use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules\BetweenLengthRule;
 
-final class TextContent implements ModelInterface
+final class TextContent implements ContentInterface
 {
     /** @var string */
     private $text;
 
-    /** @var string|null */
-    private $previewUrl = null;
+    /** @var bool */
+    private $previewUrl = false;
 
-    public function __construct(
-        string $text
-    ) {
+    public function __construct(string $text)
+    {
         $this->text = $text;
     }
 
-    public function setPreviewUrl(?string $previewUrl): self
+    public function setPreviewUrl(bool $previewUrl): self
     {
         $this->previewUrl = $previewUrl;
         return $this;
@@ -32,5 +33,11 @@ final class TextContent implements ModelInterface
             'text' => $this->text,
             'previewUrl' => $this->previewUrl,
         ]);
+    }
+
+    public function validationRules(): RuleCollection
+    {
+        return (new RuleCollection())
+            ->add(new BetweenLengthRule('content.text', $this->text, 1, 4096));
     }
 }

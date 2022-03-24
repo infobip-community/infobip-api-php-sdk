@@ -20,7 +20,6 @@ final class WhatsAppLocationMessageResourceTest extends TestCase
         $name = 'name';
         $address = 'address';
         $messageId = 'messageId';
-        $bulkId = 'bulkId';
         $callbackData = 'callbackData';
         $notifyUrl = 'notifyUrl';
 
@@ -32,7 +31,6 @@ final class WhatsAppLocationMessageResourceTest extends TestCase
             'from' => $from,
             'to' => $to,
             'messageId' => $messageId,
-            'bulkId' => $bulkId,
             'content' => $content->toArray(),
             'callbackData' => $callbackData,
             'notifyUrl' => $notifyUrl,
@@ -44,7 +42,6 @@ final class WhatsAppLocationMessageResourceTest extends TestCase
             $to,
             $content
         ))
-            ->setBulkId($bulkId)
             ->setMessageId($messageId)
             ->setCallbackData($callbackData)
             ->setNotifyUrl($notifyUrl);
@@ -61,7 +58,6 @@ final class WhatsAppLocationMessageResourceTest extends TestCase
         $latitude = 2.5;
         $longitude = 2.5;
         $messageId = 'messageId';
-        $bulkId = 'bulkId';
 
         $content = new LocationContent($longitude, $latitude);
 
@@ -69,7 +65,6 @@ final class WhatsAppLocationMessageResourceTest extends TestCase
             'from' => $from,
             'to' => $to,
             'messageId' => $messageId,
-            'bulkId' => $bulkId,
             'content' => $content->toArray(),
         ];
 
@@ -79,7 +74,6 @@ final class WhatsAppLocationMessageResourceTest extends TestCase
             $to,
             $content
         ))
-            ->setBulkId($bulkId)
             ->setMessageId($messageId);
 
         // assert

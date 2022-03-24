@@ -16,20 +16,17 @@ final class WhatsAppTextMessageResourceTest extends TestCase
         $from = 'from';
         $to = 'to';
         $text = 'text';
-        $previewUrl = 'previewUrl';
         $messageId = 'messageId';
-        $bulkId = 'bulkId';
         $callbackData = 'callbackData';
         $notifyUrl = 'notifyUrl';
 
         $content = new TextContent($text);
-        $content->setPreviewUrl($previewUrl);
+        $content->setPreviewUrl(true);
 
         $expectedArray = [
             'from' => $from,
             'to' => $to,
             'messageId' => $messageId,
-            'bulkId' => $bulkId,
             'content' => $content->toArray(),
             'callbackData' => $callbackData,
             'notifyUrl' => $notifyUrl,
@@ -41,7 +38,6 @@ final class WhatsAppTextMessageResourceTest extends TestCase
             $to,
             $content
         ))
-            ->setBulkId($bulkId)
             ->setMessageId($messageId)
             ->setCallbackData($callbackData)
             ->setNotifyUrl($notifyUrl);
@@ -57,7 +53,6 @@ final class WhatsAppTextMessageResourceTest extends TestCase
         $to = 'to';
         $text = 'text';
         $messageId = 'messageId';
-        $bulkId = 'bulkId';
 
         $content = new TextContent($text);
 
@@ -65,7 +60,6 @@ final class WhatsAppTextMessageResourceTest extends TestCase
             'from' => $from,
             'to' => $to,
             'messageId' => $messageId,
-            'bulkId' => $bulkId,
             'content' => $content->toArray(),
         ];
 
@@ -75,7 +69,6 @@ final class WhatsAppTextMessageResourceTest extends TestCase
             $to,
             $content
         ))
-            ->setBulkId($bulkId)
             ->setMessageId($messageId);
 
         // assert

@@ -8,6 +8,7 @@ use Infobip\Enums\StatusCode;
 use Infobip\Exceptions\InfobipBadRequestException;
 use Infobip\Exceptions\InfobipTooManyRequestException;
 use Infobip\Exceptions\InfobipUnauthorizedException;
+use Infobip\Exceptions\InfobipValidationException;
 use Infobip\Resources\WhatsApp\Models\VideoContent;
 use Infobip\Resources\WhatsApp\WhatsAppVideoMessageResource;
 use Tests\Endpoints\TestCase;
@@ -101,12 +102,46 @@ final class SendWhatsAppVideoMessageTest extends TestCase
             ->sendWhatsAppVideoMessage($resource);
     }
 
+    public function testApiCallExpectsValidationException(): void
+    {
+        // arrange
+        $resource = $this->getInvalidResource();
+
+        $this->setMockedGuzzleHttpClient(StatusCode::NO_CONTENT);
+
+        // act & assert
+        $this->expectException(InfobipValidationException::class);
+        $this->expectExceptionCode(StatusCode::UNPROCESSABLE_ENTITY);
+
+        try {
+            $this
+                ->getInfobipClient()
+                ->whatsApp()
+                ->sendWhatsAppVideoMessage($resource);
+        } catch (InfobipValidationException $exception) {
+            $this->assertArrayHasKey('from', $exception->getValidationErrors());
+            $this->assertArrayHasKey('to', $exception->getValidationErrors());
+            $this->assertArrayHasKey('content.mediaUrl', $exception->getValidationErrors());
+
+            throw $exception;
+        }
+    }
+
     private function getResource(): WhatsAppVideoMessageResource
     {
         return new WhatsAppVideoMessageResource(
             'from',
             'to',
-            new VideoContent('mediaUrl')
+            new VideoContent('https://infobip.com/api/docs')
+        );
+    }
+
+    private function getInvalidResource(): WhatsAppVideoMessageResource
+    {
+        return new WhatsAppVideoMessageResource(
+            '',
+            '',
+            new VideoContent('invalid url')
         );
     }
 }
