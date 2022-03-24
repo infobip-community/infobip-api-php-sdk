@@ -1,0 +1,33 @@
+{
+    "results": [
+        {
+            "bulkId": "string",
+            "messageId": "string",
+            "to": "string",
+            "from": "string",
+            "sentAt": "string",
+            "doneAt": "string",
+            "mmsCount": 0,
+            "mccMnc": "string",
+            "callbackData": "string",
+            "price": {
+                "pricePerMessage": 0,
+                "currency": "string"
+            },
+            "status": {
+                "groupId": 1,
+                "groupName": "PENDING",
+                "id": 26,
+                "name": "PENDING_ACCEPTED",
+                "description": "Message accepted, pending for delivery."
+            },
+            "error": {
+                "groupId": 0,
+                "groupName": "string",
+                "id": 0,
+                "name": "string",
+                "description": "string"
+            }
+        }
+    ]
+}
