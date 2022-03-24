@@ -11,6 +11,7 @@ use GuzzleHttp\RequestOptions;
 use Infobip\Endpoints\Email;
 use Infobip\Endpoints\MMS;
 use Infobip\Endpoints\RCS;
+use Infobip\Endpoints\SMS;
 use Infobip\Endpoints\WebRTC;
 use Infobip\Endpoints\WhatsApp;
 use Infobip\Exceptions\InfobipExceptionFactory;
@@ -38,6 +39,9 @@ final class InfobipClient
     /** @var WebRTC */
     private $webRTC;
 
+    /** @var SMS */
+    private $SMS;
+
     /** @var Email */
     private $email;
 
@@ -54,6 +58,7 @@ final class InfobipClient
         $this->whatsApp = new WhatsApp($this);
         $this->RCS = new RCS($this);
         $this->webRTC = new WebRTC($this);
+        $this->SMS = new SMS($this);
         $this->email = new Email($this);
         $this->MMS = new MMS($this);
     }
@@ -72,10 +77,11 @@ final class InfobipClient
         return $this->client;
     }
 
-    public function post(string $endpoint, array $payload = []): array
+    public function post(string $endpoint, array $payload = [], array $queryParams = []): array
     {
         $options = [
             RequestOptions::JSON => $payload,
+            RequestOptions::QUERY => $queryParams,
         ];
 
         return $this->call('POST', $endpoint, $options);
@@ -127,6 +133,11 @@ final class InfobipClient
     public function webRTC(): WebRTC
     {
         return $this->webRTC;
+    }
+
+    public function SMS(): SMS
+    {
+        return $this->SMS;
     }
 
     public function email(): Email

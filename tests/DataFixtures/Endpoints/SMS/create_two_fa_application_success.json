@@ -1,0 +1,13 @@
+{
+  "applicationId": "1234567",
+  "name": "Application name",
+  "configuration": {
+    "pinAttempts": 5,
+    "allowMultiplePinVerifications": true,
+    "pinTimeToLive": "10m",
+    "verifyPinLimit": "2/4s",
+    "sendPinPerApplicationLimit": "5000/12h",
+    "sendPinPerPhoneNumberLimit": "2/1d"
+  },
+  "enabled": true
+}
