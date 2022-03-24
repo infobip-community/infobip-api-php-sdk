@@ -170,10 +170,10 @@ Infobip API Documentation can be found [here](https://www.infobip.com/docs/api).
 Feel free to participate in this open source project. These are some console commands that could help you with the development like linter, static analysis and coding standards fixer:
 
 ```sh
-vendor/bin/phplint
-vendor/bin/phpstan analyse
 vendor/bin/php-cs-fixer fix src
 vendor/bin/php-cs-fixer fix tests
+vendor/bin/phplint
+vendor/bin/phpstan
 ```
 
 For running the PHPunit tests:
