@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Tests;
 
 use GuzzleHttp\Client as GuzzleHttpClient;
+use Infobip\Endpoints\Email;
+use Infobip\Endpoints\MMS;
 use Infobip\Endpoints\RCS;
+use Infobip\Endpoints\SMS;
 use Infobip\Endpoints\WebRTC;
 use Infobip\Endpoints\WhatsApp;
 use Infobip\InfobipClient;
@@ -21,6 +24,9 @@ final class InfobipClientTest extends TestCase
         $this->assertInstanceOf(RCS::class, $client->RCS());
         $this->assertInstanceOf(WebRTC::class, $client->webRTC());
         $this->assertInstanceOf(WhatsApp::class, $client->whatsApp());
+        $this->assertInstanceOf(SMS::class, $client->SMS());
+        $this->assertInstanceOf(MMS::class, $client->MMS());
+        $this->assertInstanceOf(Email::class, $client->email());
     }
 
     public function testDefaultGuzzleHttpClientIsCreatedAutomatically(): void
