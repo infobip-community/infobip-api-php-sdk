@@ -4,19 +4,24 @@ declare(strict_types=1);
 
 namespace Infobip\Endpoints;
 
+use Infobip\Exceptions\InfobipValidationException;
 use Infobip\Resources\WebRTC\DeleteWebRTCApplicationResource;
 use Infobip\Resources\WebRTC\GetWebRTCApplicationResource;
 use Infobip\Resources\WebRTC\SaveWebRTCApplicationResource;
 use Infobip\Resources\WebRTC\UpdateWebRTCApplicationResource;
 use Infobip\Resources\WebRTC\GenerateWebRTCTokenResource;
+use Infobip\Validations\Validator;
 
 final class WebRTC extends BaseEndpoint
 {
     /**
      * @link https://www.infobip.com/docs/api#channels/webrtc/generate-webrtc-token
+     * @throws InfobipValidationException
      */
     public function generateWebRTCToken(GenerateWebRTCTokenResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('/webrtc/1/token', $resource->payload());
     }
 
@@ -30,9 +35,12 @@ final class WebRTC extends BaseEndpoint
 
     /**
      * @link https://www.infobip.com/docs/api#channels/webrtc/save-webrtc-application
+     * @throws InfobipValidationException
      */
     public function saveWebRTCApplication(SaveWebRTCApplicationResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('/webrtc/1/applications', $resource->payload());
     }
 
@@ -51,9 +59,12 @@ final class WebRTC extends BaseEndpoint
 
     /**
      * @link https://www.infobip.com/docs/api#channels/webrtc/update-webrtc-application
+     * @throws InfobipValidationException
      */
     public function updateWebRTCApplication(UpdateWebRTCApplicationResource $resource): array
     {
+        Validator::validateResource($resource);
+
         $endpoint = sprintf(
             '/webrtc/1/applications/%s',
             $resource->getId()

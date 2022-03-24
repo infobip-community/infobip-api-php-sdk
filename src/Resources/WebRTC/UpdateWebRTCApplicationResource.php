@@ -5,13 +5,16 @@ declare(strict_types=1);
 namespace Infobip\Resources\WebRTC;
 
 use Infobip\Resources\ResourcePayloadInterface;
+use Infobip\Resources\ResourceValidationInterface;
 use Infobip\Resources\WebRTC\Models\Android;
 use Infobip\Resources\WebRTC\Models\Ios;
+use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules\MaxLengthRule;
 
 /**
  * @link https://www.infobip.com/docs/api#channels/webrtc/update-webrtc-application
  */
-final class UpdateWebRTCApplicationResource implements ResourcePayloadInterface
+final class UpdateWebRTCApplicationResource implements ResourcePayloadInterface, ResourceValidationInterface
 {
     /** @var string */
     private $id;
@@ -97,5 +100,11 @@ final class UpdateWebRTCApplicationResource implements ResourcePayloadInterface
             'appToConversations' => $this->appToConversations,
             'appToPhone' => $this->appToPhone,
         ]);
+    }
+
+    public function validationRules(): RuleCollection
+    {
+        return (new RuleCollection())
+            ->add(new MaxLengthRule('description', $this->description, 160));
     }
 }
