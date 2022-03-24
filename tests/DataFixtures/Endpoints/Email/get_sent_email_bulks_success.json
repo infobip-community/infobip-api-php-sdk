@@ -1,0 +1,9 @@
+{
+  "externalBulkId": "string",
+  "bulks": [
+    {
+      "bulkId": "string",
+      "sendAt": "2022-03-19T16:49:41Z"
+    }
+  ]
+}
