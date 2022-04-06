@@ -338,6 +338,6 @@ final class FullyFeaturedEmailResource implements ResourcePayloadInterface, Reso
             ->addRule(new EmailRule('replyTo', $this->replyTo))
             ->addRule(new UrlRule('trackingUrl', $this->trackingUrl))
             ->addRule(new UrlRule('notifyUrl', $this->notifyUrl))
-            ->addRule(new MaxLengthRule('callbackData', $this->callbackData, 40000));
+            ->addRule(new MaxLengthRule('callbackData', $this->callbackData, 4000));
     }
 }
