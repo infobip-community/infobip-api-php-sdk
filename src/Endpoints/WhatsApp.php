@@ -30,9 +30,12 @@ final class WhatsApp extends BaseEndpoint
 {
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-template-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppTemplateMessage(WhatsAppTemplateMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/template', $resource->payload());
     }
 
@@ -126,33 +129,45 @@ final class WhatsApp extends BaseEndpoint
 
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-interactive-list-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppInteractiveListMessage(WhatsAppInteractiveListMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/interactive/list', $resource->payload());
     }
 
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-interactive-product-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppInteractiveProductMessage(WhatsAppInteractiveProductMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/interactive/product', $resource->payload());
     }
 
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-interactive-multi-product-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppInteractiveMultiProductMessage(WhatsAppInteractiveMultiProductMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/interactive/multi-product', $resource->payload());
     }
 
     /**
      * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-interactive-buttons-message
+     * @throws InfobipValidationException
      */
     public function sendWhatsAppInteractiveButtonsMessage(WhatsAppInteractiveButtonsMessageResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->post('whatsapp/1/message/interactive/buttons', $resource->payload());
     }
 

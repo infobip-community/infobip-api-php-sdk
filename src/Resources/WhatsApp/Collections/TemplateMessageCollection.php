@@ -2,20 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Infobip\Resources\RCS\Collections;
+namespace Infobip\Resources\WhatsApp\Collections;
 
 use Infobip\Resources\BaseCollection;
 use Infobip\Resources\CollectionValidationInterface;
 use Infobip\Resources\ModelValidationInterface;
-use Infobip\Resources\RCS\Contracts\SuggestionInterface;
+use Infobip\Resources\WhatsApp\Models\Address;
+use Infobip\Resources\WhatsApp\Models\TemplateMessage;
 use Infobip\Validations\Rules;
 
-final class SuggestionCollection extends BaseCollection implements CollectionValidationInterface
+final class TemplateMessageCollection extends BaseCollection implements CollectionValidationInterface
 {
-    /** @var array|SuggestionInterface[] */
-    protected $items = [];
-
-    public function add(SuggestionInterface $item): self
+    public function add(TemplateMessage $item): self
     {
         $this->items[] = $item;
 

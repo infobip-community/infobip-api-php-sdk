@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\WhatsApp\Models;
 
-use Infobip\Resources\ModelInterface;
 use Infobip\Resources\WhatsApp\Contracts\InteractiveButtonsHeaderInterface;
 use Infobip\Resources\WhatsApp\Enums\InteractiveButtonHeaderType;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\UrlRule;
+use Infobip\Validations\Rules\BetweenLengthRule;
 
 final class InteractiveButtonsDocumentHeader implements InteractiveButtonsHeaderInterface
 {
@@ -32,5 +34,12 @@ final class InteractiveButtonsDocumentHeader implements InteractiveButtonsHeader
             'mediaUrl' => $this->mediaUrl,
             'filename' => $this->filename,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new UrlRule('interactiveButtonsDocumentHeader.mediaUrl', $this->mediaUrl))
+            ->addRule(new BetweenLengthRule('interactiveButtonsDocumentHeader.filename', $this->filename, 0, 240));
     }
 }

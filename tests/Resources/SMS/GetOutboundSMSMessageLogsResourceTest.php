@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Resources\SMS;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use Infobip\Resources\SMS\Enums\GeneralStatusType;
 use Infobip\Resources\SMS\GetOutboundSMSMessageLogsResource;
 use Tests\TestCase;
@@ -18,8 +20,8 @@ final class GetOutboundSMSMessageLogsResourceTest extends TestCase
         $bulkId = ['bulkId1', 'bulkId2'];
         $messageId = 'messageId';
         $generalStatus = new GeneralStatusType(GeneralStatusType::ACCEPTED);
-        $sentSince = 'sentSince';
-        $sentUntil = 'sentUntil';
+        $sentSince = new DateTimeImmutable();
+        $sentUntil = new DateTimeImmutable();
         $limit = 50;
         $mcc = 'mcc';
         $mnc = 'mnc';
@@ -30,8 +32,8 @@ final class GetOutboundSMSMessageLogsResourceTest extends TestCase
             'bulkId' => $bulkId,
             'messageId' => $messageId,
             'generalStatus' => $generalStatus->getValue(),
-            'sentSince' => $sentSince,
-            'sentUntil' => $sentUntil,
+            'sentSince' => $sentSince->format(DateTimeInterface::RFC3339_EXTENDED),
+            'sentUntil' => $sentUntil->format(DateTimeInterface::RFC3339_EXTENDED),
             'limit' => $limit,
             'mcc' => $mcc,
             'mnc' => $mnc,

@@ -27,10 +27,8 @@ final class RCSMessageResourceTest extends TestCase
         $notifyUrl = 'notifyUrl';
         $callbackData = 'callbackData';
         $messageId = 'messageId';
-        $content = new CarouselMessageContent(
-            new CardWidth(CardWidth::SMALL),
-            new CarouselContent()
-        );
+        $content = (new CarouselMessageContent(new CardWidth(CardWidth::SMALL)))
+            ->addCarouselContent(new CarouselContent());
 
         $expectedArray = [
             'from' => $from,
@@ -70,10 +68,8 @@ final class RCSMessageResourceTest extends TestCase
         $messageId = 'messageId';
         $callbackData = 'callbackData';
         $notifyUrl = 'notifyUrl';
-        $content = new CarouselMessageContent(
-            new CardWidth(CardWidth::SMALL),
-            new CarouselContent()
-        );
+        $content = (new CarouselMessageContent(new CardWidth(CardWidth::SMALL)))
+            ->addCarouselContent(new CarouselContent());
 
         $expectedArray = [
             'from' => $from,
@@ -104,10 +100,8 @@ final class RCSMessageResourceTest extends TestCase
     {
         // arrange
         $to = 'to';
-        $content = new CarouselMessageContent(
-            new CardWidth(CardWidth::SMALL),
-            new CarouselContent()
-        );
+        $content = (new CarouselMessageContent(new CardWidth(CardWidth::SMALL)))
+            ->addCarouselContent(new CarouselContent());
 
         $expectedArray = [
             'to' => $to,

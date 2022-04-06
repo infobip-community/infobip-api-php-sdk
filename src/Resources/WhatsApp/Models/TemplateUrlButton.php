@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\WhatsApp\Models;
 
-use Infobip\Resources\ModelInterface;
 use Infobip\Resources\WhatsApp\Contracts\TemplateButtonInterface;
 use Infobip\Resources\WhatsApp\Enums\TemplateButtonType;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\BetweenLengthRule;
 
 final class TemplateUrlButton implements TemplateButtonInterface
 {
@@ -28,5 +29,11 @@ final class TemplateUrlButton implements TemplateButtonInterface
             'type' => $this->type->getValue(),
             'parameter' => $this->parameter,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new BetweenLengthRule('templateButton.parameter', $this->parameter, 1, 128));
     }
 }

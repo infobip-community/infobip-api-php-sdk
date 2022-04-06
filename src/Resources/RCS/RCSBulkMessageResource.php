@@ -8,11 +8,13 @@ use Infobip\Resources\RCS\Models\SMSFailover;
 use Infobip\Resources\ResourcePayloadInterface;
 use Infobip\Resources\RCS\Contracts\MessageContentInterface;
 use Infobip\Resources\RCS\Enums\ValidityPeriodTimeUnit;
+use Infobip\Resources\ResourceValidationInterface;
+use Infobip\Validations\Rules;
 
 /**
  * @link https://www.infobip.com/docs/api#channels/rcs/send-rcs-bulk-message
  */
-final class RCSBulkMessageResource implements ResourcePayloadInterface
+final class RCSBulkMessageResource implements ResourcePayloadInterface, ResourceValidationInterface
 {
     /** @var string */
     private $to;
@@ -111,5 +113,11 @@ final class RCSBulkMessageResource implements ResourcePayloadInterface
             'callbackData' => $this->callbackData,
             'messageId' => $this->messageId,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addModelRules($this->content);
     }
 }

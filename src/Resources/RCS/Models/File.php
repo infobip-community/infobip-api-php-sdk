@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Infobip\Resources\RCS\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ModelValidationInterface;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\UrlRule;
 
-final class File implements ModelInterface
+final class File implements ModelInterface, ModelValidationInterface
 {
     /** @var string */
     private $url;
@@ -21,5 +24,11 @@ final class File implements ModelInterface
         return array_filter_recursive([
             'url' => $this->url,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new UrlRule('file.url', $this->url));
     }
 }

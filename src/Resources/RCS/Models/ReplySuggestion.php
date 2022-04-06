@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\RCS\Models;
 
-use Infobip\Resources\ModelInterface;
 use Infobip\Resources\RCS\Contracts\SuggestionInterface;
 use Infobip\Resources\RCS\Enums\SuggestionType;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\BetweenLengthRule;
 
-final class ReplySuggestion implements ModelInterface, SuggestionInterface
+final class ReplySuggestion implements SuggestionInterface
 {
     /** @var SuggestionType */
     private $type;
@@ -35,5 +36,12 @@ final class ReplySuggestion implements ModelInterface, SuggestionInterface
             'postbackData' => $this->postbackData,
             'type' => $this->type->getValue(),
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new BetweenLengthRule('replySuggestion.text', $this->text, 1, 25))
+            ->addRule(new BetweenLengthRule('replySuggestion.postbackData', $this->postbackData, 1, 2048));
     }
 }

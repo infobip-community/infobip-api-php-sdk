@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ModelValidationInterface;
 use Infobip\Resources\WhatsApp\Collections\ProductRetailerIdCollection;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\BetweenLengthRule;
 
-final class InteractiveMultiProductSection implements ModelInterface
+final class InteractiveMultiProductSection implements ModelInterface, ModelValidationInterface
 {
     /** @var string|null */
     private $title;
@@ -38,5 +41,11 @@ final class InteractiveMultiProductSection implements ModelInterface
             'title' => $this->title,
             'productRetailerIds' => $this->productRetailerIds->toArray(),
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new BetweenLengthRule('interactiveMultiProductSection.title', $this->title, 0, 24));
     }
 }

@@ -12,6 +12,7 @@ use Infobip\Resources\WhatsApp\Models\TemplateBody;
 use Infobip\Resources\WhatsApp\Models\TemplateContent;
 use Infobip\Resources\WhatsApp\Models\TemplateData;
 use Infobip\Resources\WhatsApp\Models\TemplateLanguage;
+use Infobip\Resources\WhatsApp\Models\TemplateMessage;
 use Infobip\Resources\WhatsApp\Models\TemplateName;
 use Infobip\Resources\WhatsApp\WhatsAppTemplateMessageResource;
 use Tests\Endpoints\TestCase;
@@ -107,14 +108,22 @@ final class SendWhatsAppTemplateMessageTest extends TestCase
 
     private function getResource(): WhatsAppTemplateMessageResource
     {
-        return new WhatsAppTemplateMessageResource(
-            'from',
-            'to',
-            new TemplateContent(
-                new TemplateName('templateName'),
-                new TemplateData(new TemplateBody()),
-                new TemplateLanguage('language')
-            )
-        );
+        $from = 'from';
+        $to = 'to';
+        $templateName = new TemplateName('templatename');
+        $language = new TemplateLanguage('language');
+
+        $body = new TemplateBody();
+        $body->addPlaceholder('placeholder');
+
+        $data = (new TemplateData($body));
+
+        $content = new TemplateContent($templateName, $data, $language);
+
+        $templateMessage = (new TemplateMessage($from, $to, $content));
+
+        return (new WhatsAppTemplateMessageResource())
+            ->setBulkId('bulkId')
+            ->addTemplateMessage($templateMessage);
     }
 }

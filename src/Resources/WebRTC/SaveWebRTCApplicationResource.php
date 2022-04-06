@@ -8,7 +8,7 @@ use Infobip\Resources\ResourcePayloadInterface;
 use Infobip\Resources\ResourceValidationInterface;
 use Infobip\Resources\WebRTC\Models\Android;
 use Infobip\Resources\WebRTC\Models\Ios;
-use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules;
 use Infobip\Validations\Rules\MaxLengthRule;
 
 /**
@@ -91,9 +91,9 @@ final class SaveWebRTCApplicationResource implements ResourcePayloadInterface, R
         ]);
     }
 
-    public function validationRules(): RuleCollection
+    public function rules(): Rules
     {
-        return (new RuleCollection())
-            ->add(new MaxLengthRule('description', $this->description, 160));
+        return (new Rules())
+            ->addRule(new MaxLengthRule('description', $this->description, 160));
     }
 }

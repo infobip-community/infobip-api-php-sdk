@@ -22,7 +22,7 @@ final class UpdateTwoFAMessageTemplateResourceTest extends TestCase
         $messageText = 'messageText';
         $pinLength = 50;
         $pinType = new PinType(PinType::ALPHA);
-        $regional = (new Regional())->setContentTemplateId('contentTemplateId');
+        $regional = (new Regional('principalEntityId'))->setContentTemplateId('contentTemplateId');
         $repeatDTMF = 'repeatDTMF';
         $senderId = 'senderId';
         $speechRate = 0.5;

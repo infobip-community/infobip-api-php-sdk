@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Infobip\Resources\SMS\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ModelValidationInterface;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\MaxLengthRule;
 
-final class Destination implements ModelInterface
+final class Destination implements ModelInterface, ModelValidationInterface
 {
     /** @var string */
     private $to;
@@ -32,5 +35,11 @@ final class Destination implements ModelInterface
             'messageId' => $this->messageId,
             'to' => $this->to,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new MaxLengthRule('destination.to', $this->to, 50));
     }
 }

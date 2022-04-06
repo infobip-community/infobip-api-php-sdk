@@ -6,25 +6,15 @@ namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
 use Infobip\Resources\WhatsApp\Collections\PlaceholderCollection;
-use Infobip\Resources\WhatsApp\Collections\TemplateButtonCollection;
-use Infobip\Resources\WhatsApp\Contracts\TemplateButtonInterface;
-use Infobip\Resources\WhatsApp\Contracts\TemplateHeaderInterface;
 
 final class TemplateBody implements ModelInterface
 {
     /** @var PlaceholderCollection */
     private $placeholders;
 
-    /** @var TemplateHeaderInterface|null */
-    private $templateHeader = null;
-
-    /** @var TemplateButtonCollection */
-    private $templateButtons;
-
     public function __construct()
     {
         $this->placeholders = new PlaceholderCollection();
-        $this->templateButtons = new TemplateButtonCollection();
     }
 
     public function addPlaceholder(string $placeholder): self
@@ -33,24 +23,10 @@ final class TemplateBody implements ModelInterface
         return $this;
     }
 
-    public function addTemplateButton(TemplateButtonInterface $templateButton): self
-    {
-        $this->templateButtons->add($templateButton);
-        return $this;
-    }
-
-    public function setTemplateHeader(?TemplateHeaderInterface $templateHeader): self
-    {
-        $this->templateHeader = $templateHeader;
-        return $this;
-    }
-
     public function toArray(): array
     {
         return array_filter_recursive([
             'placeholders' => $this->placeholders->toArray(),
-            'header' => $this->templateHeader ? $this->templateHeader->toArray() : null,
-            'buttons' => $this->templateButtons->toArray(),
         ]);
     }
 }

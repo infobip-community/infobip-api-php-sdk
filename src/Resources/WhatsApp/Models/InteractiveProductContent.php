@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ModelValidationInterface;
+use Infobip\Validations\Rules;
 
-final class InteractiveProductContent implements ModelInterface
+final class InteractiveProductContent implements ModelInterface, ModelValidationInterface
 {
     /** @var InteractiveProductBody */
     private $body;
@@ -38,5 +40,12 @@ final class InteractiveProductContent implements ModelInterface
             'action' => $this->action->toArray(),
             'footer' => $this->footer ? $this->footer->toArray() : null,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addModelRules($this->body)
+            ->addModelRules($this->footer);
     }
 }

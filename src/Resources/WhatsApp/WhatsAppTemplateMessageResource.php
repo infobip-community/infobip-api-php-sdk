@@ -5,48 +5,26 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp;
 
 use Infobip\Resources\ResourcePayloadInterface;
-use Infobip\Resources\WhatsApp\Models\TemplateContent;
+use Infobip\Resources\ResourceValidationInterface;
+use Infobip\Resources\WhatsApp\Collections\TemplateMessageCollection;
+use Infobip\Resources\WhatsApp\Models\TemplateMessage;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\BetweenLengthRule;
 
 /**
  * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-template-message
  */
-final class WhatsAppTemplateMessageResource implements ResourcePayloadInterface
+final class WhatsAppTemplateMessageResource implements ResourcePayloadInterface, ResourceValidationInterface
 {
-    /** @var string */
-    private $from;
-
-    /** @var string */
-    private $to;
-
-    /** @var TemplateContent */
-    private $content;
-
-    /** @var string|null */
-    private $messageId = null;
+    /** @var TemplateMessageCollection */
+    private $messages;
 
     /** @var string|null */
     private $bulkId = null;
 
-    /** @var string|null */
-    private $callbackData = null;
-
-    /** @var string|null */
-    private $notifyUrl = null;
-
     public function __construct(
-        string $from,
-        string $to,
-        TemplateContent $content
     ) {
-        $this->from = $from;
-        $this->to = $to;
-        $this->content = $content;
-    }
-
-    public function setMessageId(?string $messageId): self
-    {
-        $this->messageId = $messageId;
-        return $this;
+        $this->messages = new TemplateMessageCollection();
     }
 
     public function setBulkId(?string $bulkId): self
@@ -55,28 +33,24 @@ final class WhatsAppTemplateMessageResource implements ResourcePayloadInterface
         return $this;
     }
 
-    public function setCallbackData(?string $callbackData): self
+    public function addTemplateMessage(TemplateMessage $templateMessage): self
     {
-        $this->callbackData = $callbackData;
-        return $this;
-    }
-
-    public function setNotifyUrl(?string $notifyUrl): self
-    {
-        $this->notifyUrl = $notifyUrl;
+        $this->messages->add($templateMessage);
         return $this;
     }
 
     public function payload(): array
     {
         return array_filter_recursive([
-            'from' => $this->from,
-            'to' => $this->to,
-            'messageId' => $this->messageId,
+            'messages' => $this->messages->toArray(),
             'bulkId' => $this->bulkId,
-            'content' => $this->content->toArray(),
-            'callbackData' => $this->callbackData,
-            'notifyUrl' => $this->notifyUrl,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new BetweenLengthRule('bulkId', $this->bulkId, 0, 100))
+            ->addCollectionRules($this->messages);
     }
 }

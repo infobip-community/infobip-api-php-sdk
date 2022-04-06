@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ModelValidationInterface;
+use Infobip\Validations\Rules;
 
-final class TemplateContent implements ModelInterface
+final class TemplateContent implements ModelInterface, ModelValidationInterface
 {
     /** @var TemplateName */
     private $templateName;
@@ -34,5 +36,12 @@ final class TemplateContent implements ModelInterface
             'templateData' => $this->templateData->toArray(),
             'templateLanguage' => $this->templateLanguage->toArray(),
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addModelRules($this->templateName)
+            ->addModelRules($this->templateData);
     }
 }

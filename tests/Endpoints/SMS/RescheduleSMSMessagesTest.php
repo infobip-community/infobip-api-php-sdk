@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Endpoints\SMS;
 
+use DateTimeImmutable;
 use Infobip\Enums\StatusCode;
 use Infobip\Exceptions\InfobipServerException;
 use Infobip\Resources\SMS\RescheduleSMSMessagesResource;
@@ -60,6 +61,6 @@ final class RescheduleSMSMessagesTest extends TestCase
 
     private function getResource(): RescheduleSMSMessagesResource
     {
-        return new RescheduleSMSMessagesResource('bulkId', 'sendAt');
+        return new RescheduleSMSMessagesResource('bulkId', new DateTimeImmutable());
     }
 }

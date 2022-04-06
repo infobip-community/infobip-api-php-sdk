@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\Resources\WhatsApp;
 
+use Infobip\Resources\WhatsApp\Models\SmsFailover;
 use Infobip\Resources\WhatsApp\Models\TemplateBody;
+use Infobip\Resources\WhatsApp\Models\TemplateMessage;
 use Infobip\Resources\WhatsApp\Models\TemplateQuickReplyButton;
 use Infobip\Resources\WhatsApp\Models\TemplateContent;
 use Infobip\Resources\WhatsApp\Models\TemplateData;
@@ -27,11 +29,13 @@ final class WhatsAppTemplateMessageResourceTest extends TestCase
         $templateButton = new TemplateQuickReplyButton('parameter');
 
         $body = new TemplateBody();
-        $body->addTemplateButton($templateButton);
-        $body->setTemplateHeader($templateHeader);
         $body->addPlaceholder('placeholder');
 
-        $data = new TemplateData($body);
+        $data = (new TemplateData($body))
+            ->addTemplateButton($templateButton)
+            ->setTemplateHeader($templateHeader);
+
+        $smsFailOver = new SmsFailover('from', 'text');
 
         $content = new TemplateContent($templateName, $data, $language);
 
@@ -40,26 +44,23 @@ final class WhatsAppTemplateMessageResourceTest extends TestCase
         $callbackData = 'callbackData';
         $notifyUrl = 'notifyUrl';
 
+        $templateMessage = (new TemplateMessage($from, $to, $content))
+            ->setMessageId($messageId)
+            ->setCallbackData($callbackData)
+            ->setNotifyUrl($notifyUrl)
+            ->setSmsFailover($smsFailOver);
+
         $expectedArray = [
-            'from' => $from,
-            'to' => $to,
-            'messageId' => $messageId,
+            'messages' => [
+                $templateMessage->toArray()
+            ],
             'bulkId' => $bulkId,
-            'content' => $content->toArray(),
-            'callbackData' => $callbackData,
-            'notifyUrl' => $notifyUrl,
         ];
 
         // act
-        $whatsAppTemplateMessageResource = (new WhatsAppTemplateMessageResource(
-            $from,
-            $to,
-            $content
-        ))
+        $whatsAppTemplateMessageResource = (new WhatsAppTemplateMessageResource())
             ->setBulkId($bulkId)
-            ->setMessageId($messageId)
-            ->setCallbackData($callbackData)
-            ->setNotifyUrl($notifyUrl);
+            ->addTemplateMessage($templateMessage);
 
         // assert
         $this->assertSame($expectedArray, $whatsAppTemplateMessageResource->payload());
@@ -73,31 +74,32 @@ final class WhatsAppTemplateMessageResourceTest extends TestCase
         $templateName = new TemplateName('templatename');
         $language = new TemplateLanguage('language');
 
-        $body = new TemplateBody();
+        $bulkId = 'bulkId';
 
-        $data = new TemplateData($body);
+        $body = new TemplateBody();
+        $body->addPlaceholder('placeholder');
+
+        $data = (new TemplateData($body));
 
         $content = new TemplateContent($templateName, $data, $language);
 
-        $messageId = 'messageId';
-        $bulkId = 'bulkId';
+        $templateMessage = (new TemplateMessage($from, $to, $content));
 
         $expectedArray = [
-            'from' => $from,
-            'to' => $to,
-            'messageId' => $messageId,
+            'messages' => [
+                [
+                    'from' => $from,
+                    'to' => $to,
+                    'content' => $content->toArray(),
+                ],
+            ],
             'bulkId' => $bulkId,
-            'content' => $content->toArray(),
         ];
 
         // act
-        $whatsAppTemplateMessageResource = (new WhatsAppTemplateMessageResource(
-            $from,
-            $to,
-            $content
-        ))
+        $whatsAppTemplateMessageResource = (new WhatsAppTemplateMessageResource())
             ->setBulkId($bulkId)
-            ->setMessageId($messageId);
+            ->addTemplateMessage($templateMessage);
 
         // assert
         $this->assertSame($expectedArray, $whatsAppTemplateMessageResource->payload());
@@ -110,23 +112,29 @@ final class WhatsAppTemplateMessageResourceTest extends TestCase
         $to = 'to';
         $templateName = new TemplateName('templatename');
         $language = new TemplateLanguage('language');
+
         $body = new TemplateBody();
-        $data = new TemplateData($body);
+        $body->addPlaceholder('placeholder');
+
+        $data = (new TemplateData($body));
 
         $content = new TemplateContent($templateName, $data, $language);
 
+        $templateMessage = (new TemplateMessage($from, $to, $content));
+
         $expectedArray = [
-            'from' => $from,
-            'to' => $to,
-            'content' => $content->toArray(),
+            'messages' => [
+                [
+                    'from' => $from,
+                    'to' => $to,
+                    'content' => $content->toArray(),
+                ],
+            ]
         ];
 
         // act
-        $whatsAppTemplateMessageResource = new WhatsAppTemplateMessageResource(
-            $from,
-            $to,
-            $content
-        );
+        $whatsAppTemplateMessageResource = (new WhatsAppTemplateMessageResource())
+            ->addTemplateMessage($templateMessage);
 
         // assert
         $this->assertSame($expectedArray, $whatsAppTemplateMessageResource->payload());

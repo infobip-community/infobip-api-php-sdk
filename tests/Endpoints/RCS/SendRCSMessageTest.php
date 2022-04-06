@@ -56,10 +56,7 @@ final class SendRCSMessageTest extends TestCase
 
     private function getResource(): RCSMessageResource
     {
-        $content = new CarouselMessageContent(
-            new CardWidth(CardWidth::SMALL),
-            new CarouselContent()
-        );
+        $content = new CarouselMessageContent(new CardWidth(CardWidth::SMALL));
 
         return new RCSMessageResource(
             'mediaId',

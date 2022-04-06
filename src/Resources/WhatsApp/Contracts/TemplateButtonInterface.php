@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Contracts;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ModelValidationInterface;
 
-interface TemplateButtonInterface extends ModelInterface
+interface TemplateButtonInterface extends ModelInterface, ModelValidationInterface
 {
 }

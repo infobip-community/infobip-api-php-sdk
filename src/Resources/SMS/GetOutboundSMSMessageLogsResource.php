@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\SMS;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use Infobip\Resources\ResourceQueryOptionsInterface;
+use Infobip\Resources\ResourceValidationInterface;
 use Infobip\Resources\SMS\Enums\GeneralStatusType;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\MaxNumberRule;
 
 /**
  * @link https://www.infobip.com/docs/api#channels/sms/get-outbound-sms-message-logs
  */
-final class GetOutboundSMSMessageLogsResource implements ResourceQueryOptionsInterface
+final class GetOutboundSMSMessageLogsResource implements ResourceQueryOptionsInterface, ResourceValidationInterface
 {
     /** @var string|null */
     private $from;
@@ -27,10 +32,10 @@ final class GetOutboundSMSMessageLogsResource implements ResourceQueryOptionsInt
     /** @var GeneralStatusType|null */
     private $generalStatus;
 
-    /** @var string|null */
+    /** @var DateTimeImmutable|null */
     private $sentSince;
 
-    /** @var string|null */
+    /** @var DateTimeImmutable|null */
     private $sentUntil;
 
     /** @var int|null */
@@ -77,14 +82,14 @@ final class GetOutboundSMSMessageLogsResource implements ResourceQueryOptionsInt
         return $this;
     }
 
-    public function setSentSince(?string $sentSince): self
+    public function setSentSince(?DateTimeImmutable $sentSince): self
     {
         $this->sentSince = $sentSince;
 
         return $this;
     }
 
-    public function setSentUntil(?string $sentUntil): self
+    public function setSentUntil(?DateTimeImmutable $sentUntil): self
     {
         $this->sentUntil = $sentUntil;
 
@@ -120,11 +125,17 @@ final class GetOutboundSMSMessageLogsResource implements ResourceQueryOptionsInt
             'bulkId' => $this->bulkId,
             'messageId' => $this->messageId,
             'generalStatus' => $this->generalStatus ? $this->generalStatus->getValue() : null,
-            'sentSince' => $this->sentSince,
-            'sentUntil' => $this->sentUntil,
+            'sentSince' => $this->sentSince ? $this->sentSince->format(DateTimeInterface::RFC3339_EXTENDED) : null,
+            'sentUntil' => $this->sentUntil ? $this->sentUntil->format(DateTimeInterface::RFC3339_EXTENDED) : null,
             'limit' => $this->limit,
             'mcc' => $this->mcc,
             'mnc' => $this->mnc,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new MaxNumberRule('limit', $this->limit, 1000));
     }
 }

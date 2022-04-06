@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\WhatsApp\Models;
 
-use Infobip\Resources\ModelInterface;
 use Infobip\Resources\WhatsApp\Contracts\InteractiveListHeaderInterface;
 use Infobip\Resources\WhatsApp\Enums\InteractiveListHeaderType;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\BetweenLengthRule;
 
 final class InteractiveListTextHeader implements InteractiveListHeaderInterface
 {
@@ -28,5 +29,11 @@ final class InteractiveListTextHeader implements InteractiveListHeaderInterface
             'text' => $this->text,
             'type' => $this->type->getValue(),
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new BetweenLengthRule('interactiveListTextHeader.text', $this->text, 1, 60));
     }
 }

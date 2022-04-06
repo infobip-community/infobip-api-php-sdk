@@ -4,13 +4,19 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\SMS\Models;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ModelValidationInterface;
 use Infobip\Resources\SMS\Collections\DestinationCollection;
 use Infobip\Resources\Shared\Models\DeliveryTimeWindow;
 use Infobip\Resources\SMS\Enums\NotifyContentType;
 use Infobip\Resources\SMS\Enums\TransliterationType;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\MaxLengthRule;
+use Infobip\Validations\Rules\MaxNumberRule;
 
-final class Message implements ModelInterface
+final class Message implements ModelInterface, ModelValidationInterface
 {
     /** @var DestinationCollection */
     private $destinations;
@@ -24,14 +30,14 @@ final class Message implements ModelInterface
     /** @var DeliveryTimeWindow|null */
     private $deliveryTimeWindow;
 
-    /** @var bool|null */
-    private $flash;
+    /** @var bool */
+    private $flash = false;
 
     /** @var string|null */
     private $from;
 
-    /** @var bool|null */
-    private $intermediateReport;
+    /** @var bool */
+    private $intermediateReport = false;
 
     /** @var Language|null */
     private $language;
@@ -45,7 +51,7 @@ final class Message implements ModelInterface
     /** @var Regional|null */
     private $regional;
 
-    /** @var string|null */
+    /** @var DateTimeImmutable|null */
     private $sendAt;
 
     /** @var TransliterationType|null */
@@ -94,7 +100,7 @@ final class Message implements ModelInterface
         return $this;
     }
 
-    public function setFlash(?bool $flash): self
+    public function setFlash(bool $flash): self
     {
         $this->flash = $flash;
 
@@ -108,7 +114,7 @@ final class Message implements ModelInterface
         return $this;
     }
 
-    public function setIntermediateReport(?bool $intermediateReport): self
+    public function setIntermediateReport(bool $intermediateReport): self
     {
         $this->intermediateReport = $intermediateReport;
 
@@ -143,7 +149,7 @@ final class Message implements ModelInterface
         return $this;
     }
 
-    public function setSendAt(?string $sendAt): self
+    public function setSendAt(?DateTimeImmutable $sendAt): self
     {
         $this->sendAt = $sendAt;
 
@@ -178,9 +184,17 @@ final class Message implements ModelInterface
             'notifyContentType' => $this->notifyContentType ? $this->notifyContentType->getValue() : null,
             'notifyUrl' => $this->notifyUrl,
             'regional' => $this->regional,
-            'sendAt' => $this->sendAt,
+            'sendAt' => $this->sendAt ? $this->sendAt->format(DateTimeInterface::RFC3339_EXTENDED) : null,
             'transliteration' => $this->transliteration ? $this->transliteration->getValue() : null,
             'validityPeriod' => $this->validityPeriod,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new MaxLengthRule('message.callbackData', $this->callbackData, 4000))
+            ->addRule(new MaxNumberRule('message.validityPeriod', $this->validityPeriod, 2880))
+            ->addCollectionRules($this->destinations);
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tests\Resources\SMS;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use Infobip\Resources\SMS\RescheduleSMSMessagesResource;
 use Tests\TestCase;
 
@@ -13,14 +15,14 @@ final class RescheduleSMSMessagesResourceTest extends TestCase
     {
         // arrange
         $bulkId = 'bulkId';
-        $sendAt = 'sendAt';
+        $sendAt = new DateTimeImmutable();
 
         $expectedQueryOptionsArray = [
             'bulkId' => $bulkId
         ];
 
         $expectedPayloadArray = [
-            'sendAt' => $sendAt
+            'sendAt' => $sendAt->format(DateTimeInterface::RFC3339_EXTENDED)
         ];
 
         // act

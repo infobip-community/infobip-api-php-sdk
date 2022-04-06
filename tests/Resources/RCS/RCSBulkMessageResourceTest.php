@@ -25,10 +25,7 @@ final class RCSBulkMessageResourceTest extends TestCase
         $notifyUrl = 'notifyUrl';
         $callbackData = 'callbackData';
         $messageId = 'messageId';
-        $content = new CarouselMessageContent(
-            new CardWidth(CardWidth::SMALL),
-            new CarouselContent()
-        );
+        $content = new CarouselMessageContent(new CardWidth(CardWidth::SMALL));
 
         $expectedArray = [
             'from' => $from,
@@ -68,10 +65,7 @@ final class RCSBulkMessageResourceTest extends TestCase
         $messageId = 'messageId';
         $callbackData = 'callbackData';
         $notifyUrl = 'notifyUrl';
-        $content = new CarouselMessageContent(
-            new CardWidth(CardWidth::SMALL),
-            new CarouselContent()
-        );
+        $content = new CarouselMessageContent(new CardWidth(CardWidth::SMALL));
 
         $expectedArray = [
             'from' => $from,
@@ -102,10 +96,7 @@ final class RCSBulkMessageResourceTest extends TestCase
     {
         // arrange
         $to = 'to';
-        $content = new CarouselMessageContent(
-            new CardWidth(CardWidth::SMALL),
-            new CarouselContent()
-        );
+        $content = new CarouselMessageContent(new CardWidth(CardWidth::SMALL));
 
         $expectedArray = [
             'to' => $to,

@@ -57,8 +57,7 @@ final class SendBulkRCSMessageTest extends TestCase
     private function getResource(): RCSBulkMessageResource
     {
         $content = new CarouselMessageContent(
-            new CardWidth(CardWidth::SMALL),
-            new CarouselContent()
+            new CardWidth(CardWidth::SMALL)
         );
 
         return new RCSBulkMessageResource(

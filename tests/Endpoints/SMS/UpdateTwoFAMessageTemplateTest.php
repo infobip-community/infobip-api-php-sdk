@@ -6,6 +6,7 @@ namespace Tests\Endpoints\SMS;
 
 use Infobip\Enums\StatusCode;
 use Infobip\Exceptions\InfobipServerException;
+use Infobip\Exceptions\InfobipValidationException;
 use Infobip\Resources\SMS\UpdateTwoFAMessageTemplateResource;
 use Tests\Endpoints\TestCase;
 
@@ -58,8 +59,37 @@ final class UpdateTwoFAMessageTemplateTest extends TestCase
         $this->assertSame($mockedResponse, $response);
     }
 
+    public function testApiCallExpectsValidationException(): void
+    {
+        // arrange
+        $resource = $this->getInvalidResource();
+
+        $this->setMockedGuzzleHttpClient(StatusCode::NO_CONTENT);
+
+        // act & assert
+        $this->expectException(InfobipValidationException::class);
+        $this->expectExceptionCode(StatusCode::UNPROCESSABLE_ENTITY);
+
+        try {
+            $this
+                ->getInfobipClient()
+                ->SMS()
+                ->updateTwoFAMessageTemplate($resource);
+        } catch (InfobipValidationException $exception) {
+            $this->assertArrayHasKey('speechRate', $exception->getValidationErrors());
+
+            throw $exception;
+        }
+    }
+
     private function getResource(): UpdateTwoFAMessageTemplateResource
     {
         return new UpdateTwoFAMessageTemplateResource('appId', 'name');
+    }
+
+    private function getInvalidResource(): UpdateTwoFAMessageTemplateResource
+    {
+        return (new UpdateTwoFAMessageTemplateResource('bulkId', 'messageText'))
+            ->setSpeechRate(30.5);
     }
 }

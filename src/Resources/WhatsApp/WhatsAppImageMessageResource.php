@@ -16,8 +16,6 @@ final class WhatsAppImageMessageResource extends BaseWhatsAppMessageResource
 
     public function __construct(string $from, string $to, ImageContent $content)
     {
-        $this->from = $from;
-        $this->to = $to;
-        $this->content = $content;
+        parent::__construct($from, $to, $content);
     }
 }

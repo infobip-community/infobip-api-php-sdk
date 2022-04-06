@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\RCS\Models;
 
-use Infobip\Resources\ModelInterface;
 use Infobip\Resources\RCS\Contracts\MessageContentInterface;
 use Infobip\Resources\RCS\Enums\MessageContentType;
+use Infobip\Validations\Rules;
 
-final class FileMessageContent implements ModelInterface, MessageContentInterface
+final class FileMessageContent implements MessageContentInterface
 {
     /** @var MessageContentType */
     private $type;
@@ -37,5 +37,11 @@ final class FileMessageContent implements ModelInterface, MessageContentInterfac
             'file' => $this->file->toArray(),
             'thumbnail' => $this->thumbnail ? $this->thumbnail->toArray() : null,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addModelRules($this->thumbnail);
     }
 }

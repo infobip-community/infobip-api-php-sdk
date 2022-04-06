@@ -6,6 +6,7 @@ namespace Tests\Endpoints\SMS;
 
 use Infobip\Enums\StatusCode;
 use Infobip\Exceptions\InfobipServerException;
+use Infobip\Exceptions\InfobipValidationException;
 use Infobip\Resources\SMS\GetOutboundSMSMessageLogsResource;
 use Tests\Endpoints\TestCase;
 
@@ -60,8 +61,37 @@ final class GetOutboundSMSMessageLogsTest extends TestCase
         $this->assertSame($mockedResponse, $response);
     }
 
+    public function testApiCallExpectsValidationException(): void
+    {
+        // arrange
+        $resource = $this->getInvalidResource();
+
+        $this->setMockedGuzzleHttpClient(StatusCode::NO_CONTENT);
+
+        // act & assert
+        $this->expectException(InfobipValidationException::class);
+        $this->expectExceptionCode(StatusCode::UNPROCESSABLE_ENTITY);
+
+        try {
+            $this
+                ->getInfobipClient()
+                ->SMS()
+                ->getOutboundSMSMessageLogs($resource);
+        } catch (InfobipValidationException $exception) {
+            $this->assertArrayHasKey('limit', $exception->getValidationErrors());
+
+            throw $exception;
+        }
+    }
+
     private function getResource(): GetOutboundSMSMessageLogsResource
     {
         return new GetOutboundSMSMessageLogsResource();
+    }
+
+    private function getInvalidResource(): GetOutboundSMSMessageLogsResource
+    {
+        return (new GetOutboundSMSMessageLogsResource())
+            ->setLimit(5000);
     }
 }

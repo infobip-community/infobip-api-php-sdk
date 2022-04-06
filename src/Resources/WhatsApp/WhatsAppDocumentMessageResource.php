@@ -16,8 +16,6 @@ final class WhatsAppDocumentMessageResource extends BaseWhatsAppMessageResource
 
     public function __construct(string $from, string $to, DocumentContent $content)
     {
-        $this->from = $from;
-        $this->to = $to;
-        $this->content = $content;
+        parent::__construct($from, $to, $content);
     }
 }

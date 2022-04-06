@@ -7,6 +7,8 @@ namespace Infobip\Resources\WhatsApp\Models;
 use Infobip\Resources\ModelInterface;
 use Infobip\Resources\WhatsApp\Contracts\InteractiveButtonsInterface;
 use Infobip\Resources\WhatsApp\Enums\InteractiveButtonType;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\BetweenLengthRule;
 
 final class ReplyInteractiveButtons implements InteractiveButtonsInterface
 {
@@ -35,5 +37,12 @@ final class ReplyInteractiveButtons implements InteractiveButtonsInterface
             'id' => $this->id,
             'title' => $this->title,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new BetweenLengthRule('replyInteractiveButtons.id', $this->id, 1, 256))
+            ->addRule(new BetweenLengthRule('replyInteractiveButtons.title', $this->title, 1, 20));
     }
 }
