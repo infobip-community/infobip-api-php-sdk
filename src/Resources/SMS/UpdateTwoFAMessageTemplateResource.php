@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace Infobip\Resources\SMS;
 
 use Infobip\Resources\ResourcePayloadInterface;
+use Infobip\Resources\ResourceValidationInterface;
 use Infobip\Resources\SMS\Enums\LanguageType;
 use Infobip\Resources\SMS\Enums\PinType;
 use Infobip\Resources\SMS\Models\Regional;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\BetweenNumberRule;
 
 /**
  * @link https://www.infobip.com/docs/api#channels/sms/update-2fa-message-template
  */
-final class UpdateTwoFAMessageTemplateResource implements ResourcePayloadInterface
+final class UpdateTwoFAMessageTemplateResource implements ResourcePayloadInterface, ResourceValidationInterface
 {
     /** @var string */
     private $appId;
@@ -130,5 +133,11 @@ final class UpdateTwoFAMessageTemplateResource implements ResourcePayloadInterfa
             'senderId' => $this->senderId,
             'speechRate' => $this->speechRate
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new BetweenNumberRule('speechRate', $this->speechRate, 0.5, 2));
     }
 }

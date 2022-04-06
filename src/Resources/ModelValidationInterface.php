@@ -6,7 +6,7 @@ namespace Infobip\Resources;
 
 use Infobip\Validations\Rules;
 
-interface ResourceValidationInterface
+interface ModelValidationInterface
 {
     public function rules(): Rules;
 }

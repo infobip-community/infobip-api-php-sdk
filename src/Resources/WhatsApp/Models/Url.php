@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ModelValidationInterface;
 use Infobip\Resources\WhatsApp\Enums\UrlType;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\UrlRule;
 
-final class Url implements ModelInterface
+final class Url implements ModelInterface, ModelValidationInterface
 {
     /** @var string */
     private $url;
@@ -27,5 +30,11 @@ final class Url implements ModelInterface
             'url' => $this->url,
             'type' => $this->type->getValue(),
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new UrlRule('url.url', $this->url));
     }
 }

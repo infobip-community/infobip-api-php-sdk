@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\RCS\Models;
 
-use Infobip\Resources\ModelInterface;
+use Infobip\Resources\RCS\Collections\CarouselContentCollection;
 use Infobip\Resources\RCS\Collections\SuggestionCollection;
 use Infobip\Resources\RCS\Contracts\MessageContentInterface;
 use Infobip\Resources\RCS\Contracts\SuggestionInterface;
 use Infobip\Resources\RCS\Enums\CardWidth;
 use Infobip\Resources\RCS\Enums\MessageContentType;
+use Infobip\Validations\Rules;
 
-final class CarouselMessageContent implements ModelInterface, MessageContentInterface
+final class CarouselMessageContent implements MessageContentInterface
 {
     /** @var MessageContentType */
     private $type;
@@ -19,19 +20,18 @@ final class CarouselMessageContent implements ModelInterface, MessageContentInte
     /** @var CardWidth */
     private $cardWidth;
 
-    /** @var CarouselContent */
-    private $content;
+    /** @var CarouselContentCollection */
+    private $contents;
 
     /** @var SuggestionCollection */
     private $suggestions;
 
     public function __construct(
-        CardWidth $cardWidth,
-        CarouselContent $content
+        CardWidth $cardWidth
     ) {
         $this->cardWidth = $cardWidth;
-        $this->content = $content;
         $this->type = new MessageContentType(MessageContentType::CAROUSEL);
+        $this->contents = new CarouselContentCollection();
         $this->suggestions = new SuggestionCollection();
     }
 
@@ -42,13 +42,27 @@ final class CarouselMessageContent implements ModelInterface, MessageContentInte
         return $this;
     }
 
+    public function addCarouselContent(CarouselContent $carouselContent): self
+    {
+        $this->contents->add($carouselContent);
+
+        return $this;
+    }
+
     public function toArray(): array
     {
         return array_filter_recursive([
             'type' => $this->type->getValue(),
             'cardWidth' => $this->cardWidth->getValue(),
-            'content' => $this->content->toArray(),
+            'contents' => $this->contents->toArray(),
             'suggestions' => $this->suggestions->toArray(),
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addCollectionRules($this->contents)
+            ->addCollectionRules($this->suggestions);
     }
 }

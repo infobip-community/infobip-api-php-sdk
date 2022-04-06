@@ -16,8 +16,6 @@ final class WhatsAppVideoMessageResource extends BaseWhatsAppMessageResource
 
     public function __construct(string $from, string $to, VideoContent $content)
     {
-        $this->from = $from;
-        $this->to = $to;
-        $this->content = $content;
+        parent::__construct($from, $to, $content);
     }
 }

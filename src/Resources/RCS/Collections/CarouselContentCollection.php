@@ -7,15 +7,15 @@ namespace Infobip\Resources\RCS\Collections;
 use Infobip\Resources\BaseCollection;
 use Infobip\Resources\CollectionValidationInterface;
 use Infobip\Resources\ModelValidationInterface;
-use Infobip\Resources\RCS\Contracts\SuggestionInterface;
+use Infobip\Resources\RCS\Models\CarouselContent;
 use Infobip\Validations\Rules;
 
-final class SuggestionCollection extends BaseCollection implements CollectionValidationInterface
+final class CarouselContentCollection extends BaseCollection implements CollectionValidationInterface
 {
-    /** @var array|SuggestionInterface[] */
+    /** @var array|CarouselContent[] */
     protected $items = [];
 
-    public function add(SuggestionInterface $item): self
+    public function add(CarouselContent $item): self
     {
         $this->items[] = $item;
 

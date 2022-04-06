@@ -10,7 +10,7 @@ use ReflectionClass;
 
 final class Validator
 {
-    /** @var RuleCollection */
+    /** @var Rules */
     private $rules;
 
     /** @var array|string[] */
@@ -21,7 +21,7 @@ final class Validator
      */
     public static function validateResource(ResourceValidationInterface $resource): void
     {
-        $self = new self($resource->validationRules());
+        $self = new self($resource->rules());
 
         $self->validate();
 
@@ -35,7 +35,7 @@ final class Validator
 
     private function validate(): void
     {
-        foreach ($this->rules->all() as $rule) {
+        foreach ($this->rules->getRules() as $rule) {
             if (false === $rule->passes()) {
                 $this->addError($rule->attribute(), $rule->message());
             }
@@ -64,7 +64,7 @@ final class Validator
             ->getShortName();
     }
 
-    private function __construct(RuleCollection $rules)
+    private function __construct(Rules $rules)
     {
         $this->rules = $rules;
     }

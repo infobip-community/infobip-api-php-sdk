@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ModelValidationInterface;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\BetweenLengthRule;
 
-final class SectionRow implements ModelInterface
+final class SectionRow implements ModelInterface, ModelValidationInterface
 {
     /** @var string */
     private $id;
@@ -34,5 +37,13 @@ final class SectionRow implements ModelInterface
             'title' => $this->title,
             'description' => $this->description,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new BetweenLengthRule('sectionRow.id', $this->id, 1, 200))
+            ->addRule(new BetweenLengthRule('sectionRow.title', $this->title, 1, 24))
+            ->addRule(new BetweenLengthRule('sectionRow.description', $this->description, 0, 72));
     }
 }

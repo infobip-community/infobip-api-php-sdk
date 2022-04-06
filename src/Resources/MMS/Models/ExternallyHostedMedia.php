@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Infobip\Resources\MMS\Models;
 
 use Infobip\Resources\ModelInterface;
-use Infobip\Resources\ResourceValidationInterface;
-use Infobip\Validations\RuleCollection;
+use Infobip\Resources\ModelValidationInterface;
+use Infobip\Validations\Rules;
 use Infobip\Validations\Rules\UrlRule;
 
-final class ExternallyHostedMedia implements ModelInterface, ResourceValidationInterface
+final class ExternallyHostedMedia implements ModelInterface, ModelValidationInterface
 {
     /** @var string */
     private $contentType;
@@ -39,9 +39,9 @@ final class ExternallyHostedMedia implements ModelInterface, ResourceValidationI
         ]);
     }
 
-    public function validationRules(): RuleCollection
+    public function rules(): Rules
     {
-        return (new RuleCollection())
-            ->add(new UrlRule('externallyHostedMedia.contentUrl', $this->contentUrl));
+        return (new Rules())
+            ->addRule(new UrlRule('externallyHostedMedia.contentUrl', $this->contentUrl));
     }
 }

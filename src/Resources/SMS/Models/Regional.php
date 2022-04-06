@@ -8,22 +8,20 @@ use Infobip\Resources\ModelInterface;
 
 final class Regional implements ModelInterface
 {
+    /** @var string */
+    private $principalEntityId;
+
     /** @var string|null */
     private $contentTemplateId;
 
-    /** @var string|null */
-    private $principalEntityId;
+    public function __construct(string $principalEntityId)
+    {
+        $this->principalEntityId = $principalEntityId;
+    }
 
     public function setContentTemplateId(?string $contentTemplateId): self
     {
         $this->contentTemplateId = $contentTemplateId;
-
-        return $this;
-    }
-
-    public function setPrincipalEntityId(?string $principalEntityId): self
-    {
-        $this->principalEntityId = $principalEntityId;
 
         return $this;
     }

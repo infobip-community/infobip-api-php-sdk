@@ -5,12 +5,16 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp;
 
 use Infobip\Resources\ResourcePayloadInterface;
+use Infobip\Resources\ResourceValidationInterface;
 use Infobip\Resources\WhatsApp\Models\InteractiveButtonsContent;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\BetweenLengthRule;
+use Infobip\Validations\Rules\UrlRule;
 
 /**
  * @link https://www.infobip.com/docs/api#channels/whatsapp/send-whatsapp-interactive-buttons-message
  */
-final class WhatsAppInteractiveButtonsMessageResource implements ResourcePayloadInterface
+final class WhatsAppInteractiveButtonsMessageResource implements ResourcePayloadInterface, ResourceValidationInterface
 {
     /** @var string */
     private $from;
@@ -78,5 +82,17 @@ final class WhatsAppInteractiveButtonsMessageResource implements ResourcePayload
             'callbackData' => $this->callbackData,
             'notifyUrl' => $this->notifyUrl,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new BetweenLengthRule('from', $this->from, 1, 24))
+            ->addRule(new BetweenLengthRule('to', $this->to, 1, 24))
+            ->addRule(new BetweenLengthRule('messageId', $this->messageId, 0, 50))
+            ->addRule(new BetweenLengthRule('callbackData', $this->callbackData, 0, 4000))
+            ->addRule(new BetweenLengthRule('notifyUrl', $this->notifyUrl, 0, 2048))
+            ->addRule(new UrlRule('notifyUrl', $this->notifyUrl))
+            ->addModelRules($this->content);
     }
 }

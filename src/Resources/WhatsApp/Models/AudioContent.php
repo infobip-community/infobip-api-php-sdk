@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\WhatsApp\Contracts\ContentInterface;
-use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules;
 use Infobip\Validations\Rules\UrlRule;
 
 final class AudioContent implements ContentInterface
@@ -26,9 +26,9 @@ final class AudioContent implements ContentInterface
         ]);
     }
 
-    public function validationRules(): RuleCollection
+    public function rules(): Rules
     {
-        return (new RuleCollection())
-            ->add(new UrlRule('content.mediaUrl', $this->mediaUrl));
+        return (new Rules())
+            ->addRule(new UrlRule('content.mediaUrl', $this->mediaUrl));
     }
 }

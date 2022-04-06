@@ -7,7 +7,7 @@ namespace Infobip\Resources\WebRTC;
 use Infobip\Resources\ResourcePayloadInterface;
 use Infobip\Resources\ResourceValidationInterface;
 use Infobip\Resources\WebRTC\Models\Capabilities;
-use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules;
 use Infobip\Validations\Rules\BetweenLengthRule;
 use Infobip\Validations\Rules\MaxNumberRule;
 
@@ -71,11 +71,11 @@ final class GenerateWebRTCTokenResource implements ResourcePayloadInterface, Res
         ]);
     }
 
-    public function validationRules(): RuleCollection
+    public function rules(): Rules
     {
-        return (new RuleCollection())
-            ->add(new BetweenLengthRule('identity', $this->identity, 3, 64))
-            ->add(new BetweenLengthRule('displayName', $this->displayName, 5, 50))
-            ->add(new MaxNumberRule('timeToLive', $this->timeToLive, 60 * 60 * 24));
+        return (new Rules())
+            ->addRule(new BetweenLengthRule('identity', $this->identity, 3, 64))
+            ->addRule(new BetweenLengthRule('displayName', $this->displayName, 5, 50))
+            ->addRule(new MaxNumberRule('timeToLive', $this->timeToLive, 60 * 60 * 24));
     }
 }

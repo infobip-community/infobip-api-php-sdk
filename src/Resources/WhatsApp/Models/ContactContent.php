@@ -6,7 +6,7 @@ namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\WhatsApp\Collections\ContactCollection;
 use Infobip\Resources\WhatsApp\Contracts\ContentInterface;
-use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules;
 
 final class ContactContent implements ContentInterface
 {
@@ -31,8 +31,9 @@ final class ContactContent implements ContentInterface
         ]);
     }
 
-    public function validationRules(): RuleCollection
+    public function rules(): Rules
     {
-        return new RuleCollection();
+        return (new Rules())
+            ->addCollectionRules($this->contacts);
     }
 }

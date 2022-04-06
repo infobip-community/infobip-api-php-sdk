@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\WhatsApp\Contracts\ContentInterface;
-use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules;
 use Infobip\Validations\Rules\BetweenLengthRule;
 use Infobip\Validations\Rules\LatitudeRule;
 use Infobip\Validations\Rules\LongitudeRule;
@@ -54,12 +54,12 @@ final class LocationContent implements ContentInterface
         ]);
     }
 
-    public function validationRules(): RuleCollection
+    public function rules(): Rules
     {
-        return (new RuleCollection())
-            ->add(new LatitudeRule('content.latitude', $this->latitude))
-            ->add(new LongitudeRule('content.longitude', $this->longitude))
-            ->add(new BetweenLengthRule('content.name', $this->name, 0, 1000))
-            ->add(new BetweenLengthRule('content.address', $this->address, 0, 1000));
+        return (new Rules())
+            ->addRule(new LatitudeRule('content.latitude', $this->latitude))
+            ->addRule(new LongitudeRule('content.longitude', $this->longitude))
+            ->addRule(new BetweenLengthRule('content.name', $this->name, 0, 1000))
+            ->addRule(new BetweenLengthRule('content.address', $this->address, 0, 1000));
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\SMS;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use Infobip\Resources\ResourcePayloadInterface;
 use Infobip\Resources\ResourceQueryOptionsInterface;
 
@@ -15,10 +17,10 @@ final class RescheduleSMSMessagesResource implements ResourceQueryOptionsInterfa
     /** @var string */
     private $bulkId;
 
-    /** @var string */
+    /** @var DateTimeImmutable */
     private $sendAt;
 
-    public function __construct(string $bulkId, string $sendAt)
+    public function __construct(string $bulkId, DateTimeImmutable $sendAt)
     {
         $this->bulkId = $bulkId;
         $this->sendAt = $sendAt;
@@ -34,7 +36,7 @@ final class RescheduleSMSMessagesResource implements ResourceQueryOptionsInterfa
     public function payload(): array
     {
         return array_filter_recursive([
-            'sendAt' => $this->sendAt,
+            'sendAt' => $this->sendAt->format(DateTimeInterface::RFC3339_EXTENDED),
         ]);
     }
 }

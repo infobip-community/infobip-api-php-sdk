@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Infobip\Resources\Shared\Models;
 
 use Infobip\Resources\ModelInterface;
-use Infobip\Resources\ResourceValidationInterface;
+use Infobip\Resources\ModelValidationInterface;
 use Infobip\Resources\Shared\Collections\DayCollection;
 use Infobip\Resources\Shared\Enums\Day;
-use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules;
 
-final class DeliveryTimeWindow implements ModelInterface, ResourceValidationInterface
+final class DeliveryTimeWindow implements ModelInterface, ModelValidationInterface
 {
     /** @var DayCollection */
     private $days;
@@ -50,10 +50,10 @@ final class DeliveryTimeWindow implements ModelInterface, ResourceValidationInte
         ]);
     }
 
-    public function validationRules(): RuleCollection
+    public function rules(): Rules
     {
-        return (new RuleCollection())
-            ->addCollection($this->from ? $this->from->validationRules() : null)
-            ->addCollection($this->to ? $this->to->validationRules() : null);
+        return (new Rules())
+            ->addModelRules($this->from)
+            ->addModelRules($this->to);
     }
 }

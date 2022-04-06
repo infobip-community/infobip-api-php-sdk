@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Infobip\Endpoints;
 
+use Infobip\Exceptions\InfobipValidationException;
 use Infobip\Resources\Email\EmailDeliveryReportsResource;
 use Infobip\Resources\Email\EmailLogsResource;
 use Infobip\Resources\Email\FullyFeaturedEmailResource;
@@ -12,6 +13,7 @@ use Infobip\Resources\Email\SentEmailBulksResource;
 use Infobip\Resources\Email\SentEmailBulksStatusResource;
 use Infobip\Resources\Email\UpdateScheduledEmailMessagesStatusResource;
 use Infobip\Resources\Email\ValidateEmailAddressesResource;
+use Infobip\Validations\Validator;
 
 final class Email extends BaseEndpoint
 {
@@ -33,10 +35,13 @@ final class Email extends BaseEndpoint
 
     /**
      * @link https://www.infobip.com/docs/api#channels/email/send-email
+     * @throws InfobipValidationException
      */
     public function sendFullyFeaturedEmail(FullyFeaturedEmailResource $resource): array
     {
-        return $this->client->get('email/2/send', $resource->payload());
+        Validator::validateResource($resource);
+
+        return $this->client->post('email/2/send', $resource->payload());
     }
 
     /**
@@ -73,9 +78,12 @@ final class Email extends BaseEndpoint
 
     /**
      * @link https://www.infobip.com/docs/api#channels/email/validate-email-addresses
+     * @throws InfobipValidationException
      */
     public function validateEmailAddresses(ValidateEmailAddressesResource $resource): array
     {
+        Validator::validateResource($resource);
+
         return $this->client->put('/email/2/validation', $resource->payload());
     }
 }

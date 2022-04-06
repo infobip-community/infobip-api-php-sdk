@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ModelValidationInterface;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\BetweenLengthRule;
 
-final class InteractiveMultiProductFooter implements ModelInterface
+final class InteractiveMultiProductFooter implements ModelInterface, ModelValidationInterface
 {
     /** @var string */
     private $text;
@@ -22,5 +25,11 @@ final class InteractiveMultiProductFooter implements ModelInterface
         return array_filter_recursive([
             'text' => $this->text,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new BetweenLengthRule('interactiveMultiProductFooter.text', $this->text, 1, 60));
     }
 }

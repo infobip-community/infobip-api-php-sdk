@@ -2,37 +2,42 @@
 
 declare(strict_types=1);
 
-namespace Infobip\Resources\WhatsApp;
+namespace Infobip\Resources\WhatsApp\Models;
 
-use Infobip\Resources\ResourcePayloadInterface;
-use Infobip\Resources\ResourceValidationInterface;
-use Infobip\Resources\WhatsApp\Contracts\ContentInterface;
+use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ModelValidationInterface;
 use Infobip\Validations\Rules;
 use Infobip\Validations\Rules\BetweenLengthRule;
 use Infobip\Validations\Rules\UrlRule;
 
-abstract class BaseWhatsAppMessageResource implements ResourcePayloadInterface, ResourceValidationInterface
+final class TemplateMessage implements ModelInterface, ModelValidationInterface
 {
     /** @var string */
-    protected $from;
+    private $from;
 
     /** @var string */
-    protected $to;
+    private $to;
+
+    /** @var TemplateContent */
+    private $content;
 
     /** @var string|null */
-    protected $messageId;
-
-    /** @var ContentInterface */
-    protected $content;
+    private $messageId = null;
 
     /** @var string|null */
-    protected $callbackData = null;
+    private $callbackData = null;
 
     /** @var string|null */
-    protected $notifyUrl = null;
+    private $notifyUrl = null;
 
-    public function __construct(string $from, string $to, ContentInterface $content)
-    {
+    /** @var SmsFailover|null */
+    private $smsFailover = null;
+
+    public function __construct(
+        string $from,
+        string $to,
+        TemplateContent $content
+    ) {
         $this->from = $from;
         $this->to = $to;
         $this->content = $content;
@@ -56,7 +61,13 @@ abstract class BaseWhatsAppMessageResource implements ResourcePayloadInterface, 
         return $this;
     }
 
-    public function payload(): array
+    public function setSmsFailover(?SmsFailover $smsFailover): self
+    {
+        $this->smsFailover = $smsFailover;
+        return $this;
+    }
+
+    public function toArray(): array
     {
         return array_filter_recursive([
             'from' => $this->from,
@@ -65,6 +76,7 @@ abstract class BaseWhatsAppMessageResource implements ResourcePayloadInterface, 
             'content' => $this->content->toArray(),
             'callbackData' => $this->callbackData,
             'notifyUrl' => $this->notifyUrl,
+            'smsFailover' => $this->smsFailover ? $this->smsFailover->toArray() : null,
         ]);
     }
 
@@ -73,10 +85,10 @@ abstract class BaseWhatsAppMessageResource implements ResourcePayloadInterface, 
         return (new Rules())
             ->addRule(new BetweenLengthRule('from', $this->from, 1, 24))
             ->addRule(new BetweenLengthRule('to', $this->to, 1, 24))
-            ->addRule(new BetweenLengthRule('messageId', $this->messageId, 0, 50))
-            ->addRule(new BetweenLengthRule('callbackData', $this->callbackData, 0, 4000))
-            ->addRule(new BetweenLengthRule('notifyUrl', $this->notifyUrl, 0, 2048))
+            ->addRule(new BetweenLengthRule('messageId', $this->messageId, 1, 50))
             ->addRule(new UrlRule('notifyUrl', $this->notifyUrl))
-            ->addModelRules($this->content);
+            ->addRule(new BetweenLengthRule('callbackData', $this->callbackData, 0, 4000))
+            ->addModelRules($this->content)
+            ->addModelRules($this->smsFailover);
     }
 }

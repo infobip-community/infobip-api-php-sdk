@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\RCS\Models;
 
-use Infobip\Resources\ModelInterface;
 use Infobip\Resources\RCS\Collections\SuggestionCollection;
 use Infobip\Resources\RCS\Contracts\MessageContentInterface;
 use Infobip\Resources\RCS\Contracts\SuggestionInterface;
 use Infobip\Resources\RCS\Enums\Alignment;
 use Infobip\Resources\RCS\Enums\MessageContentType;
 use Infobip\Resources\RCS\Enums\Orientation;
+use Infobip\Validations\Rules;
 
-final class CardMessageContent implements ModelInterface, MessageContentInterface
+final class CardMessageContent implements MessageContentInterface
 {
     /** @var MessageContentType */
     private $type;
@@ -57,5 +57,11 @@ final class CardMessageContent implements ModelInterface, MessageContentInterfac
             'content' => $this->content->toArray(),
             'suggestions' => $this->suggestions->toArray(),
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addCollectionRules($this->suggestions);
     }
 }

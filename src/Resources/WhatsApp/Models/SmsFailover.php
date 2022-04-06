@@ -9,20 +9,26 @@ use Infobip\Resources\ModelValidationInterface;
 use Infobip\Validations\Rules;
 use Infobip\Validations\Rules\BetweenLengthRule;
 
-final class InteractiveProductBody implements ModelInterface, ModelValidationInterface
+final class SmsFailover implements ModelInterface, ModelValidationInterface
 {
+    /** @var string */
+    private $from;
+
     /** @var string */
     private $text;
 
     public function __construct(
+        string $from,
         string $text
     ) {
+        $this->from = $from;
         $this->text = $text;
     }
 
     public function toArray(): array
     {
         return array_filter_recursive([
+            'from' => $this->from,
             'text' => $this->text,
         ]);
     }
@@ -30,6 +36,7 @@ final class InteractiveProductBody implements ModelInterface, ModelValidationInt
     public function rules(): Rules
     {
         return (new Rules())
-            ->addRule(new BetweenLengthRule('interactiveProductBody.text', $this->text, 1, 1024));
+            ->addRule(new BetweenLengthRule('smsFailover.from', $this->from, 1, 24))
+            ->addRule(new BetweenLengthRule('smsFailover.text', $this->text, 1, 4096));
     }
 }

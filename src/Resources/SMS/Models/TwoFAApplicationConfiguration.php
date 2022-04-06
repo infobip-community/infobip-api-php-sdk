@@ -8,60 +8,60 @@ use Infobip\Resources\ModelInterface;
 
 final class TwoFAApplicationConfiguration implements ModelInterface
 {
-    /** @var bool|null */
-    private $allowMultiplePinVerifications;
+    /** @var bool */
+    private $allowMultiplePinVerifications = true;
 
-    /** @var int|null */
-    private $pinAttempts;
+    /** @var int */
+    private $pinAttempts = 10;
 
-    /** @var string|null */
-    private $pinTimeToLive;
+    /** @var string */
+    private $pinTimeToLive = '15m';
 
-    /** @var string|null */
-    private $sendPinPerApplicationLimit;
+    /** @var string */
+    private $sendPinPerApplicationLimit = '10000/1d';
 
-    /** @var string|null */
-    private $sendPinPerPhoneNumberLimit;
+    /** @var string */
+    private $sendPinPerPhoneNumberLimit = '3/1d';
 
-    /** @var string|null */
-    private $verifyPinLimit;
+    /** @var string */
+    private $verifyPinLimit = '1/3s';
 
-    public function setAllowMultiplePinVerifications(?bool $allowMultiplePinVerifications): self
+    public function setAllowMultiplePinVerifications(bool $allowMultiplePinVerifications): self
     {
         $this->allowMultiplePinVerifications = $allowMultiplePinVerifications;
 
         return $this;
     }
 
-    public function setPinAttempts(?int $pinAttempts): self
+    public function setPinAttempts(int $pinAttempts): self
     {
         $this->pinAttempts = $pinAttempts;
 
         return $this;
     }
 
-    public function setPinTimeToLive(?string $pinTimeToLive): self
+    public function setPinTimeToLive(string $pinTimeToLive): self
     {
         $this->pinTimeToLive = $pinTimeToLive;
 
         return $this;
     }
 
-    public function setSendPinPerApplicationLimit(?string $sendPinPerApplicationLimit): self
+    public function setSendPinPerApplicationLimit(string $sendPinPerApplicationLimit): self
     {
         $this->sendPinPerApplicationLimit = $sendPinPerApplicationLimit;
 
         return $this;
     }
 
-    public function setSendPinPerPhoneNumberLimit(?string $sendPinPerPhoneNumberLimit): self
+    public function setSendPinPerPhoneNumberLimit(string $sendPinPerPhoneNumberLimit): self
     {
         $this->sendPinPerPhoneNumberLimit = $sendPinPerPhoneNumberLimit;
 
         return $this;
     }
 
-    public function setVerifyPinLimit(?string $verifyPinLimit): self
+    public function setVerifyPinLimit(string $verifyPinLimit): self
     {
         $this->verifyPinLimit = $verifyPinLimit;
 

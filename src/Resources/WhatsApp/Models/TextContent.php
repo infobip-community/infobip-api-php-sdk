@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\WhatsApp\Contracts\ContentInterface;
-use Infobip\Validations\RuleCollection;
+use Infobip\Validations\Rules;
 use Infobip\Validations\Rules\BetweenLengthRule;
 
 final class TextContent implements ContentInterface
@@ -35,9 +35,9 @@ final class TextContent implements ContentInterface
         ]);
     }
 
-    public function validationRules(): RuleCollection
+    public function rules(): Rules
     {
-        return (new RuleCollection())
-            ->add(new BetweenLengthRule('content.text', $this->text, 1, 4096));
+        return (new Rules())
+            ->addRule(new BetweenLengthRule('content.text', $this->text, 1, 4096));
     }
 }

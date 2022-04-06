@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Infobip\Resources\Shared\Models;
 
 use Infobip\Resources\ModelInterface;
-use Infobip\Resources\ResourceValidationInterface;
-use Infobip\Validations\RuleCollection;
+use Infobip\Resources\ModelValidationInterface;
+use Infobip\Validations\Rules;
 use Infobip\Validations\Rules\TimeHourRule;
 use Infobip\Validations\Rules\TimeMinuteRule;
 
-final class TimeWindowTo implements ModelInterface, ResourceValidationInterface
+final class TimeWindowTo implements ModelInterface, ModelValidationInterface
 {
     /** @var int */
     private $hour;
@@ -32,10 +32,10 @@ final class TimeWindowTo implements ModelInterface, ResourceValidationInterface
         ]);
     }
 
-    public function validationRules(): RuleCollection
+    public function rules(): Rules
     {
-        return (new RuleCollection())
-            ->add(new TimeHourRule('deliveryTimeWindow.to.hour', $this->hour))
-            ->add(new TimeMinuteRule('deliveryTimeWindow.to.minute', $this->minute));
+        return (new Rules())
+            ->addRule(new TimeHourRule('deliveryTimeWindow.to.hour', $this->hour))
+            ->addRule(new TimeMinuteRule('deliveryTimeWindow.to.minute', $this->minute));
     }
 }

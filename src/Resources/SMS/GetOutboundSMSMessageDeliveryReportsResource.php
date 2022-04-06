@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Infobip\Resources\SMS;
 
 use Infobip\Resources\ResourceQueryOptionsInterface;
+use Infobip\Resources\ResourceValidationInterface;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\MaxNumberRule;
 
 /**
  * @link https://www.infobip.com/docs/api#channels/sms/get-outbound-sms-message-delivery-reports
  */
-final class GetOutboundSMSMessageDeliveryReportsResource implements ResourceQueryOptionsInterface
+final class GetOutboundSMSMessageDeliveryReportsResource implements ResourceQueryOptionsInterface, ResourceValidationInterface
 {
     /** @var string|null */
     private $bulkId;
@@ -48,5 +51,11 @@ final class GetOutboundSMSMessageDeliveryReportsResource implements ResourceQuer
             'messageId' => $this->messageId,
             'limit' => $this->limit
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new MaxNumberRule('limit', $this->limit, 1000));
     }
 }

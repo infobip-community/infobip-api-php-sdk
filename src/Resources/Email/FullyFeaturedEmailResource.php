@@ -5,11 +5,16 @@ declare(strict_types=1);
 namespace Infobip\Resources\Email;
 
 use Infobip\Resources\ResourcePayloadInterface;
+use Infobip\Resources\ResourceValidationInterface;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\EmailRule;
+use Infobip\Validations\Rules\UrlRule;
+use Infobip\Validations\Rules\MaxLengthRule;
 
 /**
  * @link https://www.infobip.com/docs/api#channels/email/send-email
  */
-final class FullyFeaturedEmailResource implements ResourcePayloadInterface
+final class FullyFeaturedEmailResource implements ResourcePayloadInterface, ResourceValidationInterface
 {
     /** @var string */
     private $from;
@@ -325,5 +330,14 @@ final class FullyFeaturedEmailResource implements ResourcePayloadInterface
             'landingPagePlaceholders' => $this->landingPagePlaceholders,
             'landingPageId' => $this->landingPageId,
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new EmailRule('replyTo', $this->replyTo))
+            ->addRule(new UrlRule('trackingUrl', $this->trackingUrl))
+            ->addRule(new UrlRule('notifyUrl', $this->notifyUrl))
+            ->addRule(new MaxLengthRule('callbackData', $this->callbackData, 4000));
     }
 }

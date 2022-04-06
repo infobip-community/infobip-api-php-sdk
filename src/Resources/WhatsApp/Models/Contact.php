@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace Infobip\Resources\WhatsApp\Models;
 
 use Infobip\Resources\ModelInterface;
+use Infobip\Resources\ModelValidationInterface;
 use Infobip\Resources\WhatsApp\Collections\AddressCollection;
 use Infobip\Resources\WhatsApp\Collections\EmailCollection;
 use Infobip\Resources\WhatsApp\Collections\PhoneCollection;
 use Infobip\Resources\WhatsApp\Collections\UrlCollection;
+use Infobip\Validations\Rules;
 
-final class Contact implements ModelInterface
+final class Contact implements ModelInterface, ModelValidationInterface
 {
     /** @var AddressCollection */
     private $addresses;
@@ -83,5 +85,12 @@ final class Contact implements ModelInterface
             'phones' => $this->phones->toArray(),
             'urls' => $this->urls->toArray(),
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addCollectionRules($this->emails)
+            ->addCollectionRules($this->urls);
     }
 }

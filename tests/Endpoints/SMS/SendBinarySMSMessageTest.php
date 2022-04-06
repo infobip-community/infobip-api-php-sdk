@@ -6,6 +6,8 @@ namespace Tests\Endpoints\SMS;
 
 use Infobip\Enums\StatusCode;
 use Infobip\Exceptions\InfobipServerException;
+use Infobip\Exceptions\InfobipValidationException;
+use Infobip\Resources\SMS\Models\Message;
 use Infobip\Resources\SMS\SendBinarySMSMessageResource;
 use Infobip\Resources\SMS\SendSMSMessageOverQueryParametersResource;
 use Tests\Endpoints\TestCase;
@@ -59,8 +61,42 @@ final class SendBinarySMSMessageTest extends TestCase
         $this->assertSame($mockedResponse, $response);
     }
 
+    public function testApiCallExpectsValidationException(): void
+    {
+        // arrange
+        $resource = $this->getInvalidResource();
+
+        $this->setMockedGuzzleHttpClient(StatusCode::NO_CONTENT);
+
+        // act & assert
+        $this->expectException(InfobipValidationException::class);
+        $this->expectExceptionCode(StatusCode::UNPROCESSABLE_ENTITY);
+
+        try {
+            $this
+                ->getInfobipClient()
+                ->SMS()
+                ->sendBinarySMSMessage($resource);
+        } catch (InfobipValidationException $exception) {
+            $this->assertArrayHasKey('message.callbackData', $exception->getValidationErrors());
+            $this->assertArrayHasKey('message.validityPeriod', $exception->getValidationErrors());
+
+            throw $exception;
+        }
+    }
+
     private function getResource(): SendBinarySMSMessageResource
     {
         return new SendBinarySMSMessageResource();
+    }
+
+    private function getInvalidResource(): SendBinarySMSMessageResource
+    {
+        $message = (new Message())
+            ->setCallbackData($this->faker->text(4500))
+            ->setValidityPeriod(3000);
+
+        return (new SendBinarySMSMessageResource())
+            ->addMessage($message);
     }
 }

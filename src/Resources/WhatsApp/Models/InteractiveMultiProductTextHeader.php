@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Infobip\Resources\WhatsApp\Models;
 
-use Infobip\Resources\ModelInterface;
 use Infobip\Resources\WhatsApp\Contracts\InteractiveMultiProductHeaderInterface;
 use Infobip\Resources\WhatsApp\Enums\InteractiveMultiProductHeaderType;
+use Infobip\Validations\Rules;
+use Infobip\Validations\Rules\BetweenLengthRule;
 
 final class InteractiveMultiProductTextHeader implements InteractiveMultiProductHeaderInterface
 {
@@ -28,5 +29,11 @@ final class InteractiveMultiProductTextHeader implements InteractiveMultiProduct
             'text' => $this->text,
             'type' => $this->type->getValue(),
         ]);
+    }
+
+    public function rules(): Rules
+    {
+        return (new Rules())
+            ->addRule(new BetweenLengthRule('interactiveMultiProductTextHeader.text', $this->text, 1, 60));
     }
 }
