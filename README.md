@@ -88,6 +88,7 @@ There is a couple of Infobip `exceptions` that you could stumble upon while usin
 - Unauthorized (401)
 - Forbidden (403)
 - Not found (404)
+- Unprocessable entity (422)
 - Too many requests (429)
 - Internal server error (500)
 
@@ -95,15 +96,15 @@ Of course, there is a way of handling those:
 
 ```php
 try {
-    $resource = new \Infobip\Resources\WhatsApp\WhatsAppTextMessageResource();
+    $resource = new WhatsAppTextMessageResource();
     
     $response = $infobipClient
         ->whatsApp()
         ->sendWhatsAppTextMessage($resource);
-} catch (\Infobip\Exceptions\InfobipException $exception) {
+} catch (InfobipException $exception) {
     $exception->getMessage(); // error message
     $exception->getCode(); // http status code
-    $exception->getValidationErrors(); // array of validation errors, only available on 400 Bad request exception
+    $exception->getValidationErrors(); // array of validation errors, only available on 400 Bad request and 422 Unprocessable entity exceptions
 }
 ```
 
@@ -137,6 +138,7 @@ namespace App\Http\Controllers;
 
 use Infobip\InfobipClient;
 use Infobip\Resources\WhatsApp\WhatsAppTextMessageResource;
+use Infobip\Resources\WhatsApp\Models\TextContent;
 
 final class InfobipController
 {
@@ -145,7 +147,7 @@ final class InfobipController
         $resource = new WhatsAppTextMessageResource(
             $request->input('from'),
             $request->input('to'),
-            new \Infobip\Resources\WhatsApp\Models\TextContent($request->input('message'))
+            new TextContent($request->input('message'))
         );
         
         $response = $infobipClient
@@ -159,7 +161,16 @@ final class InfobipController
 
 ### Symfony
 
-TODO
+Add and bind `InfobipClient` to your `config/services.yaml` file:
+
+```yaml
+services:
+  Infobip\InfobipClient:
+    arguments:
+      $apiKey: '%infobip.api_key%'
+      $baseUrl: '%infobip.base_url%'
+      $timeout: '%infobip.timeout%'
+```
 
 ## Documentation
 
