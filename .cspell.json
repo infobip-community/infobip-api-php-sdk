@@ -69,6 +69,7 @@
     ".eslintrc.js",
     ".vscode/settings.json",
     ".gitignore",
-    ".github/workflows"
+    ".github/workflows",
+    ".ddev"
   ]
 }
