@@ -182,11 +182,13 @@ final class InfobipClient
 
     private function getDefaultOptions(): array
     {
+        $packaageVersion = \Composer\InstalledVersions::getRootPackage()['version'];
         return [
             RequestOptions::HEADERS => [
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
                 'Authorization' => 'App '.$this->apiKey,
+                'User-Agent' => '@infobip/php-sdk/'.$packaageVersion.' php/'.phpversion()
             ],
         ];
     }
