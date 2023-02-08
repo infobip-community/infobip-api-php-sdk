@@ -4,6 +4,7 @@
 /tools
 /.idea
 composer.phar
+composer.lock
 phpstan.neon
 phplint.cache
 Thumbs.db
