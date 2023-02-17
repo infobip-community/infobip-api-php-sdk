@@ -2,6 +2,14 @@
   "version": "0.2",
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/master/cspell.schema.json",
   "language": "en",
+  "dictionaries": [
+    "php",
+    "en_US",
+    "en-gb",
+    "companies",
+    "softwareTerms",
+    "misc"
+  ],
   "words": [
     "infobip",
     "ibsso",
