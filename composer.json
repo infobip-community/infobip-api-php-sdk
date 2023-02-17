@@ -7,6 +7,11 @@
     "license": "MIT",
     "authors": [
         {
+            "name": "Mike Elsmore",
+            "email": "mike.elsmore@infobip.com",
+            "role": "Developer Advocate"
+        },
+        {
             "name": "Frano Sasvari",
             "email": "sasvari.frano@gmail.com"
         }

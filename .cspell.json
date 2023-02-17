@@ -2,10 +2,28 @@
   "version": "0.2",
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/master/cspell.schema.json",
   "language": "en",
+  "dictionaries": [
+    "php",
+    "en_US",
+    "en-gb",
+    "companies",
+    "softwareTerms",
+    "misc"
+  ],
   "words": [
     "infobip",
     "ibsso",
-    "juliacodez"
+    "juliacodez",
+    "msisdn",
+    "Smil",
+    "ENROUTE",
+    "DTMF",
+    "templateid",
+    "replyto",
+    "defaultplaceholders",
+    "preserverecipients",
+    "trackclicks",
+    "trackopens"
   ],
   "flagWords": [],
   "patterns": [
@@ -61,14 +79,11 @@
   ],
   "ignorePaths": [
     ".cspell.json",
-    "package.json",
-    "package-lock.json",
-    "yarn.lock",
-    "tsconfig.json",
-    "node_modules/**",
-    ".eslintrc.js",
+    "composer.json",
+    "vendor/**",
     ".vscode/settings.json",
     ".gitignore",
-    ".github/workflows"
+    ".github/workflows",
+    ".ddev"
   ]
 }

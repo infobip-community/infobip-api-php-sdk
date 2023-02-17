@@ -219,7 +219,7 @@ final class WhatsApp extends BaseEndpoint
     public function getWhatsAppTemplates(WhatsAppTemplatesResource $resource): array
     {
         $endpoint = sprintf(
-            'whatsapp/1/senders/%s/templates',
+            'whatsapp/2/senders/%s/templates',
             $resource->getSender()
         );
 

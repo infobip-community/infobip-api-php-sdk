@@ -53,6 +53,9 @@ final class FullyFeaturedEmailResource implements ResourcePayloadInterface, Reso
     private $html = null;
 
     /** @var string|null */
+    private $ampHtml = null;
+
+    /** @var string|null */
     private $replyTo = null;
 
     /** @var string|null */
@@ -93,6 +96,12 @@ final class FullyFeaturedEmailResource implements ResourcePayloadInterface, Reso
 
     /** @var string|null */
     private $landingPageId = null;
+
+    /** @var string|null */
+    private $applicationId = null;
+
+    /** @var string|null */
+    private $entityId = null;
 
     public function __construct(
         string $from,
@@ -163,6 +172,13 @@ final class FullyFeaturedEmailResource implements ResourcePayloadInterface, Reso
     public function setHtml(?string $html): self
     {
         $this->html = $html;
+
+        return $this;
+    }
+
+    public function setAmpHtml(?string $ampHtml): self
+    {
+        $this->ampHtml = $ampHtml;
 
         return $this;
     }
@@ -300,6 +316,20 @@ final class FullyFeaturedEmailResource implements ResourcePayloadInterface, Reso
         return $this;
     }
 
+    public function setApplicationId(?string $applicationId): self
+    {
+        $this->applicationId = $applicationId;
+
+        return $this;
+    }
+
+    public function setEntityId(?string $entityId): self
+    {
+        $this->entityId = $entityId;
+
+        return $this;
+    }
+
     public function payload(): array
     {
         return array_filter_recursive([
@@ -315,6 +345,7 @@ final class FullyFeaturedEmailResource implements ResourcePayloadInterface, Reso
             'attachment' => $this->attachment,
             'inlineImage' => $this->inlineImage,
             'HTML' => $this->html,
+            'ampHtml' => $this->ampHtml,
             'replyto' => $this->replyTo,
             'defaultplaceholders' => $this->defaultPlaceholders,
             'preserverecipients' => $this->preserveRecipients,
@@ -329,6 +360,8 @@ final class FullyFeaturedEmailResource implements ResourcePayloadInterface, Reso
             'sendAt' => $this->sendAt,
             'landingPagePlaceholders' => $this->landingPagePlaceholders,
             'landingPageId' => $this->landingPageId,
+            'applicationId' => $this->applicationId,
+            'entityId' => $this->entityId,
         ]);
     }
 
