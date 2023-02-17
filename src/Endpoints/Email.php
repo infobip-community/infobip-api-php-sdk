@@ -41,7 +41,7 @@ final class Email extends BaseEndpoint
     {
         Validator::validateResource($resource);
 
-        return $this->client->post('email/2/send', $resource->payload());
+        return $this->client->post('email/3/send', $resource->payload());
     }
 
     /**
