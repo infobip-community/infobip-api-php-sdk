@@ -13,7 +13,11 @@
   "words": [
     "infobip",
     "ibsso",
-    "juliacodez"
+    "juliacodez",
+    "msisdn",
+    "Smil",
+    "ENROUTE",
+    "DTMF"
   ],
   "flagWords": [],
   "patterns": [
@@ -69,12 +73,8 @@
   ],
   "ignorePaths": [
     ".cspell.json",
-    "package.json",
-    "package-lock.json",
-    "yarn.lock",
-    "tsconfig.json",
-    "node_modules/**",
-    ".eslintrc.js",
+    "composer.json",
+    "vendor/**",
     ".vscode/settings.json",
     ".gitignore",
     ".github/workflows",
