@@ -17,7 +17,13 @@
     "msisdn",
     "Smil",
     "ENROUTE",
-    "DTMF"
+    "DTMF",
+    "templateid",
+    "replyto",
+    "defaultplaceholders",
+    "preserverecipients",
+    "trackclicks",
+    "trackopens"
   ],
   "flagWords": [],
   "patterns": [
