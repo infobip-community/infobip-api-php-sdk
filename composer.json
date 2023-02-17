@@ -5,7 +5,6 @@
     "homepage": "https://github.com/infobip-community/infobip-api-php-sdk",
     "minimum-stability": "stable",
     "license": "MIT",
-    "version": "v1.2.0",
     "authors": [
         {
             "name": "Mike Elsmore",
