@@ -27,6 +27,10 @@ final class TemplateName implements ModelInterface, ModelValidationInterface
         ]);
     }
 
+    public function getTemplateName()
+    {
+        return $this->templateName;
+    }
     public function rules(): Rules
     {
         return (new Rules())

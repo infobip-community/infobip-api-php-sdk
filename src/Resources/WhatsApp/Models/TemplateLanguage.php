@@ -17,6 +17,11 @@ final class TemplateLanguage implements ModelInterface
         $this->language = $language;
     }
 
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+    
     public function toArray(): array
     {
         return array_filter_recursive([
