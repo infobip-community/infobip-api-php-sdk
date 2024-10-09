@@ -32,9 +32,9 @@ final class TemplateContent implements ModelInterface, ModelValidationInterface
     public function toArray(): array
     {
         return array_filter_recursive([
-            'templateName' => $this->templateName->toArray(),
+            'templateName' => $this->templateName->getTemplateName(),
             'templateData' => $this->templateData->toArray(),
-            'templateLanguage' => $this->templateLanguage->toArray(),
+            'language' => $this->templateLanguage->getLanguage(),
         ]);
     }
 

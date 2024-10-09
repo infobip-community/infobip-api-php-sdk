@@ -44,7 +44,7 @@ final class TemplateData implements ModelInterface, ModelValidationInterface
     public function toArray(): array
     {
         return array_filter_recursive([
-            'body' => $this->body,
+            'body' => $this->body->toArray(),
             'header' => $this->templateHeader ? $this->templateHeader->toArray() : null,
             'buttons' => $this->templateButtons->toArray(),
         ]);
